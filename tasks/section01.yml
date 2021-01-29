@@ -1,5 +1,5 @@
 ---
-- name: "SCORED | 1.1.1 | AUDIT | L1 Ensure Enforce password history is set to 24 or more passwords"
+- name: "SCORED | 1.1.1 | AUDIT | (L1) Ensure 'Enforce password history' is set to '24 or more password(s)'
   assert:
       that: passwordhistorysize | int is version('24', '>=')
       fail_msg: "Password history must be configured to 24 passwords remembered and variable passwordhistorysize is set to {{ passwordhistorysize }}"
@@ -9,7 +9,6 @@
   when: rule_1_1_1
   tags:
     - level1
-    - level2
     - rule_1.1.1
     - audit
 
