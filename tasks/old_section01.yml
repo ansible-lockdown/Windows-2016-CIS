@@ -102,93 +102,93 @@
 #     - rule_1.1.4
 #     - patch
 
-- name: "SCORED | 1.1.5 | PATCH | L1 Ensure Password must meet complexity requirements is set to Enabled"
-  win_security_policy:
-      section: System Access
-      key: PasswordComplexity
-      value: 1
-  when: rule_1_1_5
-  tags:
-    - level1
-    - level2
-    - rule_1.1.5
-    - patch
+# - name: "SCORED | 1.1.5 | PATCH | L1 Ensure Password must meet complexity requirements is set to Enabled"
+#   win_security_policy:
+#       section: System Access
+#       key: PasswordComplexity
+#       value: 1
+#   when: rule_1_1_5
+#   tags:
+#     - level1
+#     - level2
+#     - rule_1.1.5
+#     - patch
 
-- name: "SCORED | 1.1.6 | PATCH | L1 Ensure Store passwords using reversible encryption is set to Disabled"
-  win_security_policy:
-    section: System Access
-    key: ClearTextPassword
-    value: "0"
-  when: rule_1_1_6
-  tags:
-    - level1
-    - level2
-    - rule_1.1.6
-    - patch
+# - name: "SCORED | 1.1.6 | PATCH | L1 Ensure Store passwords using reversible encryption is set to Disabled"
+#   win_security_policy:
+#     section: System Access
+#     key: ClearTextPassword
+#     value: "0"
+#   when: rule_1_1_6
+#   tags:
+#     - level1
+#     - level2
+#     - rule_1.1.6
+#     - patch
 
-- name: "SCORED | 1.2.1 | AUDIT | L1 Ensure Account lockout duration is set to 15 or more minutes"
-  assert:
-      that: lockoutduration | int is version('15', '<=')
-      fail_msg: "Must have the period of time before the bad logon counter is reset configured to 15 minutes or greater and variable lockoutduration is set to {{ lockoutduration }}"
-  register: result
-  changed_when: no
-  ignore_errors: yes
-  when: rule_1_2_1
-  tags:
-    - level1
-    - level2
-    - rule_1.2.1
-    - audit
+# - name: "SCORED | 1.2.1 | AUDIT | L1 Ensure Account lockout duration is set to 15 or more minutes"
+#   assert:
+#       that: lockoutduration | int is version('15', '<=')
+#       fail_msg: "Must have the period of time before the bad logon counter is reset configured to 15 minutes or greater and variable lockoutduration is set to {{ lockoutduration }}"
+#   register: result
+#   changed_when: no
+#   ignore_errors: yes
+#   when: rule_1_2_1
+#   tags:
+#     - level1
+#     - level2
+#     - rule_1.2.1
+#     - audit
 
-- name: "SCORED | 1.2.1 | PATCH | L1 Ensure Account lockout duration is set to 15 or more minutes"
-  win_security_policy:
-    section: System Access
-    key: LockoutDuration
-    value: "{{ lockoutduration }}"
-  when:
-    - rule_1_2_1
-    - is_implemented #Speelman | added because of this error "Failed to import secedit.ini file from C:\\Users\\vagrant\\AppData\\Local\\Temp\\tmp81F3.tmp
-  tags:
-    - level1
-    - level2
-    - rule_1.2.1
-    - patch
+# - name: "SCORED | 1.2.1 | PATCH | L1 Ensure Account lockout duration is set to 15 or more minutes"
+#   win_security_policy:
+#     section: System Access
+#     key: LockoutDuration
+#     value: "{{ lockoutduration }}"
+#   when:
+#     - rule_1_2_1
+#     - is_implemented #Speelman | added because of this error "Failed to import secedit.ini file from C:\\Users\\vagrant\\AppData\\Local\\Temp\\tmp81F3.tmp
+#   tags:
+#     - level1
+#     - level2
+#     - rule_1.2.1
+#     - patch
 
-#This rule must be applied first to make rule_1.2.1 and rule_1.2.3 applicable
-- name: "SCORED | 1.2.2 | PATCH | L1 Ensure Account lockout threshold is set to 10 or fewer invalid logon attempts but not 0"
-  win_security_policy:
-      section: System Access
-      key: LockoutBadCount
-      value: "{{ lockoutbadcount }}"
-  when: rule_1_2_2
-  tags:
-    - level1
-    - level2
-    - rule_1.2.2
-    - patch
+# #This rule must be applied first to make rule_1.2.1 and rule_1.2.3 applicable
+# - name: "SCORED | 1.2.2 | PATCH | L1 Ensure Account lockout threshold is set to 10 or fewer invalid logon attempts but not 0"
+#   win_security_policy:
+#       section: System Access
+#       key: LockoutBadCount
+#       value: "{{ lockoutbadcount }}"
+#   when: rule_1_2_2
+#   tags:
+#     - level1
+#     - level2
+#     - rule_1.2.2
+#     - patch
 
-- name: "SCORED | 1.2.3 | AUDIT | L1 Ensure Reset account lockout counter after is set to 15 or more minutes"
-  assert:
-      that: resetlockoutcount | int is version('15', '>=')
-      fail_msg: "Must have the period of time before the bad logon counter is reset configured to 15 minutes or greater and variable resetlockoutcount is set to {{ resetlockoutcount }}"
-  register: result
-  changed_when: no
-  ignore_errors: yes
-  when: rule_1_2_3
-  tags:
-    - level1
-    - level2
-    - rule_1.2.3
-    - audit
+# - name: "SCORED | 1.2.3 | AUDIT | L1 Ensure Reset account lockout counter after is set to 15 or more minutes"
+#   assert:
+#       that: resetlockoutcount | int is version('15', '>=')
+#       fail_msg: "Must have the period of time before the bad logon counter is reset configured to 15 minutes or greater and variable resetlockoutcount is set to {{ resetlockoutcount }}"
+#   register: result
+#   changed_when: no
+#   ignore_errors: yes
+#   when: rule_1_2_3
+#   tags:
+#     - level1
+#     - level2
+#     - rule_1.2.3
+#     - audit
 
-- name: "SCORED | 1.2.3 | PATCH | L1 Ensure Reset account lockout counter after is set to 15 or more minutes"
-  win_security_policy:
-      section: System Access
-      key: ResetLockoutCount
-      value: "{{ resetlockoutcount }}"
-  when: rule_1_2_3
-  tags:
-    - level1
-    - level2
-    - rule_1.2.3
-    - patch
+# - name: "SCORED | 1.2.3 | PATCH | L1 Ensure Reset account lockout counter after is set to 15 or more minutes"
+#   win_security_policy:
+#       section: System Access
+#       key: ResetLockoutCount
+#       value: "{{ resetlockoutcount }}"
+#   when: rule_1_2_3
+#   tags:
+#     - level1
+#     - level2
+#     - rule_1.2.3
+#     - patch
