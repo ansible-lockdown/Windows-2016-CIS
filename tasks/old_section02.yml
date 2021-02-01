@@ -1236,316 +1236,314 @@
 #     - rule_2.3.10.11
 #     - patch
 
-- name: "SCORED | 2.3.10.12 | PATCH | L1 Ensure Network access Shares that can be accessed anonymously is set to None"
-  win_regedit:
-    path: HKLM:\System\Currentcontrolset\Services\Lanmanserver\Parameters
-    name: NullSessionShares
-    data: ""
-    type: multistring
-  when: rule_2_3_10_12
-  tags:
-    - level1
-    - level2
-    - rule_2.3.10.12
-    - patch
+# - name: "SCORED | 2.3.10.12 | PATCH | L1 Ensure Network access Shares that can be accessed anonymously is set to None"
+#   win_regedit:
+#     path: HKLM:\System\Currentcontrolset\Services\Lanmanserver\Parameters
+#     name: NullSessionShares
+#     data: ""
+#     type: multistring
+#   when: rule_2_3_10_12
+#   tags:
+#     - level1
+#     - level2
+#     - rule_2.3.10.12
+#     - patch
 
-- name: "SCORED | 2.3.10.13 | PATCH | L1 Ensure Network access Sharing and security model for local accounts is set to Classic - local users authenticate as themselves"
-  win_regedit:
-    path: HKLM:\System\Currentcontrolset\Control\Lsa
-    name: ForceGuest
-    data: 0
-    type: dword
-  when: rule_2_3_10_13
-  tags:
-    - level1
-    - level2
-    - rule_2.3.10.13
-    - patch
+# - name: "SCORED | 2.3.10.13 | PATCH | L1 Ensure Network access Sharing and security model for local accounts is set to Classic - local users authenticate as themselves"
+#   win_regedit:
+#     path: HKLM:\System\Currentcontrolset\Control\Lsa
+#     name: ForceGuest
+#     data: 0
+#     type: dword
+#   when: rule_2_3_10_13
+#   tags:
+#     - level1
+#     - level2
+#     - rule_2.3.10.13
+#     - patch
 
-- name: "SCORED | 2.3.11.1 | PATCH | L1 Ensure Network security Allow Local System to use computer identity for NTLM is set to Enabled"
-  win_regedit:
-    path: HKLM:\System\Currentcontrolset\Control\Lsa
-    name: UseMachineId
-    data: 1
-    type: dword
-  when: rule_2_3_11_1
-  tags:
-    - level1
-    - level2
-    - rule_2.3.11.1
-    - patch
+# - name: "SCORED | 2.3.11.1 | PATCH | L1 Ensure Network security Allow Local System to use computer identity for NTLM is set to Enabled"
+#   win_regedit:
+#     path: HKLM:\System\Currentcontrolset\Control\Lsa
+#     name: UseMachineId
+#     data: 1
+#     type: dword
+#   when: rule_2_3_11_1
+#   tags:
+#     - level1
+#     - level2
+#     - rule_2.3.11.1
+#     - patch
 
-- name: "SCORED | 2.3.11.2 | PATCH | L1 Ensure Network security Allow LocalSystem NULL session fallback is set to Disabled"
-  win_regedit:
-    path: HKLM:\System\Currentcontrolset\Control\Lsa\Msv1_0
-    name: allownullsessionfallback
-    data: 0
-    type: dword
-  when: rule_2_3_11_2
-  tags:
-    - level1
-    - level2
-    - rule_2.3.11.2
-    - patch
+# - name: "SCORED | 2.3.11.2 | PATCH | L1 Ensure Network security Allow LocalSystem NULL session fallback is set to Disabled"
+#   win_regedit:
+#     path: HKLM:\System\Currentcontrolset\Control\Lsa\Msv1_0
+#     name: allownullsessionfallback
+#     data: 0
+#     type: dword
+#   when: rule_2_3_11_2
+#   tags:
+#     - level1
+#     - level2
+#     - rule_2.3.11.2
+#     - patch
 
-- name: "SCORED | 2.3.11.3 | PATCH | L1 Ensure Network Security Allow PKU2U authentication requests to this computer to use online identities is set to Disabled"
-  win_regedit:
-    path: HKLM:\System\Currentcontrolset\Control\Lsa\Pku2U
-    name: AllowOnlineID
-    data: 0
-    type: dword
-  when: rule_2_3_11_3
-  tags:
-    - level1
-    - level2
-    - rule_2.3.11.3
-    - patch
+# - name: "SCORED | 2.3.11.3 | PATCH | L1 Ensure Network Security Allow PKU2U authentication requests to this computer to use online identities is set to Disabled"
+#   win_regedit:
+#     path: HKLM:\System\Currentcontrolset\Control\Lsa\Pku2U
+#     name: AllowOnlineID
+#     data: 0
+#     type: dword
+#   when: rule_2_3_11_3
+#   tags:
+#     - level1
+#     - level2
+#     - rule_2.3.11.3
+#     - patch
 
-- name: "SCORED | 2.3.11.4 | PATCH | L1 Ensure Network security Configure encryption types allowed for Kerberos is set to AES128 HMAC SHA1 AES256 HMAC SHA1 Future encryption types"
-  win_regedit:
-    path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\System\Kerberos\Parameters
-    name: SupportedEncryptionTypes
-    data: 2147483644
-    type: dword
-  when: rule_2_3_11_4
-  tags:
-    - level1
-    - level2
-    - rule_2.3.11.4
-    - patch
+# - name: "SCORED | 2.3.11.4 | PATCH | L1 Ensure Network security Configure encryption types allowed for Kerberos is set to AES128 HMAC SHA1 AES256 HMAC SHA1 Future encryption types"
+#   win_regedit:
+#     path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\System\Kerberos\Parameters
+#     name: SupportedEncryptionTypes
+#     data: 2147483644
+#     type: dword
+#   when: rule_2_3_11_4
+#   tags:
+#     - level1
+#     - level2
+#     - rule_2.3.11.4
+#     - patch
 
-- name: "SCORED | 2.3.11.5 | PATCH | L1 Ensure Network security Do not store LAN Manager hash value on next password change is set to Enabled"
-  win_regedit:
-    path: HKLM:\System\Currentcontrolset\Control\Lsa
-    name: NoLMHash
-    data: 1
-    type: dword
-  when: rule_2_3_11_5
-  tags:
-    - level1
-    - level2
-    - rule_2.3.11.5
-    - patch
+# - name: "SCORED | 2.3.11.5 | PATCH | L1 Ensure Network security Do not store LAN Manager hash value on next password change is set to Enabled"
+#   win_regedit:
+#     path: HKLM:\System\Currentcontrolset\Control\Lsa
+#     name: NoLMHash
+#     data: 1
+#     type: dword
+#   when: rule_2_3_11_5
+#   tags:
+#     - level1
+#     - level2
+#     - rule_2.3.11.5
+#     - patch
 
-- name: "SCORED | 2.3.11.6 | PATCH | L1 Ensure Network security Force logoff when logon hours expire is set to Enabled"
-  win_regedit:
-    path: HKLM:\System\CurrentControlSet\Services\LanManServer\Parameters
-    name: EnableForcedLogOff
-    data: 1
-    type: dword
-  when: rule_2_3_11_6
-  tags:
-    - level1
-    - level2
-    - rule_2.3.11.6
-    - patch
+# - name: "SCORED | 2.3.11.6 | PATCH | L1 Ensure Network security Force logoff when logon hours expire is set to Enabled"
+#   win_regedit:
+#     path: HKLM:\System\CurrentControlSet\Services\LanManServer\Parameters
+#     name: EnableForcedLogOff
+#     data: 1
+#     type: dword
+#   when: rule_2_3_11_6
+#   tags:
+#     - level1
+#     - level2
+#     - rule_2.3.11.6
+#     - patch
 
-- name: "SCORED | 2.3.11.7 | PATCH | L1 Ensure Network security LAN Manager authentication level is set to Send NTLMv2 response only. Refuse LM  NTLM"
-  win_regedit:
-    path: HKLM:\System\Currentcontrolset\Control\Lsa
-    name: LMCompatibilityLevel
-    data: 5
-    type: dword
-  when: rule_2_3_11_7
-  tags:
-    - level1
-    - level2
-    - rule_2.3.11.7
-    - patch
+# - name: "SCORED | 2.3.11.7 | PATCH | L1 Ensure Network security LAN Manager authentication level is set to Send NTLMv2 response only. Refuse LM  NTLM"
+#   win_regedit:
+#     path: HKLM:\System\Currentcontrolset\Control\Lsa
+#     name: LMCompatibilityLevel
+#     data: 5
+#     type: dword
+#   when: rule_2_3_11_7
+#   tags:
+#     - level1
+#     - level2
+#     - rule_2.3.11.7
+#     - patch
 
-- name: "SCORED | 2.3.11.8 | PATCH | L1 Ensure Network security LDAP client signing requirements is set to Negotiate signing or higher"
-  win_regedit:
-    path: HKLM:\System\Currentcontrolset\Services\Ldap
-    name: LDAPClientIntegrity
-    data: 1
-    type: dword
-  when: rule_2_3_11_8
-  tags:
-    - level1
-    - level2
-    - rule_2.3.11.8
-    - patch
+# - name: "SCORED | 2.3.11.8 | PATCH | L1 Ensure Network security LDAP client signing requirements is set to Negotiate signing or higher"
+#   win_regedit:
+#     path: HKLM:\System\Currentcontrolset\Services\Ldap
+#     name: LDAPClientIntegrity
+#     data: 1
+#     type: dword
+#   when: rule_2_3_11_8
+#   tags:
+#     - level1
+#     - level2
+#     - rule_2.3.11.8
+#     - patch
 
-- name: "SCORED | 2.3.11.9 | PATCH | L1 Ensure Network security Minimum session security for NTLM SSP based including secure RPC clients is set to Require NTLMv2 session security Require 128-bit encryption"
-  win_regedit:
-    path: HKLM:\System\Currentcontrolset\Control\Lsa\Msv1_0
-    name: NTLMMinClientSec
-    data: 537395200
-    type: dword
-  when: rule_2_3_11_9
-  tags:
-    - level1
-    - level2
-    - rule_2.3.11.9
-    - patch
+# - name: "SCORED | 2.3.11.9 | PATCH | L1 Ensure Network security Minimum session security for NTLM SSP based including secure RPC clients is set to Require NTLMv2 session security Require 128-bit encryption"
+#   win_regedit:
+#     path: HKLM:\System\Currentcontrolset\Control\Lsa\Msv1_0
+#     name: NTLMMinClientSec
+#     data: 537395200
+#     type: dword
+#   when: rule_2_3_11_9
+#   tags:
+#     - level1
+#     - level2
+#     - rule_2.3.11.9
+#     - patch
 
-- name: "SCORED | 2.3.11.10 | PATCH | L1 Ensure Network security Minimum session security for NTLM SSP based including secure RPC servers is set to Require NTLMv2 session security Require 128-bit encryption"
-  win_regedit:
-    path: HKLM:\System\Currentcontrolset\Control\Lsa\Msv1_0
-    name: NTLMMinServerSec
-    data: 537395200
-    type: dword
-  when: rule_2_3_11_10
-  tags:
-    - level1
-    - level2
-    - rule_2.3.11.10
-    - patch
+# - name: "SCORED | 2.3.11.10 | PATCH | L1 Ensure Network security Minimum session security for NTLM SSP based including secure RPC servers is set to Require NTLMv2 session security Require 128-bit encryption"
+#   win_regedit:
+#     path: HKLM:\System\Currentcontrolset\Control\Lsa\Msv1_0
+#     name: NTLMMinServerSec
+#     data: 537395200
+#     type: dword
+#   when: rule_2_3_11_10
+#   tags:
+#     - level1
+#     - level2
+#     - rule_2.3.11.10
+#     - patch
 
-- name: "SCORED | 2.3.13.1 | PATCH | L1 Ensure Shutdown Allow system to be shut down without having to log on is set to Disabled"
-  win_regedit:
-    path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\System
-    name: ShutdownWithoutLogon
-    data: 0
-    type: dword
-  when: rule_2_3_13_1
-  tags:
-    - level1
-    - level2
-    - rule_2.3.13.1
-    - patch
+# - name: "SCORED | 2.3.13.1 | PATCH | L1 Ensure Shutdown Allow system to be shut down without having to log on is set to Disabled"
+#   win_regedit:
+#     path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\System
+#     name: ShutdownWithoutLogon
+#     data: 0
+#     type: dword
+#   when: rule_2_3_13_1
+#   tags:
+#     - level1
+#     - level2
+#     - rule_2.3.13.1
+#     - patch
 
-- name: "SCORED | 2.3.15.1 | PATCH | L1 Ensure System objects Require case insensitivity for non-Windows subsystems is set to Enabled"
-  win_regedit:
-    path: HKLM:\System\Currentcontrolset\Control\Session Manager\Kernel
-    name: ObCaseInsensitive
-    data: 1
-    type: dword
-  when: rule_2_3_15_1
-  tags:
-    - level1
-    - level2
-    - rule_2.3.15.1
-    - patch
+# - name: "SCORED | 2.3.15.1 | PATCH | L1 Ensure System objects Require case insensitivity for non-Windows subsystems is set to Enabled"
+#   win_regedit:
+#     path: HKLM:\System\Currentcontrolset\Control\Session Manager\Kernel
+#     name: ObCaseInsensitive
+#     data: 1
+#     type: dword
+#   when: rule_2_3_15_1
+#   tags:
+#     - level1
+#     - level2
+#     - rule_2.3.15.1
+#     - patch
 
-- name: "SCORED | 2.3.15.2 | PATCH | L1 Ensure System objects Strengthen default permissions of internal system objects e.g. Symbolic Links is set to Enabled"
-  win_regedit:
-    path: HKLM:\System\Currentcontrolset\Control\Session Manager
-    name: ProtectionMode
-    data: 1
-    type: dword
-  when: rule_2_3_15_2
-  tags:
-    - level1
-    - level2
-    - rule_2.3.15.2
-    - patch
+# - name: "SCORED | 2.3.15.2 | PATCH | L1 Ensure System objects Strengthen default permissions of internal system objects e.g. Symbolic Links is set to Enabled"
+#   win_regedit:
+#     path: HKLM:\System\Currentcontrolset\Control\Session Manager
+#     name: ProtectionMode
+#     data: 1
+#     type: dword
+#   when: rule_2_3_15_2
+#   tags:
+#     - level1
+#     - level2
+#     - rule_2.3.15.2
+#     - patch
 
-- name: "SCORED | 2.3.17.1 | PATCH | L1 Ensure User Account Control Admin Approval Mode for the Built-in Administrator account is set to Enabled"
-  win_regedit:
-    path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\System
-    name: FilterAdministratorToken
-    data: 1
-    type: dword
-  when: rule_2_3_17_1
-  tags:
-    - level1
-    - level2
-    - rule_2.3.17.1
-    - patch
+# - name: "SCORED | 2.3.17.1 | PATCH | L1 Ensure User Account Control Admin Approval Mode for the Built-in Administrator account is set to Enabled"
+#   win_regedit:
+#     path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\System
+#     name: FilterAdministratorToken
+#     data: 1
+#     type: dword
+#   when: rule_2_3_17_1
+#   tags:
+#     - level1
+#     - level2
+#     - rule_2.3.17.1
+#     - patch
 
-- name: "SCORED | 2.3.17.2 | PATCH | L1 Ensure User Account Control Behavior of the elevation prompt for administrators in Admin Approval Mode is set to Prompt for consent on the secure desktop"
-  win_regedit:
-    path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\System
-    name: EnableUIADesktopToggle
-    data: 0
-    type: dword
-  when: rule_2_3_17_2
-  tags:
-    - level1
-    - level2
-    - rule_2.3.17.2
-    - patch
+# - name: "SCORED | 2.3.17.2 | PATCH | L1 Ensure User Account Control Behavior of the elevation prompt for administrators in Admin Approval Mode is set to Prompt for consent on the secure desktop"
+#   win_regedit:
+#     path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\System
+#     name: EnableUIADesktopToggle
+#     data: 0
+#     type: dword
+#   when: rule_2_3_17_2
+#   tags:
+#     - level1
+#     - level2
+#     - rule_2.3.17.2
+#     - patch
 
-- name: "SCORED | 2.3.17.3 | PATCH | L1 Ensure User Account Control Behavior of the elevation prompt for administrators in Admin Approval Mode is set to Prompt for consent on the secure desktop"
-  win_regedit:
-    path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\System
-    name: ConsentPromptBehaviorAdmin
-    data: 2
-    type: dword
-  when: rule_2_3_17_3
-  tags:
-    - level1
-    - level2
-    - rule_2.3.17.3
-    - patch
+# - name: "SCORED | 2.3.17.3 | PATCH | L1 Ensure User Account Control Behavior of the elevation prompt for administrators in Admin Approval Mode is set to Prompt for consent on the secure desktop"
+#   win_regedit:
+#     path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\System
+#     name: ConsentPromptBehaviorAdmin
+#     data: 2
+#     type: dword
+#   when: rule_2_3_17_3
+#   tags:
+#     - level1
+#     - level2
+#     - rule_2.3.17.3
+#     - patch
 
-- name: "SCORED | 2.3.17.4 | PATCH | L1 Ensure User Account Control Behavior of the elevation prompt for standard users is set to Automatically deny elevation requests"
-  win_regedit:
-    path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\System
-    name: ConsentPromptBehaviorUser
-    data: 0
-    type: dword
-  when: rule_2_3_17_4
-  tags:
-    - level1
-    - level2
-    - rule_2.3.17.4
-    - patch
+# - name: "SCORED | 2.3.17.4 | PATCH | L1 Ensure User Account Control Behavior of the elevation prompt for standard users is set to Automatically deny elevation requests"
+#   win_regedit:
+#     path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\System
+#     name: ConsentPromptBehaviorUser
+#     data: 0
+#     type: dword
+#   when: rule_2_3_17_4
+#   tags:
+#     - level1
+#     - level2
+#     - rule_2.3.17.4
+#     - patch
 
-- name: "SCORED | 2.3.17.5 | PATCH | L1 Ensure User Account Control Detect application installations and prompt for elevation is set to Enabled"
-  win_regedit:
-    path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\System
-    name: EnableInstallerDetection
-    data: 1
-    type: dword
-  when: rule_2_3_17_5
-  tags:
-    - level1
-    - level2
-    - rule_2.3.17.5
-    - patch
+# - name: "SCORED | 2.3.17.5 | PATCH | L1 Ensure User Account Control Detect application installations and prompt for elevation is set to Enabled"
+#   win_regedit:
+#     path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\System
+#     name: EnableInstallerDetection
+#     data: 1
+#     type: dword
+#   when: rule_2_3_17_5
+#   tags:
+#     - level1
+#     - level2
+#     - rule_2.3.17.5
+#     - patch
 
-- name: "SCORED | 2.3.17.6 | PATCH | L1 Ensure User Account Control Only elevate UIAccess applications that are installed in secure locations is set to Enabled"
-  win_regedit:
-    path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\System
-    name: EnableSecureUIAPaths
-    data: 1
-    type: dword
-  when: rule_2_3_17_6
-  tags:
-    - level1
-    - level2
-    - rule_2.3.17.6
-    - patch
+# - name: "SCORED | 2.3.17.6 | PATCH | L1 Ensure User Account Control Only elevate UIAccess applications that are installed in secure locations is set to Enabled"
+#   win_regedit:
+#     path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\System
+#     name: EnableSecureUIAPaths
+#     data: 1
+#     type: dword
+#   when: rule_2_3_17_6
+#   tags:
+#     - level1
+#     - level2
+#     - rule_2.3.17.6
+#     - patch
 
-- name: "SCORED | 2.3.17.7 | PATCH | L1 Ensure User Account Control Run all administrators in Admin Approval Mode is set to Enabled"
-  win_regedit:
-    path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\System
-    name: EnableLUA
-    data: 1
-    type: dword
-  when: rule_2_3_17_7
-  tags:
-    - level1
-    - level2
-    - rule_2.3.17.7
-    - patch
+# - name: "SCORED | 2.3.17.7 | PATCH | L1 Ensure User Account Control Run all administrators in Admin Approval Mode is set to Enabled"
+#   win_regedit:
+#     path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\System
+#     name: EnableLUA
+#     data: 1
+#     type: dword
+#   when: rule_2_3_17_7
+#   tags:
+#     - level1
+#     - level2
+#     - rule_2.3.17.7
+#     - patch
 
-- name: "SCORED | 2.3.17.8 | PATCH | L1 Ensure User Account Control Switch to the secure desktop when prompting for elevation is set to Enabled"
-  win_regedit:
-    path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\System
-    name: PromptOnSecureDesktop
-    data: 1
-    type: dword
-  when: rule_2_3_17_8
-  tags:
-    - level1
-    - level2
-    - rule_2.3.17.8
-    - patch
+# - name: "SCORED | 2.3.17.8 | PATCH | L1 Ensure User Account Control Switch to the secure desktop when prompting for elevation is set to Enabled"
+#   win_regedit:
+#     path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\System
+#     name: PromptOnSecureDesktop
+#     data: 1
+#     type: dword
+#   when: rule_2_3_17_8
+#   tags:
+#     - level1
+#     - level2
+#     - rule_2.3.17.8
+#     - patch
 
-- name: "SCORED | 2.3.17.9 | PATCH | L1 Ensure User Account Control Virtualize file and registry write failures to per-user locations is set to Enabled"
-  win_regedit:
-    path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\System
-    name: EnableVirtualization
-    data: 1
-    type: dword
-  when: rule_2_3_17_9
-  tags:
-    - level1
-    - level2
-    - rule_2.3.17.9
-    - patch
-
-
+# - name: "SCORED | 2.3.17.9 | PATCH | L1 Ensure User Account Control Virtualize file and registry write failures to per-user locations is set to Enabled"
+#   win_regedit:
+#     path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\System
+#     name: EnableVirtualization
+#     data: 1
+#     type: dword
+#   when: rule_2_3_17_9
+#   tags:
+#     - level1
+#     - level2
+#     - rule_2.3.17.9
+#     - patch

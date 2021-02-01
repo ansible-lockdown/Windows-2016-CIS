@@ -175,10 +175,11 @@ rule_2_3_17_5: true
 rule_2_3_17_6: true
 rule_2_3_17_7: true
 rule_2_3_17_8: true
-rule_2_3_17_9: true
 
 # section17
 rule_17_1_1: true
+rule_17_1_2: true
+rule_17_1_3: true
 rule_17_2_1: true
 rule_17_2_2: true
 rule_17_2_3: true
@@ -197,9 +198,13 @@ rule_17_5_5: true
 rule_17_5_6: true
 rule_17_6_1: true
 rule_17_6_2: true
+rule_17_6_3: true
+rule_17_6_4: true
 rule_17_7_1: true
 rule_17_7_2: true
 rule_17_7_3: true
+rule_17_7_4: true
+rule_17_7_5: true
 rule_17_8_1: true
 rule_17_9_1: true
 rule_17_9_2: true
