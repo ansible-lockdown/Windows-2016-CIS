@@ -451,7 +451,8 @@ rule_19_1_3_2: true
 rule_19_1_3_3: true
 rule_19_1_3_4: true
 rule_19_5_1_1: true
-rule_19_6_5_1_1: true
+# rule_19_6_5_1_1: true
+rule_19_6_6_1_1: true
 rule_19_7_4_1: true
 rule_19_7_4_2: true
 rule_19_7_7_1: true
@@ -459,8 +460,10 @@ rule_19_7_7_2: true
 rule_19_7_7_3: true
 rule_19_7_7_4: true
 rule_19_7_26_1: true
-rule_19_7_40_1: true
-rule_19_7_44_2_1: true
+# rule_19_7_40_1: true
+rule_19_7_41_1: true
+# rule_19_7_44_2_1: true
+rule_19_7_45_2_1: true
 
 
 # This SID is the same for standalone, member, domain controller for 'Administrators' group
