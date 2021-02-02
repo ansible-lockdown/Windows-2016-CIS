@@ -173,286 +173,280 @@
     - rule_18.2.6
     - audit
 
-# - name: "SCORED | 18.3.1 | AUDIT | L1 Ensure Apply UAC restrictions to local accounts on network logons is set to Enabled MS only"
-#   command: "echo true"
-#   register: result
-#   changed_when: no
-#   ignore_errors: yes
-#   when:
-#     - is_implemented
-#     - rule_18_3_1
-#     - not ansible_windows_domain_role == "Primary domain controller"
-#   tags:
-#     - level1
-#     - level2
-#     - rule_18.3.1
-#     - audit
+- name: "SCORED | 18.3.1 | AUDIT | (L1) Ensure 'Apply UAC restrictions to local accounts on network logons' is set to 'Enabled' (MS only)"
+  block:
+    - name: "SCORED | 18.3.1 | AUDIT | (L1) Ensure 'Apply UAC restrictions to local accounts on network logons' is set to 'Enabled' (MS only)"
+      command: "echo true"
+      register: result
+      changed_when: no
+      ignore_errors: yes
 
-# - name: "SCORED | 18.3.1 | PATCH | L1 Ensure Apply UAC restrictions to local accounts on network logons is set to Enabled MS only"
-#   command: "echo true"
-#   when:
-#     - is_implemented
-#     - rule_18_3_1
-#     - not ansible_windows_domain_role == "Primary domain controller"
-#   tags:
-#     - level1
-#     - level2
-#     - rule_18.3.1
-#     - patch
+    - name: "SCORED | 18.3.1 | PATCH | (L1) Ensure 'Apply UAC restrictions to local accounts on network logons' is set to 'Enabled' (MS only)"
+      command: "echo true"
+  when:
+    - is_implemented
+    - rule_18_3_1
+    - not ansible_windows_domain_role == "Primary domain controller"
+  tags:
+    - level1-memberserver
+    - rule_18.3.1
+    - audit
 
-# - name: "SCORED | 18.3.2 | AUDIT | L1 Ensure Configure SMB v1 client driver is set to Enabled Disable driver"
-#   command: "echo true"
-#   register: result
-#   changed_when: no
-#   ignore_errors: yes
-#   when:
-#     - is_implemented
-#     - rule_18_3_2
-#   tags:
-#     - level1
-#     - level2
-#     - rule_18.3.2
-#     - audit
+- name: "SCORED | 18.3.2 | AUDIT | (L1) Ensure 'Configure SMB v1 client driver' is set to 'Enabled: Disable driver (recommended)'"
+  block:
+    - name: "SCORED | 18.3.2 | AUDIT | (L1) Ensure 'Configure SMB v1 client driver' is set to 'Enabled: Disable driver (recommended)'"
+      command: "echo true"
+      register: result
+      changed_when: no
+      ignore_errors: yes
 
-# - name: "SCORED | 18.3.2 | PATCH | L1 Ensure Configure SMB v1 client driver is set to Enabled Disable driver"
-#   command: "echo true"
-#   when:
-#     - is_implemented
-#     - rule_18_3_2
-#   tags:
-#     - level1
-#     - level2
-#     - rule_18.3.2
-#     - patch
+    - name: "SCORED | 18.3.2 | PATCH | (L1) Ensure 'Configure SMB v1 client driver' is set to 'Enabled: Disable driver (recommended)'"
+      command: "echo true"
+  when:
+    - is_implemented
+    - rule_18_3_2
+  tags:
+    - level1-domaincontroller
+    - level1-memberserver
+    - rule_18.3.2
+    - audit
 
-# - name: "SCORED | 18_3_3 | PATCH | L1 Ensure Configure SMB v1 server is set to Disabled"
-#   win_regedit:
-#       path: HKLM:\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters
-#       name: SMB1
-#       data: 0
-#       type: dword
-#       state: present
-#   notify: reboot_windows
-#   when: rule_18_3_3
-#   tags:
-#     - level1
-#     - level2
-#     - rule_18.3.3
-#     - patch
+- name: "SCORED | 18_3_3 | PATCH | (L1) Ensure 'Configure SMB v1 server' is set to 'Disabled'"
+  win_regedit:
+      path: HKLM:\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters
+      name: SMB1
+      data: 0
+      type: dword
+      state: present
+  notify: reboot_windows
+  when: rule_18_3_3
+  tags:
+    - level1-domaincontroller
+    - level1-memberserver
+    - rule_18.3.3
+    - patch
 
-# - name: "SCORED | 18_3_4 | PATCH | L1 Ensure Enable Structured Exception Handling Overwrite Protection SEHOP is set to Enabled"
-#   win_regedit:
-#       path: HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\kernel
-#       name: DisableExceptionChainValidation
-#       data: 1
-#       type: dword
-#       state: present
-#   when: rule_18_3_4
-#   tags:
-#     - level1
-#     - level2
-#     - rule_18.3.4
-#     - patch
+- name: "SCORED | 18_3_4 | PATCH | (L1) Ensure 'Enable Structured Exception Handling Overwrite Protection (SEHOP)' is set to 'Enabled'"
+  win_regedit:
+      path: HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\kernel
+      name: DisableExceptionChainValidation
+      data: 1
+      type: dword
+      state: present
+  when: rule_18_3_4
+  tags:
+    - level1-domaincontroller
+    - level1-memberserver
+    - rule_18.3.4
+    - patch
 
-# - name: "SCORED | 18.3.5 | AUDIT | L1 Ensure Turn on Windows Defender protection against Potentially Unwanted Applications is set to Enabled"
-#   command: "echo true"
-#   register: result
-#   changed_when: no
-#   ignore_errors: yes
-#   when:
-#     - is_implemented
-#     - rule_18_3_5
-#   tags:
-#     - level1
-#     - level2
-#     - rule_18.3.5
-#     - audit
+- name: "SCORED | 18.3.5 | PATCH | (L1) Ensure 'Extended Protection for LDAP Authentication (Domain Controllers only)' is set to 'Enabled: Enabled, always (recommended)' (DC Only)"
+  win_regedit:
+      path: HKLM:\SYSTEM\CurrentControlSet\Services\NTDS\Parameters
+      name: LdapEnforceChannelBinding
+      data: 1
+      type: dword
+  when:
+    - rule_18_3_5
+    - ansible_windows_domain_role == "Primary domain controller"
+  tags:
+    - level1-domaincontroller
+    - rule_18.3.5
+    - patch
 
-# - name: "SCORED | 18.3.5 | PATCH | L1 Ensure Turn on Windows Defender protection against Potentially Unwanted Applications is set to Enabled"
-#   command: "echo true"
-#   when:
-#     - is_implemented
-#     - rule_18_3_5
-#   tags:
-#     - level1
-#     - level2
-#     - rule_18.3.5
-#     - patch
 
-# - name: "SCORED | 18.3.6 | PATCH | L1 Ensure WDigest Authentication is set to Disabled"
-#   win_regedit:
-#       path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\Wdigest
-#       state: present
-#       value: UseLogonCredential
-#       data: 0
-#       datatype: dword
-#   when: rule_18_3_6
-#   tags:
-#     - level1
-#     - level2
-#     - rule_18.3.6
-#     - patch
+- name: "SCORED | 18.3.6 | PATCH | (L1) Ensure 'NetBT NodeType configuration' is set to 'Enabled: P-node (recommended)'"
+  win_regedit:
+      path: HKLM:\SYSTEM\CurrentControlSet\Services\NetBT\Parameters
+      state: present
+      value: NodeType
+      data: 2
+      datatype: dword
+  when: rule_18_3_6
+  tags:
+    - level1-domaincontroller
+    - level1-memberserver
+    - rule_18.3.6
+    - patch
 
-# - name: "SCORED | 18.4.1 | PATCH | L1 Ensure MSS AutoAdminLogon Enable Automatic Logon not recommended is set to Disabled"
-#   win_regedit:
-#       path: HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon
-#       state: present
-#       value: AutoAdminLogon
-#       data: 0
-#       datatype: dword
-#   when: rule_18_4_1
-#   tags:
-#     - level1
-#     - level2
-#     - rule_18.4.1
-#     - patch
+- name: "SCORED | 18.3.7 | PATCH | (L1) Ensure 'WDigest Authentication' is set to 'Disabled'"
+  win_regedit:
+      path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\Wdigest
+      state: present
+      value: UseLogonCredential
+      data: 0
+      datatype: dword
+  when: rule_18_3_7
+  tags:
+    - level1-domaincontroller
+    - level1-memberserver
+    - rule_18.3.6
+    - patch
 
-# - name: "SCORED | 18.4.2 | PATCH | L1 Ensure MSS DisableIPSourceRouting IPv6 IP source routing protection level protects against packet spoofing is set to Enabled Highest protection source routing is completely disabled"
-#   win_regedit:
-#       path: HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip6\Parameters
-#       state: present
-#       value: DisableIPSourceRouting
-#       data: 2
-#       datatype: dword
-#   when: rule_18_4_2
-#   tags:
-#     - level1
-#     - level2
-#     - rule_18.4.2
-#     - patch
+- name: "SCORED | 18.4.1 | PATCH | (L1) Ensure 'MSS: (AutoAdminLogon) Enable Automatic Logon (not recommended)' is set to 'Disabled'"
+  win_regedit:
+      path: HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon
+      state: present
+      value: AutoAdminLogon
+      data: 0
+      datatype: dword
+  when: rule_18_4_1
+  tags:
+    - level1-domaincontroller
+    - level1-memberserver
+    - rule_18.4.1
+    - patch
 
-# - name: "SCORED | 18.4.3 | PATCH | L1 Ensure MSS DisableIPSourceRouting IP source routing protection level protects against packet spoofing is set to Enabled Highest protection source routing is completely disabled"
-#   win_regedit:
-#       path: HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters
-#       state: present
-#       value: DisableIPSourceRouting
-#       data: 2
-#       datatype: dword
-#   when: rule_18_4_3
-#   tags:
-#     - level1
-#     - level2
-#     - rule_18.4.3
-#     - patch
+- name: "SCORED | 18.4.2 | PATCH | (L1) Ensure 'MSS: (DisableIPSourceRouting IPv6) IP source routing protection level (protects against packet spoofing)' is set to 'Enabled: Highest protection, source routing is completely disabled'"
+  win_regedit:
+      path: HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip6\Parameters
+      state: present
+      value: DisableIPSourceRouting
+      data: 2
+      datatype: dword
+  when: rule_18_4_2
+  tags:
+    - level1-domaincontroller
+    - level1-memberserver
+    - rule_18.4.2
+    - patch
 
-# - name: "SCORED | 18.4.4 | PATCH | L1 Ensure MSS EnableICMPRedirect Allow ICMP redirects to override OSPF generated routes is set to Disabled"
-#   win_regedit:
-#       path: HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters
-#       state: present
-#       value: EnableICMPRedirect
-#       data: 0
-#       datatype: dword
-#   when: rule_18_4_4
-#   tags:
-#     - level1
-#     - level2
-#     - rule_18.4.4
-#     - patch
+- name: "SCORED | 18.4.3 | PATCH | (L1) Ensure 'MSS: (DisableIPSourceRouting) IP source routing protection level (protects against packet spoofing)' is set to 'Enabled: Highest protection, source routing is completely disabled'"
+  win_regedit:
+      path: HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters
+      state: present
+      value: DisableIPSourceRouting
+      data: 2
+      datatype: dword
+  when: rule_18_4_3
+  tags:
+    - level1-domaincontroller
+    - level1-memberserver
+    - rule_18.4.3
+    - patch
 
-# - name: "SCORED | 18.4.5 | PATCH | L2 Ensure MSS KeepAliveTime How often keep-alive packets are sent in milliseconds is set to Enabled 300000 or 5 minutes recommended"
-#   win_regedit:
-#     path: HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters
-#     state: present
-#     value: KeepAliveTime
-#     data: 300000
-#     datatype: dword
-#   when: rule_18_4_5
-#   tags:
-#     - level2
-#     - rule_18.4.5
-#     - patch
+- name: "SCORED | 18.4.4 | PATCH | (L1) Ensure 'MSS: (EnableICMPRedirect) Allow ICMP redirects to override OSPF generated routes' is set to 'Disabled'"
+  win_regedit:
+      path: HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters
+      state: present
+      value: EnableICMPRedirect
+      data: 0
+      datatype: dword
+  when: rule_18_4_4
+  tags:
+    - level1-domaincontroller
+    - level1-memberserver
+    - rule_18.4.4
+    - patch
 
-# - name: "SCORED | 18.4.6 | PATCH | L1 Ensure MSS NoNameReleaseOnDemand Allow the computer to ignore NetBIOS name release requests except from WINS servers is set to Enabled"
-#   win_regedit:
-#     path: HKLM:\System\Currentcontrolset\Services\Netbt\Parameters
-#     state: present
-#     name: NoNameReleaseOnDemand
-#     data: 1
-#     type: dword
-#   when: rule_18_4_6
-#   tags:
-#     - level1
-#     - level2
-#     - rule_18.4.6
-#     - patch
+- name: "SCORED | 18.4.5 | PATCH | (L2) Ensure 'MSS: (KeepAliveTime) How often keep-alive packets are sent in milliseconds' is set to 'Enabled: 300,000 or 5 minutes (recommended)'"
+  win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters
+    state: present
+    value: KeepAliveTime
+    data: 300000
+    datatype: dword
+  when: rule_18_4_5
+  tags:
+    - level2-domaincontroller
+    - level2-memberserver
+    - rule_18.4.5
+    - patch
 
-# - name: "SCORED | 18.4.7 | PATCH | L2 Ensure MSS PerformRouterDiscovery Allow IRDP to detect and configure Default Gateway addresses could lead to DoS is set to Disabled"
-#   win_regedit:
-#     path: HKLM:\System\Currentcontrolset\Services\Tcpip\Parameters
-#     state: present
-#     name: PerformRouterDiscovery
-#     data: 0
-#     type: dword
-#   when: rule_18_4_7
-#   tags:
-#     - level2
-#     - rule_18.4.7
-#     - patch
+- name: "SCORED | 18.4.6 | PATCH | (L1) Ensure 'MSS: (NoNameReleaseOnDemand) Allow the computer to ignore NetBIOS name release requests except from WINS servers' is set to 'Enabled'"
+  win_regedit:
+    path: HKLM:\System\Currentcontrolset\Services\Netbt\Parameters
+    state: present
+    name: NoNameReleaseOnDemand
+    data: 1
+    type: dword
+  when: rule_18_4_6
+  tags:
+    - level1-domaincontroller
+    - level1-memberserver
+    - rule_18.4.6
+    - patch
 
-# - name: "SCORED | 18.4.8 | PATCH | L1 Ensure MSS SafeDllSearchMode Enable Safe DLL search mode recommended is set to Enabled"
-#   win_regedit:
-#     path: HKLM:\System\Currentcontrolset\Control\Session Manager
-#     name: SafeDllSearchMode
-#     data: 1
-#     type: dword
-#     state: present
-#   when: rule_18_4_8
-#   tags:
-#     - level1
-#     - level2
-#     - rule_18.4.8
-#     - patch
+- name: "SCORED | 18.4.7 | PATCH | (L2) Ensure 'MSS: (PerformRouterDiscovery) Allow IRDP to detect and configure Default Gateway addresses (could lead to DoS)' is set to 'Disabled'"
+  win_regedit:
+    path: HKLM:\System\Currentcontrolset\Services\Tcpip\Parameters
+    state: present
+    name: PerformRouterDiscovery
+    data: 0
+    type: dword
+  when: rule_18_4_7
+  tags:
+    - level2-domaincontroller
+    - level2-memberserver
+    - rule_18.4.7
+    - patch
 
-# - name: "SCORED | 18.4.9 | PATCH | L1 Ensure MSS ScreenSaverGracePeriod The time in seconds before the screen saver grace period expires 0 recommended is set to Enabled 5 or fewer seconds"
-#   win_regedit:
-#     path: HKLM:\Software\Microsoft\Windows Nt\Currentversion\Winlogon
-#     name: ScreenSaverGracePeriod
-#     data: 5
-#     type: string
-#     state: present
-#   when: rule_18_4_9
-#   tags:
-#     - level1
-#     - level2
-#     - rule_18.4.9
-#     - patch
+- name: "SCORED | 18.4.8 | PATCH | (L1) Ensure 'MSS: (SafeDllSearchMode) Enable Safe DLL search mode (recommended)' is set to 'Enabled'"
+  win_regedit:
+    path: HKLM:\System\Currentcontrolset\Control\Session Manager
+    name: SafeDllSearchMode
+    data: 1
+    type: dword
+    state: present
+  when: rule_18_4_8
+  tags:
+    - level1-domaincontroller
+    - level1-memberserver
+    - rule_18.4.8
+    - patch
 
-# - name: "SCORED | 18.4.10 | PATCH | L2 Ensure MSS TcpMaxDataRetransmissions IPv6 How many times unacknowledged data is retransmitted is set to Enabled 3"
-#   win_regedit:
-#     path: HKLM:\System\Currentcontrolset\Services\Tcpip6\Parameters
-#     name: TcpMaxDataRetransmissions
-#     data: 3
-#     type: dword
-#   when: rule_18_4_10
-#   tags:
-#     - level2
-#     - rule_18.4.10
-#     - patch
+- name: "SCORED | 18.4.9 | PATCH | (L1) Ensure 'MSS: (ScreenSaverGracePeriod) The time in seconds before the screen saver grace period expires (0 recommended)' is set to 'Enabled: 5 or fewer seconds'"
+  win_regedit:
+    path: HKLM:\Software\Microsoft\Windows Nt\Currentversion\Winlogon
+    name: ScreenSaverGracePeriod
+    data: 5
+    type: string
+    state: present
+  when: rule_18_4_9
+  tags:
+    - level1-domaincontroller
+    - level1-memberserver
+    - rule_18.4.9
+    - patch
 
-# - name: "SCORED | 18.4.11 | PATCH | L2 Ensure MSS TcpMaxDataRetransmissions How many times unacknowledged data is retransmitted is set to Enabled 3"
-#   win_regedit:
-#     path: HKLM:\System\Currentcontrolset\Services\Tcpip\Parameters
-#     name: TcpMaxDataRetransmissions
-#     data: 3
-#     type: dword
-#   when: rule_18_4_11
-#   tags:
-#     - level2
-#     - rule_18.4.11
-#     - patch
+- name: "SCORED | 18.4.10 | PATCH | (L2) Ensure 'MSS: (TcpMaxDataRetransmissions IPv6) How many times unacknowledged data is retransmitted' is set to 'Enabled: 3'"
+  win_regedit:
+    path: HKLM:\System\Currentcontrolset\Services\Tcpip6\Parameters
+    name: TcpMaxDataRetransmissions
+    data: 3
+    type: dword
+  when: rule_18_4_10
+  tags:
+    - level2-domaincontroller
+    - level2-memberserver
+    - rule_18.4.10
+    - patch
 
-# - name: "SCORED | 18.4.12 | PATCH | L1 Ensure MSS WarningLevel Percentage threshold for the security event log at which the system will generate a warning is set to Enabled 90 or less"
-#   win_regedit:
-#     path: HKLM:\System\Currentcontrolset\Services\Eventlog\Security
-#     name: WarningLevel
-#     data: 90
-#     type: dword
-#   when: rule_18_4_12
-#   tags:
-#     - level1
-#     - level2
-#     - rule_18.4.12
-#     - patch
+- name: "SCORED | 18.4.11 | PATCH | (L2) Ensure 'MSS: (TcpMaxDataRetransmissions) How many times unacknowledged data is retransmitted' is set to 'Enabled: 3'"
+  win_regedit:
+    path: HKLM:\System\Currentcontrolset\Services\Tcpip\Parameters
+    name: TcpMaxDataRetransmissions
+    data: 3
+    type: dword
+  when: rule_18_4_11
+  tags:
+    - level2-domaincontroller
+    - level2-memberserver
+    - rule_18.4.11
+    - patch
+
+- name: "SCORED | 18.4.12 | PATCH | (L1) Ensure 'MSS: (WarningLevel) Percentage threshold for the security event log at which the system will generate a warning' is set to 'Enabled: 90% or less'"
+  win_regedit:
+    path: HKLM:\System\Currentcontrolset\Services\Eventlog\Security
+    name: WarningLevel
+    data: 90
+    type: dword
+  when: rule_18_4_12
+  tags:
+    - level1-domaincontroller
+    - level1-memberserver
+    - rule_18.4.12
+    - patch
 
 
 # - name: "SCORED | 18.5.4.1 | PATCH | L1 Set NetBIOS node type to P-node Ensure NetBT Parameter NodeType is set to 0x2 2 MS Only"
@@ -470,127 +464,130 @@
 #     - rule_18.5.4.1
 #     - patch
 
-# - name: "SCORED | 18.5.4.2 | PATCH | L1 Ensure Turn off multicast name resolution is set to Enabled MS Only"
-#   win_regedit:
-#     path: HKLM:\Software\Policies\Microsoft\Windows NT\DNSClient
-#     name: EnableMulticast
-#     data: 0
-#     type: dword
-#   when:
-#     - rule_18_5_4_2
-#     - not ansible_windows_domain_role == "Primary domain controller"
-#   tags:
-#     - level1
-#     - level2
-#     - rule_18.5.4.2
-#     - patch
+- name: "SCORED | 18.5.4.1 | PATCH | (L1) Ensure 'Turn off multicast name resolution' is set to 'Enabled'"
+  win_regedit:
+    path: HKLM:\Software\Policies\Microsoft\Windows NT\DNSClient
+    name: EnableMulticast
+    data: 0
+    type: dword
+  when:
+    - rule_18_5_4_2
+  tags:
+    - level1-domaincontroller
+    - level1-memberserver
+    - rule_18.5.4.2
+    - patch
 
-# - name: "SCORED | 18.5.5.1 | PATCH | L2 Ensure Enable Font Providers is set to Disabled"
-#   win_regedit:
-#     path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\System
-#     name: EnableFontProviders
-#     data: 0
-#     type: dword
-#   when: rule_18_5_5_1
-#   tags:
-#     - level2
-#     - rule_18.5.5.1
-#     - patch
+- name: "SCORED | 18.5.5.1 | PATCH | (L2) Ensure 'Enable Font Providers' is set to 'Disabled'"
+  win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\System
+    name: EnableFontProviders
+    data: 0
+    type: dword
+  when: rule_18_5_5_1
+  tags:
+    - level2-domaincontroller
+    - level2-memberserver
+    - rule_18.5.5.1
+    - patch
 
-# - name: "SCORED | 18.5.8.1 | PATCH | L1 Ensure Enable insecure guest logons is set to Disabled"
-#   win_regedit:
-#     path: HKLM:\Software\Policies\Microsoft\Windows\Lanmanworkstation
-#     name: AllowInsecureGuestAuth
-#     data: 0
-#     type: dword
-#   when: rule_18_5_8_1
-#   tags:
-#     - level1
-#     - level2
-#     - rule_18.5.8.1
-#     - patch
+- name: "SCORED | 18.5.8.1 | PATCH | (L1) Ensure 'Enable insecure guest logons' is set to 'Disabled'"
+  win_regedit:
+    path: HKLM:\Software\Policies\Microsoft\Windows\Lanmanworkstation
+    name: AllowInsecureGuestAuth
+    data: 0
+    type: dword
+  when: rule_18_5_8_1
+  tags:
+    - level1-domaincontroller
+    - level1-memberserver
+    - rule_18.5.8.1
+    - patch
 
-# - name: "SCORED | 18.5.9.1 | PATCH | L2 Ensure Turn on Mapper IO LLTDIO driver is set to Disabled"
-#   block:
-#     - name: "SCORED | 18.5.9.1 | PATCH | L2 Ensure Turn on Mapper IO LLTDIO driver is set to Disabled | AllowLLTDIOOndomain"
-#       win_regedit:
-#         path: HKLM:\Software\Policies\Microsoft\Windows\Lltd
-#         name: AllowLLTDIOOndomain
-#         data: 0
-#         type: dword
+- name: "SCORED | 18.5.9.1 | PATCH | (L2) Ensure 'Turn on Mapper I/O (LLTDIO) driver' is set to 'Disabled'"
+  block:
+    - name: "SCORED | 18.5.9.1 | PATCH | (L2) Ensure 'Turn on Mapper I/O (LLTDIO) driver' is set to 'Disabled' | AllowLLTDIOOndomain"
+      win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Lltd
+        name: AllowLLTDIOOndomain
+        data: 0
+        type: dword
     
-#     - name: "SCORED | 18.5.9.1 | PATCH | L2 Ensure Turn on Mapper IO LLTDIO driver is set to Disabled | AllowLLTDIOOnPublicNet"
-#       win_regedit:
-#         path: HKLM:\Software\Policies\Microsoft\Windows\Lltd
-#         name: AllowLLTDIOOnPublicNet
-#         data: 0
-#         type: dword
+    - name: "SCORED | 18.5.9.1 | PATCH | (L2) Ensure 'Turn on Mapper I/O (LLTDIO) driver' is set to 'Disabled' | AllowLLTDIOOnPublicNet"
+      win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Lltd
+        name: AllowLLTDIOOnPublicNet
+        data: 0
+        type: dword
 
-#     - name: "SCORED | 18.5.9.1 | PATCH | L2 Ensure Turn on Mapper IO LLTDIO driver is set to Disabled | EnableLLTDIO"
-#       win_regedit:
-#         path: HKLM:\Software\Policies\Microsoft\Windows\Lltd
-#         name: EnableLLTDIO
-#         data: 0
-#         type: dword
+    - name: "SCORED | 18.5.9.1 | PATCH | (L2) Ensure 'Turn on Mapper I/O (LLTDIO) driver' is set to 'Disabled' | EnableLLTDIO"
+      win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Lltd
+        name: EnableLLTDIO
+        data: 0
+        type: dword
 
-#     - name: "SCORED | 18.5.9.1 | PATCH | L2 Ensure Turn on Mapper IO LLTDIO driver is set to Disabled | ProhibitLLTDIOOnPrivateNet"
-#       win_regedit:
-#         path: HKLM:\Software\Policies\Microsoft\Windows\Lltd
-#         name: ProhibitLLTDIOOnPrivateNet
-#         data: 0
-#         type: dword
-#   when: rule_18_5_9_1
-#   tags:
-#     - level2
-#     - rule_18.5.9.1
-#     - patch
+    - name: "SCORED | 18.5.9.1 | PATCH | (L2) Ensure 'Turn on Mapper I/O (LLTDIO) driver' is set to 'Disabled' | ProhibitLLTDIOOnPrivateNet"
+      win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Lltd
+        name: ProhibitLLTDIOOnPrivateNet
+        data: 0
+        type: dword
+  when: rule_18_5_9_1
+  tags:
+    - level2-domaincontroller
+    - level2-memberserver
+    - rule_18.5.9.1
+    - patch
 
-# - name: "SCORED | 18.5.9.2 | PATCH | L2 Ensure Turn on Responder RSPNDR driver is set to Disabled"
-#   block:
-#     - name: "SCORED | 18.5.9.2 | PATCH | L2 Ensure Turn on Responder RSPNDR driver is set to Disabled | AllowRspndrOnDomain"
-#       win_regedit:
-#         path: HKLM:\Software\Policies\Microsoft\Windows\Lltd
-#         name: AllowRspndrOnDomain
-#         data: 0
-#         type: dword
+- name: "SCORED | 18.5.9.2 | PATCH | (L2) Ensure 'Turn on Responder (RSPNDR) driver' is set to 'Disabled'"
+  block:
+    - name: "SCORED | 18.5.9.2 | PATCH | (L2) Ensure 'Turn on Responder (RSPNDR) driver' is set to 'Disabled' | AllowRspndrOnDomain"
+      win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Lltd
+        name: AllowRspndrOnDomain
+        data: 0
+        type: dword
 
-#     - name: "SCORED | 18.5.9.2 | PATCH | L2 Ensure Turn on Responder RSPNDR driver is set to Disabled | AllowRspndrOnPublicNet"
-#       win_regedit:
-#         path: HKLM:\Software\Policies\Microsoft\Windows\Lltd
-#         name: AllowRspndrOnPublicNet
-#         data: 0
-#         type: dword
+    - name: "SCORED | 18.5.9.2 | PATCH | (L2) Ensure 'Turn on Responder (RSPNDR) driver' is set to 'Disabled' | AllowRspndrOnPublicNet"
+      win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Lltd
+        name: AllowRspndrOnPublicNet
+        data: 0
+        type: dword
 
-#     - name: "SCORED | 18.5.9.2 | PATCH | L2 Ensure Turn on Responder RSPNDR driver is set to Disabled | EnableRspndr"
-#       win_regedit:
-#         path: HKLM:\Software\Policies\Microsoft\Windows\Lltd
-#         name: EnableRspndr
-#         data: 0
-#         type: dword
+    - name: "SCORED | 18.5.9.2 | PATCH | (L2) Ensure 'Turn on Responder (RSPNDR) driver' is set to 'Disabled' | EnableRspndr"
+      win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Lltd
+        name: EnableRspndr
+        data: 0
+        type: dword
 
-#     - name: "SCORED | 18.5.9.2 | PATCH | L2 Ensure Turn on Responder RSPNDR driver is set to Disabled | ProhibitRspndrOnPrivateNet"
-#       win_regedit:
-#         path: HKLM:\Software\Policies\Microsoft\Windows\Lltd
-#         name: ProhibitRspndrOnPrivateNet
-#         data: 0
-#         type: dword
-#   when: rule_18_5_9_2
-#   tags:
-#     - level2
-#     - rule_18.5.9.2
-#     - patch
+    - name: "SCORED | 18.5.9.2 | PATCH | (L2) Ensure 'Turn on Responder (RSPNDR) driver' is set to 'Disabled' | ProhibitRspndrOnPrivateNet"
+      win_regedit:
+        path: HKLM:\Software\Policies\Microsoft\Windows\Lltd
+        name: ProhibitRspndrOnPrivateNet
+        data: 0
+        type: dword
+  when: rule_18_5_9_2
+  tags:
+    - level2-domaincontroller
+    - level2-memberserver
+    - rule_18.5.9.2
+    - patch
 
-# - name: "SCORED | 18.5.10.2 | PATCH | L2 Ensure Turn off Microsoft Peer-to-Peer Networking Services is set to Enabled"
-#   win_regedit:
-#     path: HKLM:\Software\Policies\Microsoft\Peernet
-#     name: Disabled
-#     data: 1
-#     type: dword
-#   when: rule_18_5_10_2
-#   tags:
-#     - level2
-#     - rule_18.5.10.2
-#     - patch
+- name: "SCORED | 18.5.10.2 | PATCH | (L2) Ensure 'Turn off Microsoft Peer-to-Peer Networking Services' is set to 'Enabled'"
+  win_regedit:
+    path: HKLM:\Software\Policies\Microsoft\Peernet
+    name: Disabled
+    data: 1
+    type: dword
+  when: rule_18_5_10_2
+  tags:
+    - level2-domaincontroller
+    - level2-memberserver
+    - rule_18.5.10.2
+    - patch
 
 # - name: "SCORED | 18.5.11.2 | PATCH | L1 Ensure Prohibit installation and configuration of Network Bridge on your DNS domain network is set to Enabled"
 #   win_regedit:
