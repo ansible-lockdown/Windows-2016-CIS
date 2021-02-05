@@ -1,6 +1,7 @@
 ---
 section01_patch: yes
 section02_patch: yes
+section09_patch: yes
 section17_patch: yes
 section18_patch: yes
 section19_patch: yes
@@ -40,6 +41,7 @@ is_implemented: false
 #set to false to skip long running tasks
 long_running: false
 
+win_skip_for_test: true
 
 # These variables correspond with the STIG IDs defined in the STIG and allows you to enable/disable specific rules.
 # PLEASE NOTE: These work in coordination with the cat1, cat2, cat3 group variables. You must enable an entire group
@@ -175,10 +177,39 @@ rule_2_3_17_5: true
 rule_2_3_17_6: true
 rule_2_3_17_7: true
 rule_2_3_17_8: true
-rule_2_3_17_9: true
+
+# section9
+rule_9_1_1: true
+rule_9_1_2: true
+rule_9_1_3: true
+rule_9_1_4: true
+rule_9_1_5: true
+rule_9_1_6: true
+rule_9_1_7: true
+rule_9_1_8: true
+rule_9_2_1: true
+rule_9_2_2: true
+rule_9_2_3: true
+rule_9_2_4: true
+rule_9_2_5: true
+rule_9_2_6: true
+rule_9_2_7: true
+rule_9_2_8: true
+rule_9_3_1: true
+rule_9_3_2: true
+rule_9_3_3: true
+rule_9_3_4: true
+rule_9_3_5: true
+rule_9_3_6: true
+rule_9_3_7: true
+rule_9_3_8: true
+rule_9_3_9: true
+rule_9_3_10: true
 
 # section17
 rule_17_1_1: true
+rule_17_1_2: true
+rule_17_1_3: true
 rule_17_2_1: true
 rule_17_2_2: true
 rule_17_2_3: true
@@ -197,9 +228,13 @@ rule_17_5_5: true
 rule_17_5_6: true
 rule_17_6_1: true
 rule_17_6_2: true
+rule_17_6_3: true
+rule_17_6_4: true
 rule_17_7_1: true
 rule_17_7_2: true
 rule_17_7_3: true
+rule_17_7_4: true
+rule_17_7_5: true
 rule_17_8_1: true
 rule_17_9_1: true
 rule_17_9_2: true
@@ -224,6 +259,7 @@ rule_18_3_3: true
 rule_18_3_4: true
 rule_18_3_5: true
 rule_18_3_6: true
+rule_18_3_7: true
 rule_18_4_1: true
 rule_18_4_2: true
 rule_18_4_3: true
@@ -252,13 +288,17 @@ rule_18_5_20_1: true
 rule_18_5_20_2: true
 rule_18_5_21_1: true
 rule_18_5_21_2: true
+rule_18_7_1_1: true
 rule_18_8_3_1: true
 rule_18_8_4_1: true
+rule_18_8_4_2: true
 rule_18_8_5_1: true
 rule_18_8_5_2: true
 rule_18_8_5_3: true
 rule_18_8_5_4: true
 rule_18_8_5_5: true
+rule_18_8_5_6: true
+rule_18_8_5_7: true
 rule_18_8_14_1: true
 rule_18_8_21_2: true
 rule_18_8_21_3: true
@@ -278,27 +318,27 @@ rule_18_8_22_1_11: true
 rule_18_8_22_1_12: true
 rule_18_8_22_1_13: true
 rule_18_8_25_1: true
-rule_18_8_26_1: true
 rule_18_8_27_1: true
-rule_18_8_27_2: true
-rule_18_8_27_3: true
-rule_18_8_27_4: true
-rule_18_8_27_5: true
-rule_18_8_27_6: true
-rule_18_8_27_7: true
 rule_18_8_28_1: true
-rule_18_8_33_6_2: true
-rule_18_8_33_6_3: true
-rule_18_8_33_6_4: true
-rule_18_8_35_1: true
-rule_18_8_35_2: true
+rule_18_8_28_2: true
+rule_18_8_28_3: true
+rule_18_8_28_4: true
+rule_18_8_28_5: true
+rule_18_8_28_6: true
+rule_18_8_28_7: true
+rule_18_8_34_6_1: true
+rule_18_8_34_6_2: true
+rule_18_8_34_6_3: true
+rule_18_8_34_6_4: true
 rule_18_8_36_1: true
 rule_18_8_36_2: true
-rule_18_8_44_5_1: true
-rule_18_8_44_11_1: true
-rule_18_8_46_1: true
-rule_18_8_49_1_1: true
-rule_18_8_49_1_2: true
+rule_18_8_37_1: true
+rule_18_8_37_2: true
+rule_18_8_47_5_1: true
+rule_18_8_47_11_1: true
+rule_18_8_49_1: true
+rule_18_8_52_1_1: true
+rule_18_8_52_1_2: true
 rule_18_9_4_1: true
 rule_18_9_6_1: true
 rule_18_9_8_1: true
@@ -314,7 +354,6 @@ rule_18_9_16_1: true
 rule_18_9_16_2: true
 rule_18_9_16_3: true
 rule_18_9_16_4: true
-rule_18_9_16_5: true
 rule_18_9_26_1_1: true
 rule_18_9_26_1_2: true
 rule_18_9_26_2_1: true
@@ -326,38 +365,38 @@ rule_18_9_26_4_2: true
 rule_18_9_30_2: true
 rule_18_9_30_3: true
 rule_18_9_30_4: true
-rule_18_9_39_2: true
+rule_18_9_39_1: true
 rule_18_9_43_1: true
 rule_18_9_44_1: true
 rule_18_9_52_1: true
-rule_18_9_58_2_2: true
-rule_18_9_58_3_2_1: true
-rule_18_9_58_3_3_1: true
-rule_18_9_58_3_3_2: true
-rule_18_9_58_3_3_3: true
-rule_18_9_58_3_3_4: true
-rule_18_9_58_3_9_1: true
-rule_18_9_58_3_9_2: true
-rule_18_9_58_3_9_3: true
-rule_18_9_58_3_10_1: true
-rule_18_9_58_3_10_2: true
-rule_18_9_58_3_11_1: true
-rule_18_9_58_3_11_2: true
-rule_18_9_59_1: true
-rule_18_9_60_2: true
-rule_18_9_60_3: true
-rule_18_9_65_1: true
-rule_18_9_76_3_1: true
-rule_18_9_76_3_2: true
-rule_18_9_76_7_1: true
-rule_18_9_76_9_1: true
-rule_18_9_76_10_1: true
-rule_18_9_76_10_2: true
-rule_18_9_76_13_1_1: true
-rule_18_9_76_13_1_2: true
-rule_18_9_76_13_3_1: true
-rule_18_9_76_14: true
-rule_18_9_79_1_1: true
+rule_18_9_59_2_2: true
+rule_18_9_59_3_2_1: true
+rule_18_9_59_3_3_1: true
+rule_18_9_59_3_3_2: true
+rule_18_9_59_3_3_3: true
+rule_18_9_59_3_3_4: true
+rule_18_9_59_3_9_1: true
+rule_18_9_59_3_9_2: true
+rule_18_9_59_3_9_3: true
+rule_18_9_59_3_9_4: true
+rule_18_9_59_3_9_5: true
+rule_18_9_59_3_10_1: true
+rule_18_9_59_3_10_2: true
+rule_18_9_59_3_11_1: true
+rule_18_9_59_3_11_2: true
+rule_18_9_60_1: true
+rule_18_9_61_2: true
+rule_18_9_61_3: true
+rule_18_9_66_1: true
+rule_18_9_77_3_1: true
+rule_18_9_77_3_2: true
+rule_18_9_77_7_1: true
+rule_18_9_77_9_1: true
+rule_18_9_77_10_1: true
+rule_18_9_77_10_2: true
+rule_18_9_77_13_3_1: true
+rule_18_9_77_14: true
+rule_18_9_77_15: true
 rule_18_9_80_1_1: true
 rule_18_9_84_1: true
 rule_18_9_84_2: true
@@ -375,12 +414,13 @@ rule_18_9_97_2_2: true
 rule_18_9_97_2_3: true
 rule_18_9_97_2_4: true
 rule_18_9_98_1: true
-rule_18_9_101_1_1: true
-rule_18_9_101_1_2: true
-rule_18_9_101_1_3: true
-rule_18_9_101_2: true
-rule_18_9_101_3: true
-rule_18_9_101_4: true
+rule_18_9_99_2_1: true
+rule_18_9_102_1_1: true
+rule_18_9_102_1_2: true
+rule_18_9_102_1_3: true
+rule_18_9_102_2: true
+rule_18_9_102_3: true
+rule_18_9_102_4: true
 
 # section19
 rule_19_1_3_1: true
@@ -388,7 +428,7 @@ rule_19_1_3_2: true
 rule_19_1_3_3: true
 rule_19_1_3_4: true
 rule_19_5_1_1: true
-rule_19_6_5_1_1: true
+rule_19_6_6_1_1: true
 rule_19_7_4_1: true
 rule_19_7_4_2: true
 rule_19_7_7_1: true
@@ -396,8 +436,8 @@ rule_19_7_7_2: true
 rule_19_7_7_3: true
 rule_19_7_7_4: true
 rule_19_7_26_1: true
-rule_19_7_40_1: true
-rule_19_7_44_2_1: true
+rule_19_7_41_1: true
+rule_19_7_45_2_1: true
 
 
 # This SID is the same for standalone, member, domain controller for 'Administrators' group
@@ -437,3 +477,33 @@ sys_maxsize: 32768
 
 
 legalnoticecaption: "DoD Notice and Consent Banner"
+
+# 9.1.5
+# domain_firewall_log_path is the path to the domain firewall log files. The control suggests %SystemRoot%\System32\logfiles\firewall\domainfw.log
+# This is a variable to give some leway on where to store these log files
+domain_firewall_log_path: '%SystemRoot%\System32\logfiles\firewall\domainfw.log'
+
+# 9.1.6
+# domain_firewall_log_size is the size of the log file generated
+# To conform to CIS standards the value should be 16,384 or greater. Value is in KB
+domain_firewall_log_size: 16,384
+
+# 9.2.5
+# private_firewall_log_path is the path to the private firewall log files. The control suggests %SystemRoot%\System32\logfiles\firewall\privatefw.log
+# This is a variable to give some leway on where to store these log files
+private_firewall_log_path: '%SystemRoot%\System32\logfiles\firewall\privatefw.log'
+
+# 9.2.6
+# private_firewall_log_size is the size of the log file
+# To conform to CIS stadnards the value should be 16,384 or greater. Value is in KB
+private_firewall_log_size: 16,384
+
+# 9.3.7
+# public_firewall_log_path is the path to the public firewall log file. The control suggests %SystemRoot%\System32\logfiles\firewall\publicfw.log
+# This is a variable to give some leway on where to store these log files
+public_firewall_log_path: '%SystemRoot%\System32\logfiles\firewall\publicfw.log'
+
+# 9.3.8
+# public_firewall_log_size is the size of the log file
+# To conform to CIS stadnards the value should be 16,384 or greater. Value is in KB
+public_firewall_log_size: 16,384
