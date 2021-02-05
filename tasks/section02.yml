@@ -232,7 +232,7 @@
     - rule_2.2.17
     - patch
 
-- name: "SCORED | 2.2.18 | PATCH | (L1) Ensure 'Create symbolic links' is set to 'Administrators, NT VIRTUAL MACHINE\Virtual Machines' (MS only)"
+- name: "SCORED | 2.2.18 | PATCH | (L1) Ensure 'Create symbolic links' is set to 'Administrators, NT VIRTUAL MACHINE/Virtual Machines' (MS only)"
   win_user_right:
     name: SeCreateSymbolicLinkPrivilege
     users:
@@ -565,7 +565,7 @@
     - rule_2.2.42
     - patch
 
-- name: "SCORED | 2.2.43 | PATCH | (L1) Ensure 'Profile system performance' is set to 'Administrators, NT SERVICE\WdiServiceHost'"
+- name: "SCORED | 2.2.43 | PATCH | (L1) Ensure 'Profile system performance' is set to 'Administrators, NT SERVICE/WdiServiceHost'"
   win_user_right:
     name: SeSystemProfilePrivilege
     users:
@@ -702,7 +702,9 @@
     section: System Access
     key: newadministratorname
     value: GeorgeSharp
-  when: rule_2_3_1_5
+  when: 
+    - rule_2_3_1_5
+    - not win_skip_for_test
   tags:
     - level1-domaincontroller
     - level1-memberserver
@@ -714,7 +716,8 @@
     section: System Access
     key: NewGuestName
     value: BobCooper
-  when: rule_2_3_1_6
+  when:
+    - rule_2_3_1_6
   tags:
     - level1-domaincontroller
     - level1-memberserver

@@ -285,6 +285,7 @@
     type: dword
   when:
     - rule_9_3_5
+    - not win_skip_for_test
   tags:
     - level1-domaincontroller
     - level1-memberserver
@@ -305,6 +306,7 @@
     - rule_9.3.6
     - patch
 
+# title has slashes switched
 - name: "SCORED | 9.3.7 | PATCH | (L1) Ensure 'Windows Firewall: Public: Logging: Name' is set to '%SystemRoot%/System32/logfiles/firewall/publicfw.log'"
   win_regedit:
     path: HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\PublicProfile\Logging
