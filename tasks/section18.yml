@@ -2404,7 +2404,6 @@
     type: dword
   when:
     - rule_18_9_97_2_4
-    # - not win_skip_for_test
   tags:
     - level1-domaincontroller
     - level1-memberserver
