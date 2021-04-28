@@ -289,7 +289,7 @@
       state: present
       value: AutoAdminLogon
       data: 0
-      datatype: dword
+      datatype: string
   when: rule_18_4_1
   tags:
     - level1-domaincontroller
