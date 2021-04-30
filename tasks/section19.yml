@@ -302,8 +302,8 @@
           type: dword
   when: rule_19_7_41_1
   tags:
-    - level1
-    - level2
+    - level1-domaincontroller
+    - level1-memberserver
     - rule_19.7.41.1
     - patch
 
