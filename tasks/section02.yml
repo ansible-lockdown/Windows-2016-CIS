@@ -701,7 +701,7 @@
   win_security_policy:
     section: System Access
     key: newadministratorname
-    value: GeorgeSharp
+    value: "{{ win16cis_admin_username }}"
   when: 
     - rule_2_3_1_5
     - not win_skip_for_test
@@ -714,7 +714,7 @@
 - name: "SCORED | 2.3.1.6 | PATCH | (L1) Configure 'Accounts: Rename guest account'"
   win_security_policy:
     section: System Access
-    key: NewGuestName
+    key: "{{ win16cis_guest_username }}"
     value: BobCooper
   when:
     - rule_2_3_1_6
