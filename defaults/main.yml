@@ -1,10 +1,10 @@
 ---
-section01_patch: yes
-section02_patch: yes
-section09_patch: yes
-section17_patch: yes
-section18_patch: yes
-section19_patch: yes
+section01_patch: true
+section02_patch: true
+section09_patch: true
+section17_patch: true
+section18_patch: true
+section19_patch: true
 
 min_ansible_version: "2.6"
 
@@ -439,6 +439,14 @@ rule_19_7_26_1: true
 rule_19_7_41_1: true
 rule_19_7_45_2_1: true
 
+# Section 2 Variables
+# Control 2.3.1.5
+# win16cis_admin_username is the name the administrator account will be renamed to
+win16cis_admin_username: ChangeThis
+
+# Control 2.3.1.6
+# win16cis_guest_username is the name the guest account will be renamed to
+win16cis_guest_username: GuestChangeThis
 
 # This SID is the same for standalone, member, domain controller for 'Administrators' group
 sedebugprivilege: "*S-1-5-32-544"
