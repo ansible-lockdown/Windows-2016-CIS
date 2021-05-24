@@ -16,10 +16,10 @@
             value: "{{ passwordhistorysize }}"
   when: rule_1_1_1
   tags:
-    - level1-domaincontroller
-    - level1-memberserver
-    - rule_1.1.1
-    - patch
+      - level1-domaincontroller
+      - level1-memberserver
+      - rule_1.1.1
+      - patch
 
 - name: "SCORED | 1.1.2 | PATCH | (L1) Ensure 'Maximum password age' is set to '60 or fewer days, but not 0'"
   block:
@@ -38,10 +38,10 @@
             value: "{{ maximumpasswordage }}"
   when: rule_1_1_2
   tags:
-    - level1-domaincontroller
-    - level1-memberserver
-    - rule_1.1.2
-    - patch
+      - level1-domaincontroller
+      - level1-memberserver
+      - rule_1.1.2
+      - patch
 
 - name: "SCORED | 1.1.3 | AUDIT | (L1) Ensure 'Minimum password age' is set to '1 or more day(s)'"
   block:
@@ -60,10 +60,10 @@
             value: "{{ minimumpasswordage }}"
   when: rule_1_1_3
   tags:
-    - level1-domaincontroller
-    - level1-memberserver
-    - rule_1.1.3
-    - patch
+      - level1-domaincontroller
+      - level1-memberserver
+      - rule_1.1.3
+      - patch
 
 - name: "SCORED | 1.1.4 | AUDIT | (L1) Ensure 'Minimum password length' is set to '14 or more character(s)'"
   block:
@@ -82,10 +82,10 @@
             value: "{{ minimumpasswordlength }}"
   when: rule_1_1_4
   tags:
-    - level1-domaincontroller
-    - level1-memberserver
-    - rule_1.1.4
-    - patch
+      - level1-domaincontroller
+      - level1-memberserver
+      - rule_1.1.4
+      - patch
 
 - name: "SCORED | 1.1.5 | PATCH | (L1) Ensure 'Password must meet complexity requirements' is set to 'Enabled'"
   win_security_policy:
@@ -94,24 +94,24 @@
       value: 1
   when: rule_1_1_5
   tags:
-    - level1-domaincontroller
-    - level1-memberserver
-    - rule_1.1.5
-    - patch
+      - level1-domaincontroller
+      - level1-memberserver
+      - rule_1.1.5
+      - patch
 
 - name: "SCORED | 1.1.6 | PATCH | (L1) Ensure 'Store passwords using reversible encryption' is set to 'Disabled'"
   win_security_policy:
-    section: System Access
-    key: ClearTextPassword
-    value: "0"
+      section: System Access
+      key: ClearTextPassword
+      value: "0"
   when: rule_1_1_6
   tags:
-    - level1-domaincontroller
-    - level1-memberserver
-    - rule_1.1.6
-    - patch
+      - level1-domaincontroller
+      - level1-memberserver
+      - rule_1.1.6
+      - patch
 
-#This rule must be applied first to make rule_1.2.1 and rule_1.2.3 applicable
+# This rule must be applied first to make rule_1.2.1 and rule_1.2.3 applicable
 - name: "SCORED | 1.2.2 | PATCH | (L1) Ensure 'Account lockout threshold' is set to '10 or fewer invalid logon attempt(s), but not 0'"
   win_security_policy:
       section: System Access
@@ -119,10 +119,10 @@
       value: "{{ lockoutbadcount }}"
   when: rule_1_2_2
   tags:
-    - level1-domaincontroller
-    - level1-memberserver
-    - rule_1.2.2
-    - patch
+      - level1-domaincontroller
+      - level1-memberserver
+      - rule_1.2.2
+      - patch
 
 - name: "SCORED | 1.2.1 | AUDIT | (L1) Ensure 'Account lockout duration' is set to '15 or more minute(s)'"
   block:
@@ -136,17 +136,18 @@
 
       - name: "SCORED | 1.2.1 | PATCH | (L1) Ensure 'Account lockout duration' is set to '15 or more minute(s)'"
         win_security_policy:
-          section: System Access
-          key: LockoutDuration
-          value: "{{ lockoutduration }}"
+            section: System Access
+            key: LockoutDuration
+            value: "{{ lockoutduration }}"
   when:
-    - rule_1_2_1
-    - is_implemented #Speelman | added because of this error "Failed to import secedit.ini file from C:\\Users\\vagrant\\AppData\\Local\\Temp\\tmp81F3.tmp
+      - rule_1_2_1
+      # Speelman | added because of this error "Failed to import secedit.ini file from C:\\Users\\vagrant\\AppData\\Local\\Temp\\tmp81F3.tmp
+      - is_implemented
   tags:
-    - level1-domaincontroller
-    - level1-memberserver
-    - rule_1.2.1
-    - patch
+      - level1-domaincontroller
+      - level1-memberserver
+      - rule_1.2.1
+      - patch
 
 - name: "SCORED | 1.2.3 | AUDIT | (L1) Ensure 'Reset account lockout counter after' is set to '15 or more minute(s)'"
   block:
@@ -165,7 +166,7 @@
             value: "{{ resetlockoutcount }}"
   when: rule_1_2_3
   tags:
-    - level1-domaincontroller
-    - level1-memberserver
-    - rule_1.2.3
-    - patch
+      - level1-domaincontroller
+      - level1-memberserver
+      - rule_1.2.3
+      - patch
