@@ -35,10 +35,10 @@ workaround_for_ssg_benchmark: true
 # tweak role to run in a non-privileged container
 system_is_container: no
 
-#set to false to skip tasks that either have not been developed or cannot be automated
+# set to false to skip tasks that either have not been developed or cannot be automated
 is_implemented: false
 
-#set to false to skip long running tasks
+# set to false to skip long running tasks
 long_running: false
 
 win_skip_for_test: false
@@ -89,8 +89,8 @@ rule_2_2_27: true
 rule_2_2_28: true
 rule_2_2_29: true
 rule_2_2_30: true
-rule_2_2_31: true 
-rule_2_2_32: true 
+rule_2_2_31: true
+rule_2_2_32: true
 rule_2_2_33: true
 rule_2_2_34: true
 rule_2_2_35: true

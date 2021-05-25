@@ -5,4 +5,3 @@
 
   roles:
       - role: "{{ playbook_dir }}"
-        system_is_container: "{{ is_container | default(false) }}"
