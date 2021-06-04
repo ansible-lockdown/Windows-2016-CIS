@@ -557,7 +557,7 @@
         register: rule_17_7_5_audit
 
       - name: "SCORED | 17.7.5 | PATCH | (L1) Ensure 'Audit Other Policy Change Events' is set to include 'Failure' | Set failure"
-        win_shell: AuditPol /set /subcategory:"Other Policy Change Events" /success:enable
+        win_shell: AuditPol /set /subcategory:"Other Policy Change Events" /failure:enable
         when: "'Failure' not in rule_17_7_5_audit.stdout"
   when:
       - rule_17_7_5
