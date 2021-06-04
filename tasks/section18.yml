@@ -470,7 +470,7 @@
   win_regedit:
       path: HKLM:\Software\Policies\Microsoft\Windows NT\DNSClient
       name: EnableMulticast
-      data: 0
+      data: 1
       type: dword
   when:
       - rule_18_5_4_2
