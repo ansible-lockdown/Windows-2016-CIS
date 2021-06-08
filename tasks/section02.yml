@@ -241,7 +241,7 @@
       action: set
   when:
       - rule_2_2_18
-      - ansible_windows_domain_role == "Member server"
+      - not ansible_windows_domain_role == "Primary domain controller"
   tags:
       - level1-memberserver
       - rule_2.2.18
@@ -285,7 +285,7 @@
       action: set
   when:
       - rule_2_2_21
-      - ansible_windows_domain_member
+      - not ansible_windows_domain_role == "Primary domain controller"
   tags:
       - level1-memberserver
       - rule_2.2.21
@@ -442,7 +442,7 @@
       action: set
   when:
       - rule_2_2_32
-      - ansible_windows_domain_member
+      - not ansible_windows_domain_role == "Primary domain controller"
   tags:
       - level1-memberserver
       - rule_2.2.32
@@ -979,7 +979,7 @@
       type: string
   when:
       - rule_2_3_7_6
-      - not ansible_windows_domain_role == "Primary domain controller"
+      - ansible_windows_domain_role == "Member server"
   tags:
       - level2-memberserver
       - rule_2.3.7.6
