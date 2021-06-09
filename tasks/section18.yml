@@ -140,24 +140,19 @@
       type: dword
   when:
       - rule_18_2_6
-      - not ansible_windows_domain_role == "Memmber Server"
+      - ansible_windows_domain_role == "Memmber Server"
   tags:
       - level1-memberserver
       - rule_18.2.6
       - audit
 
 - name: "SCORED | 18.3.1 | AUDIT | (L1) Ensure 'Apply UAC restrictions to local accounts on network logons' is set to 'Enabled' (MS only)"
-  block:
-      - name: "SCORED | 18.3.1 | AUDIT | (L1) Ensure 'Apply UAC restrictions to local accounts on network logons' is set to 'Enabled' (MS only)"
-        command: "echo true"
-        changed_when: false
-        ignore_errors: true
-        register: result
-
-      - name: "SCORED | 18.3.1 | PATCH | (L1) Ensure 'Apply UAC restrictions to local accounts on network logons' is set to 'Enabled' (MS only)"
-        command: "echo true"
+  win_regedit:
+      path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
+      name: LocalAccountTokenFilterPolicy
+      data: 0
+      type: dword
   when:
-      - is_implemented
       - rule_18_3_1
       - not ansible_windows_domain_role == "Primary domain controller"
   tags:
