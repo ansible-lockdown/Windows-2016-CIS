@@ -90,19 +90,14 @@
       - audit
 
 - name: "SCORED | 18.2.3 | AUDIT | (L1) Ensure 'Enable Local Admin Password Management' is set to 'Enabled' (MS only)"
-  block:
-      - name: "SCORED | 18.2.3 | AUDIT | (L1) Ensure 'Enable Local Admin Password Management' is set to 'Enabled' (MS only)"
-        command: "echo true"
-        changed_when: false
-        ignore_errors: true
-        register: result
-
-      - name: "SCORED | 18.2.3 | PATCH | (L1) Ensure 'Enable Local Admin Password Management' is set to 'Enabled' (MS only)"
-        command: "echo true"
+  win_regedit:
+      path: HKLM:\SOFTWARE\Policies\Microsoft Services\AdmPwd
+      name: AdmPwdEnabled
+      data: 1
+      type: dword
   when:
-      - is_implemented
       - rule_18_2_3
-      - not ansible_windows_domain_role == "Primary domain controller"
+      - ansible_windows_domain_role == "Member Server"
   tags:
       - level1-memberserver
       - rule_18.2.3
@@ -115,6 +110,7 @@
       data: 4
       type: dword
   when:
+      - is_implemented
       - rule_18_2_4
       - ansible_windows_domain_role == "Member Server"
   tags:
