@@ -461,6 +461,11 @@ maximumpasswordage: 60
 minimumpasswordage: 1
 minimumpasswordlength: 14
 
+# Control 18.2.5
+# laps_passwordlength is the LAPS tool password length.
+# To conform to CIS standards please use a min value of 15 and max value of 127
+laps_passwordlength: 15
+
 newadministratorname: renamedadmin
 newguestname: renamedguest
 
