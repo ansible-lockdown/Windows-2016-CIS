@@ -145,7 +145,7 @@
       type: dword
   when:
       - rule_18_2_5
-      - not ansible_windows_domain_role == "Member Server"
+      - nsible_windows_domain_role == "Member Server"
   tags:
       - level1-memberserver
       - rule_18.2.5
