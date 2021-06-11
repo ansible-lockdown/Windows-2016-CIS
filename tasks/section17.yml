@@ -75,23 +75,22 @@
 - name: "SCORED | 17.2.1 | PATCH | (L1) Ensure 'Audit Application Group Management' is set to 'Success and Failure'"
   block:
       - name: "SCORED | 17.2.1 | AUDIT | (L1) Ensure 'Audit Application Group Management' is set to 'Success and Failure' | Get current settings"
-        win_shell: AuditPol /get /subcategory:"Security Group Management" -r | ConvertFrom-Csv | Select-Object -expand "Inclusion Setting"
+        win_shell: AuditPol /get /subcategory:"Application Group Management" -r | ConvertFrom-Csv | Select-Object -expand "Inclusion Setting"
         changed_when: false
         failed_when: false
         register: rule_17_2_1_audit
 
       - name: "SCORED | 17.2.1 | PATCH | (L1) Ensure 'Audit Application Group Management' is set to 'Success and Failure' | Success"
-        win_shell: AuditPol /set /subcategory:"Security Group Management" /success:enable
+        win_shell: AuditPol /set /subcategory:"Application Group Management" /success:enable
         changed_when: "'Success' not in rule_17_2_1_audit.stdout"
         when: "'Success' not in rule_17_2_1_audit.stdout"
 
       - name: "SCORED | 17.2.1 | PATCH | (L1) Ensure 'Audit Application Group Management' is set to 'Success and Failure' | Failure"
-        win_shell: AuditPol /set /subcategory:"Security Group Management" /failure:enable
+        win_shell: AuditPol /set /subcategory:"Application Group Management" /failure:enable
         changed_when: "'Failure' not in rule_17_2_1_audit.stdout"
         when: "'Failure' not in rule_17_2_1_audit.stdout"
   when:
       - rule_17_2_1
-      - ansible_windows_domain_role == "Primary domain controller"
   tags:
       - level1-domaincontroller
       - level1-memberserver

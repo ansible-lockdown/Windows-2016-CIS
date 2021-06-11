@@ -233,12 +233,23 @@
       - patch
 
 - name: "SCORED | 2.2.18 | PATCH | (L1) Ensure 'Create symbolic links' is set to 'Administrators, NT VIRTUAL MACHINE/Virtual Machines' (MS only)"
-  win_user_right:
-      name: SeCreateSymbolicLinkPrivilege
-      users:
-          - Administrators
-          - NT VIRTUAL MACHINE\Virtual Machines
-      action: set
+  block:
+      - name: "SCORED | 2.2.18 | PATCH | (L1) Ensure 'Create symbolic links' is set to 'Administrators, NT VIRTUAL MACHINE/Virtual Machines' (MS only) | No Hyper-v"
+        win_user_right:
+            name: SeCreateSymbolicLinkPrivilege
+            users:
+                - Administrators
+            action: set
+        when: not is_hyperv_installed
+
+      - name: "SCORED | 2.2.18 | PATCH | (L1) Ensure 'Create symbolic links' is set to 'Administrators, NT VIRTUAL MACHINE/Virtual Machines' (MS only) | With Hyper-v"
+        win_user_right:
+            name: SeCreateSymbolicLinkPrivilege
+            users:
+                - Administrators
+                - NT VIRTUAL MACHINE\Virtual Machines
+            action: set
+        when: is_hyperv_installed
   when:
       - rule_2_2_18
       - not ansible_windows_domain_role == "Primary domain controller"
