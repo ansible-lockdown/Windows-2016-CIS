@@ -828,7 +828,7 @@
       type: dword
   when:
       - rule_2_3_6_1
-      - not ansible_windows_domain_role == "Primary domain controller"
+      - ansible_windows_domain_role == "Member Server"
   tags:
       - level1-domaincontroller
       - level1-memberserver
@@ -843,7 +843,7 @@
       type: dword
   when:
       - rule_2_3_6_2
-      - not ansible_windows_domain_role == "Primary domain controller"
+      - ansible_windows_domain_role == "Member Server"
   tags:
       - level1-domaincontroller
       - level1-memberserver
@@ -1124,7 +1124,7 @@
       type: dword
   when:
       - rule_2_3_9_5
-      - ansible_windows_domain_role == "Member server"
+      - not ansible_windows_domain_role == "Primary domain controller"
   tags:
       - level1-memberserver
       - rule_2.3.9.5

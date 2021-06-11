@@ -811,6 +811,7 @@
       type: dword
   when:
       - rule_18_8_5_3
+      - ansible_windows_domain_role == "Member server"
   tags:
       - nextgen-domaincontroller
       - nextgen-memberserver
@@ -825,6 +826,7 @@
       type: dword
   when:
       - rule_18_8_5_4
+      - ansible_windows_domain_role == "Member server"
   tags:
       - nextgen-domaincontroller
       - nextgen-memberserver
@@ -839,7 +841,7 @@
       type: dword
   when:
       - rule_18_8_5_5
-      - not ansible_windows_domain_role == "Primary domain controller"
+      - ansible_windows_domain_role == "Member server"
   tags:
       - nextgen-memberserver
       - rule_18.8.5.5
@@ -1220,7 +1222,7 @@
       type: dword
   when:
       - rule_18_8_28_4
-      - not ansible_windows_domain_role == "Primary domain controller"
+      - ansible_windows_domain_role == "Member server"
   tags:
       - level1-memberserver
       - rule_18.8.28.4
