@@ -2614,9 +2614,12 @@
 - name: "SCORED | 18.9.102.2 | PATCH | (L1) Ensure 'Configure Automatic Updates' is set to 'Enabled'"
   win_regedit:
       path: HKLM:\Software\Policies\Microsoft\Windows\Windowsupdate\Au
-      name: NoAutoUpdate
-      data: 0
+      name: "{{ item.name }}"
+      data: "{{ item.data }}"
       type: dword
+  with_items:
+      - { name: NoAutoUpdate, data: 0 }
+      - { name: AUOptions, data: "{{ win16cis_wupdate_options }}" }
   when:
       - rule_18_9_102_2
   tags:

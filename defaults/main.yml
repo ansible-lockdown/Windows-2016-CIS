@@ -530,3 +530,11 @@ public_firewall_log_path: '%SystemRoot%\System32\logfiles\firewall\publicfw.log'
 # public_firewall_log_size is the size of the log file
 # To conform to CIS stadnards the value should be 16,384 or greater. Value is in KB
 public_firewall_log_size: 16,384
+
+
+# 18.9.102.2
+# win16cis_wupdate_options are described below
+# value 2 - Notify for download and install, value 3 - Auto download and notify for install
+# value 4 - Auto download and schedule install (recommended), value 5 - Allow local admin to choose setting
+# value 7 - Auto download, notify to install, notify to restart
+win16cis_wupdate_options: 4
