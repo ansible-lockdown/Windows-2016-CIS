@@ -1,4 +1,7 @@
 ---
+win2016_os_distribution: Windows-2016
+benchmark: CIS
+
 section01_patch: true
 section02_patch: true
 section09_patch: true
@@ -42,6 +45,13 @@ is_implemented: false
 long_running: false
 
 win_skip_for_test: false
+
+## Run goss audit - runs using go program so captures non ansible state
+### Other goss variable can be found at the end of these variables
+setup_goss: true
+run_goss: true
+goss_audit_path: c:/goss1  # Paths need to be /
+download_goss_exe: false
 
 # These variables correspond with the STIG IDs defined in the STIG and allows you to enable/disable specific rules.
 # PLEASE NOTE: These work in coordination with the cat1, cat2, cat3 group variables. You must enable an entire group
@@ -538,3 +548,18 @@ public_firewall_log_size: 16,384
 # value 4 - Auto download and schedule install (recommended), value 5 - Allow local admin to choose setting
 # value 7 - Auto download, notify to install, notify to restart
 win16cis_wupdate_options: 4
+
+
+### Goss audit variables
+goss_version: v0.3.16
+goss_url: https://github.com/aelsabbahy/goss/releases/download/
+goss_dl_exe: goss-alpha-windows-amd64.exe
+goss_dl_sha: dd5fd18a2c42ae05215b1fca3cf7d0d4e4d318011c67be13cb37545e368d4323
+goss_exe: goss.exe  # Note any path to be a forward slash
+goss_download_url: "{{ goss_url }}{{ goss_version }}/{{ goss_dl_exe }}"
+goss_conf_git_branch: main
+goss_conf_url: "https://github.com/ansible-lockdown/{{ win2016_os_distribution }}-{{ benchmark }}-Audit/archive/refs/heads/{{ goss_conf_git_branch }}.zip"
+
+## Goss running
+goss_vars_path: "{{ goss_audit_path }}/{{ win2016_os_distribution }}-{{ benchmark }}-Audit/{{ ansible_hostname }}.yml"
+goss_output_file: "{{ goss_audit_path }}/{{ ansible_hostname }}_{{ audit_time }}_remediate_{{ ansible_date_time.epoch }}"

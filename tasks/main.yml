@@ -30,6 +30,21 @@
 #   tags:
 #       - prelim_tasks
 
+- name: Setup for Audit
+  import_tasks: setup_goss.yml
+  when: setup_goss
+  tags:
+  - setup_goss
+#  - run_goss
+
+- name: Run Audit
+  import_tasks: run_goss_audit.yml
+  when: run_goss
+  vars:
+    audit_time: pre
+  tags:
+  - run_goss
+
 - name: Execute the section 1 tasks
   import_tasks: section01.yml
   when: section01_patch | bool
@@ -65,3 +80,11 @@
   when: section19_patch | bool
   tags:
       - section19
+
+#- name: Run Audit
+#  import_tasks: run_goss_audit.yml
+#  when: run_goss
+#  vars:
+#    audit_time: post
+#  tags:
+#  - run_goss

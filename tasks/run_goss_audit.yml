@@ -1,0 +1,19 @@
+---
+
+- name: create files to audit against
+  win_shell: "{{ item.cmd }} {{ goss_audit_path }}/{{ item.name }}_{{ audit_time }}.txt"
+  with_items:
+  - { 'name': secedit, 'cmd': 'secedit.exe /export /cfg' }
+  - { 'name': auditpol, 'cmd': 'auditpol.exe /get /category:* >' }
+  become_method: runas
+  become: yes
+  become_user: SYSTEM
+  #become_flags: logon_type=interactive logon_flags=with_profile
+
+- name: copy the template used by ansible for consistent checks
+  win_template:
+    src: ansible_vars_goss.yml.j2
+    dest: "{{ goss_vars_path }}"
+
+- name: Run the goss audit
+  win_shell: "{{ goss_audit_path }}/{{ goss_exe }} -g {{ goss_audit_dir }}/{{ win2016_os_distribution }}-{{ benchmark }}-Audit/goss.yml --vars {{ goss_vars_path }} -f json -o pretty | Out-File {{ goss_output_file }}"
