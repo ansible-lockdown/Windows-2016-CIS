@@ -1,14 +1,15 @@
 ---
 
-- name: create files to audit against
-  win_shell: "{{ item.cmd }} {{ goss_audit_path }}/{{ item.name }}_{{ audit_time }}.txt"
-  with_items:
-  - { 'name': secedit, 'cmd': 'secedit.exe /export /cfg' }
-  - { 'name': auditpol, 'cmd': 'auditpol.exe /get /category:* >' }
-  become_method: runas
-  become: yes
-  become_user: SYSTEM
-  #become_flags: logon_type=interactive logon_flags=with_profile
+- name: Create goss audit path if it doesn't exist
+  win_file:
+    path: "{{ goss_audit_path }}"
+    state: directory
+
+- name: run secedit export
+  win_command: "powershell.exe -noninteractive -noprofile -command secedit.exe /export /cfg {{ goss_audit_path }}\\secedit_{{ audit_time }}"
+
+- name: create auditpol report
+  win_shell: "auditpol.exe /get /category:* > {{ goss_audit_path }}auditpol_{{ audit_time }}.txt"
 
 - name: copy the template used by ansible for consistent checks
   win_template:

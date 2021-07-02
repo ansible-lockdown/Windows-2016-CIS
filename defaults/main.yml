@@ -1,6 +1,7 @@
 ---
 win2016_os_distribution: Windows-2016
 benchmark: CIS
+benchmark_version: 1.2
 
 section01_patch: true
 section02_patch: true
@@ -50,7 +51,7 @@ win_skip_for_test: false
 ### Other goss variable can be found at the end of these variables
 setup_goss: true
 run_goss: true
-goss_audit_path: c:/goss1  # Paths need to be /
+goss_audit_path: c:\\goss1\\
 download_goss_exe: false
 
 # These variables correspond with the STIG IDs defined in the STIG and allows you to enable/disable specific rules.
