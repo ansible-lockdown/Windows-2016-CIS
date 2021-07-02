@@ -54,7 +54,7 @@ win2016_use_public_firewall: false
 ################
 win2016cis_section_1: {{ section01_patch }}
 win2016cis_section_2: {{ section02_patch }}
-win2016cis_section_9: {{ section03_patch }}
+win2016cis_section_9: {{ section09_patch }}
 win2016cis_section_17: {{ section17_patch }}
 win2016cis_section_18: {{ section18_patch }}
 win2016cis_section_19: {{ section19_patch }}
@@ -86,46 +86,46 @@ win2016cis_2_2_5: {{ rule_2_2_5 }}  # DC_ONLY
 win2016cis_2_2_6: {{ rule_2_2_6 }}
 win2016cis_2_2_7: {{ rule_2_2_7 }}  # DC & MS separate controls (see Section_2_Vars)
 win2016cis_2_2_8: {{ rule_2_2_8 }}  # DC_ONLY
-win2016cis_2_2_9: {{ rule_2_2_10 }}  # MS_ONLY
-win2016cis_2_2_10: {{ rule_2_2_11 }}
-win2016cis_2_2_11: {{ rule_2_2_12 }}
-win2016cis_2_2_12: {{ rule_2_2_13 }}
-win2016cis_2_2_13: {{ rule_2_2_14 }}
-win2016cis_2_2_14: {{ rule_2_2_15 }}
-win2016cis_2_2_15: {{ rule_2_2_16 }}
-win2016cis_2_2_16: {{ rule_2_2_17 }}
-win2016cis_2_2_17: {{ rule_2_2_18 }}  # DC ONLY
-win2016cis_2_2_18: {{ rule_2_2_19 }}  # MS ONLY
-win2016cis_2_2_19: {{ rule_2_2_20 }}
-win2016cis_2_2_20: {{ rule_2_2_21 }}  # DC ONLY
-win2016cis_2_2_21: {{ rule_2_2_22 }}
-win2016cis_2_2_22: {{ rule_2_2_23 }}
-win2016cis_2_2_23: {{ rule_2_2_24 }}
-win2016cis_2_2_24: {{ rule_2_2_25 }}
-win2016cis_2_2_25: {{ rule_2_2_26 }}  # DC ONLY
-win2016cis_2_2_26: {{ rule_2_2_27 }}  # MS ONLY
-win2016cis_2_2_27: {{ rule_2_2_28 }}  # DC ONLY
-win2016cis_2_2_28: {{ rule_2_2_29 }}  # MS ONLY
-win2016cis_2_2_29: {{ rule_2_2_30 }}
-win2016cis_2_2_30: {{ rule_2_2_31 }}
-win2016cis_2_2_31: {{ rule_2_2_32 }}  # DC ONLY
-win2016cis_2_2_32: {{ rule_2_2_33 }}  # MS ONLY
-win2016cis_2_2_33: {{ rule_2_2_34 }}
-win2016cis_2_2_34: {{ rule_2_2_35 }}
-win2016cis_2_2_35: {{ rule_2_2_36 }}
-win2016cis_2_2_36: {{ rule_2_2_37 }}  # DC ONLY
-win2016cis_2_2_37: {{ rule_2_2_38 }}  # DC ONLY
-win2016cis_2_2_38: {{ rule_2_2_39 }}  # MS ONLY
-win2016cis_2_2_39: {{ rule_2_2_40 }}
-win2016cis_2_2_40: {{ rule_2_2_41 }}
-win2016cis_2_2_41: {{ rule_2_2_42 }}
-win2016cis_2_2_42: {{ rule_2_2_43 }}
-win2016cis_2_2_43: {{ rule_2_2_44 }}
-win2016cis_2_2_44: {{ rule_2_2_45 }}
-win2016cis_2_2_45: {{ rule_2_2_46 }}
-win2016cis_2_2_46: {{ rule_2_2_47 }}
-win2016cis_2_2_47: {{ rule_2_2_48 }}  # DC ONLY
-win2016cis_2_2_48: {{ rule_2_2_49 }}
+win2016cis_2_2_9: {{ rule_2_2_9 }}  # MS_ONLY
+win2016cis_2_2_10: {{ rule_2_2_10 }}
+win2016cis_2_2_11: {{ rule_2_2_11 }}
+win2016cis_2_2_12: {{ rule_2_2_12 }}
+win2016cis_2_2_13: {{ rule_2_2_13 }}
+win2016cis_2_2_14: {{ rule_2_2_14 }}
+win2016cis_2_2_15: {{ rule_2_2_15 }}
+win2016cis_2_2_16: {{ rule_2_2_16 }}
+win2016cis_2_2_17: {{ rule_2_2_17 }}  # DC ONLY
+win2016cis_2_2_18: {{ rule_2_2_18 }}  # MS ONLY
+win2016cis_2_2_19: {{ rule_2_2_19 }}
+win2016cis_2_2_20: {{ rule_2_2_20 }}  # DC ONLY
+win2016cis_2_2_21: {{ rule_2_2_21 }}
+win2016cis_2_2_22: {{ rule_2_2_22 }}
+win2016cis_2_2_23: {{ rule_2_2_23 }}
+win2016cis_2_2_24: {{ rule_2_2_24 }}
+win2016cis_2_2_25: {{ rule_2_2_25 }}  # DC ONLY
+win2016cis_2_2_26: {{ rule_2_2_26 }}  # MS ONLY
+win2016cis_2_2_27: {{ rule_2_2_27 }}  # DC ONLY
+win2016cis_2_2_28: {{ rule_2_2_28 }}  # MS ONLY
+win2016cis_2_2_29: {{ rule_2_2_29 }}
+win2016cis_2_2_30: {{ rule_2_2_30 }}
+win2016cis_2_2_31: {{ rule_2_2_31 }}  # DC ONLY
+win2016cis_2_2_32: {{ rule_2_2_32 }}  # MS ONLY
+win2016cis_2_2_33: {{ rule_2_2_33 }}
+win2016cis_2_2_34: {{ rule_2_2_34 }}
+win2016cis_2_2_35: {{ rule_2_2_35 }}
+win2016cis_2_2_36: {{ rule_2_2_36 }}  # DC ONLY
+win2016cis_2_2_37: {{ rule_2_2_37 }}  # DC ONLY
+win2016cis_2_2_38: {{ rule_2_2_38 }}  # MS ONLY
+win2016cis_2_2_39: {{ rule_2_2_39 }}
+win2016cis_2_2_40: {{ rule_2_2_40 }}
+win2016cis_2_2_41: {{ rule_2_2_41 }}
+win2016cis_2_2_42: {{ rule_2_2_42 }}
+win2016cis_2_2_43: {{ rule_2_2_43 }}
+win2016cis_2_2_44: {{ rule_2_2_44 }}
+win2016cis_2_2_45: {{ rule_2_2_45 }}
+win2016cis_2_2_46: {{ rule_2_2_46 }}
+win2016cis_2_2_47: {{ rule_2_2_47 }}  # DC ONLY
+win2016cis_2_2_48: {{ rule_2_2_48 }}
 # 2.3.1 Accounts
 win2016cis_2_3_1_1: {{ rule_2_3_1_1 }}  # MS Only
 win2016cis_2_3_1_2: {{ rule_2_3_1_2 }} 
@@ -374,7 +374,7 @@ win2016cis_18_5_9_1: {{ rule_18_5_9_1 }}
 win2016cis_18_5_9_2: {{ rule_18_5_9_2 }}
 # 18.5.10 Microsoft Peer-To-Peer Networking Services
 # 18.5.10.1 Peer Name Resolution Protocol
-win2016cis_18_5_10_1: {{ rule_18_5_10_1 }}
+win2016cis_18_5_10_2: {{ rule_18_5_10_2 }}
 # 18.5.11 Network Connections
 # 18.5.11.1 Windows Defender Firewall (formally Windows Firewall)
 win2016cis_18_5_11_2: {{ rule_18_5_11_2 }}
@@ -437,24 +437,24 @@ win2016cis_18_8_14_1: {{ rule_18_8_14_1 }}
 # 18.8.21 Group Policy
 # 18.8.21.1 Logging and Tracing
 win2016cis_18_8_21_2: {{ rule_18_8_21_2 }}
-win2016cis_18_8_21_3: {{ rule_18_8_22_3 }}
-win2016cis_18_8_21_4: {{ rule_18_8_23_4 }}
-win2016cis_18_8_21_5: {{ rule_18_8_24_5 }}
+win2016cis_18_8_21_3: {{ rule_18_8_21_3 }}
+win2016cis_18_8_21_4: {{ rule_18_8_21_4 }}
+win2016cis_18_8_21_5: {{ rule_18_8_21_5 }}
 # 18.8.22 Internet Communication Managemnet
 # 18.8.22.1 Internet Communication Settings
-win2016cis_18_8_22_1_1: {{ rule_18_8_22_1 }}
-win2016cis_18_8_22_1_2: {{ rule_18_8_22_2 }}
-win2016cis_18_8_22_1_3: {{ rule_18_8_22_3 }}
-win2016cis_18_8_22_1_4: {{ rule_18_8_22_4 }}
-win2016cis_18_8_22_1_5: {{ rule_18_8_22_5 }}
-win2016cis_18_8_22_1_6: {{ rule_18_8_22_6 }}
-win2016cis_18_8_22_1_7: {{ rule_18_8_22_7 }}
-win2016cis_18_8_22_1_8: {{ rule_18_8_22_8 }}
-win2016cis_18_8_22_1_9: {{ rule_18_8_22_9 }}
-win2016cis_18_8_22_1_10: {{ rule_18_8_22_10 }}
-win2016cis_18_8_22_1_11: {{ rule_18_8_22_11 }}
-win2016cis_18_8_22_1_12: {{ rule_18_8_22_12 }}
-win2016cis_18_8_22_1_13: {{ rule_18_8_22_13 }}
+win2016cis_18_8_22_1_1: {{ rule_18_8_22_1_1 }}
+win2016cis_18_8_22_1_2: {{ rule_18_8_22_1_2 }}
+win2016cis_18_8_22_1_3: {{ rule_18_8_22_1_3 }}
+win2016cis_18_8_22_1_4: {{ rule_18_8_22_1_4 }}
+win2016cis_18_8_22_1_5: {{ rule_18_8_22_1_5 }}
+win2016cis_18_8_22_1_6: {{ rule_18_8_22_1_6 }}
+win2016cis_18_8_22_1_7: {{ rule_18_8_22_1_7 }}
+win2016cis_18_8_22_1_8: {{ rule_18_8_22_1_8 }}
+win2016cis_18_8_22_1_9: {{ rule_18_8_22_1_9 }}
+win2016cis_18_8_22_1_10: {{ rule_18_8_22_1_10 }}
+win2016cis_18_8_22_1_11: {{ rule_18_8_22_1_11 }}
+win2016cis_18_8_22_1_12: {{ rule_18_8_22_1_12 }}
+win2016cis_18_8_22_1_13: {{ rule_18_8_22_1_13 }}
 # 18.8.23 iSCSI
 # 18.8.24 KDC
 # 18.8.25 Kerberos
@@ -542,7 +542,7 @@ win2016cis_18_9_8_3: {{ rule_18_9_8_3 }}
 # 18.9.9 Backup
 # 18.9.10 Biometrics
 # 18.9.10.1 Facial Features
-win2016cis_18_9_10_1: {{ rule_18_9_10_1 }}
+win2016cis_18_9_10_1_1: {{ rule_18_9_10_1_1 }}
 # 18.9.11 BitLocker Drive Encryption
 # 18.9.12 Camera
 win2016cis_18_9_12_1: {{ rule_18_9_12_1 }}
@@ -569,7 +569,7 @@ win2016cis_18_9_16_4: {{ rule_18_9_16_4 }}
 # 18.9.26 Event Log Service
 # 18.9.26.1 Application
 win2016cis_18_9_26_1_1: {{ rule_18_9_26_1_1 }}
-win2016cis_18_9_26_1_2: {{ rule_18_9_36_1_2 }}
+win2016cis_18_9_26_1_2: {{ rule_18_9_26_1_2 }}
 # 18.9.26.2 Security
 win2016cis_18_9_26_2_1: {{ rule_18_9_26_2_1 }}
 win2016cis_18_9_26_2_2: {{ rule_18_9_26_2_2 }}
@@ -708,9 +708,9 @@ win2016cis_18_9_80_1_1: {{ rule_18_9_80_1_1 }}
 win2016cis_18_9_84_1: {{ rule_18_9_84_1 }}
 win2016cis_18_9_84_2: {{ rule_18_9_84_2 }}
 # 18.9.85 Windows Installer
-win2016cis_18_9_85_1: {{ rule_18_9_84_1 }}
-win2016cis_18_9_85_2: {{ rule_18_9_84_2 }}
-win2016cis_18_9_85_3: {{ rule_18_9_84_3 }}
+win2016cis_18_9_85_1: {{ rule_18_9_85_1 }}
+win2016cis_18_9_85_2: {{ rule_18_9_85_2 }}
+win2016cis_18_9_85_3: {{ rule_18_9_85_3 }}
 # 18.9.86 Windows Logon Options
 win2016cis_18_9_86_1: {{ rule_18_9_86_1 }}
 # 18.9.87 Windows Mail
@@ -755,10 +755,10 @@ win2016cis_18_9_102_4: {{ rule_18_9_102_4 }}
 ###################
 # Section_18_Vars #
 ###################
-win2016_eventlog_app_max_size: {{ app_max_size }}
-win2016_eventlog_sec_max_size: {{ sec_max_size }}
+win2016_eventlog_app_max_size: {{ app_maxsize }}
+win2016_eventlog_sec_max_size: {{ sec_maxsize }}
 win2016_eventlog_setup_max_size: 32768
-win2016_eventlog_sys_max_size: {{ sys_max_size }}
+win2016_eventlog_sys_max_size: {{ sys_maxsize }}
 win2016cis_autoupdate_enabled: '0'
 win2016cis_autoupdate_option: {{ win16cis_wupdate_options }}  # 2 - Notify for download and auto install # 3 -Auto download and notify for instal # 4 - Auto download and schedule the install
 win2016cis_autoupdate_day: 0 # 0 - everyday
@@ -789,7 +789,7 @@ win2016cis_19_5_1_1: {{ rule_19_5_1_1 }}
 # 19.6.5 Group Policy
 # 19.6.6 Internet Communication Management
 # 19.6.6.1 Internet Communication settings
-win2016cis_19_6_6_1_1: {{ rule_19_6_1_1_1 }}
+win2016cis_19_6_6_1_1: {{ rule_19_6_6_1_1 }}
 # 19.7 Windows Components
 # 19.7.1 Add features to Windows 8 / 8.1 / 10 (formerly Windows Anytime Upgrade)
 # 19.7.2 App runtime
