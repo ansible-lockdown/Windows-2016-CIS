@@ -3,10 +3,11 @@
 win2016cis_benchmark:
 - "type: {{ benchmark }}"
 - "version: '{{ benchmark_version }}'"
-- "os: {{ win2016_os_distribution }}"
+- "os: Win2016"
 - "epoch: {{ ansible_date_time.epoch }}" # To be populated via wrapper script using inline vars
 - "hostname: {{ ansible_hostname }}" # To be populated via wrapper script using inline vars
 
+win2016_os_distribution: {{ win2016_os_distribution }}
 
 ######################
 ## Server Variables ##
