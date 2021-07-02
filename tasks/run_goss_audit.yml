@@ -11,5 +11,13 @@
     src: ansible_vars_goss.yml.j2
     dest: "{{ goss_vars_path }}"
 
+- name: set goss alpha environment
+  win_environment:
+    state: present
+    name: GOSS_USE_ALPHA
+    value: 1
+    level: user
+
 - name: Run the goss audit
-  win_shell: "{{ goss_audit_path }}{{ goss_exe }} -g {{ goss_audit_path }}{{ win2016_os_distribution }}-{{ benchmark }}-Audit/goss.yml --vars {{ goss_vars_path }} -f json -o pretty | Out-File {{ goss_output_file }}"
+  #win_shell: "{{ goss_audit_path }}{{ goss_exe }} -g {{ goss_audit_path }}{{ win2016_os_distribution }}-{{ benchmark }}-Audit/goss.yml --vars {{ goss_vars_path }} -f json -o pretty | Out-File {{ goss_output_file }}"
+  win_shell: "{{ goss_audit_path }}{{ goss_exe }} -g c:\\vagrant\\Win2016-{{ benchmark }}-Audit\\goss.yml --vars {{ goss_vars_path }} v  --format json --format-options pretty | Out-File {{ goss_output_file }}"

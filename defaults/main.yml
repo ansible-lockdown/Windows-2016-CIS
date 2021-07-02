@@ -562,5 +562,5 @@ goss_conf_git_branch: main
 goss_conf_url: "https://github.com/ansible-lockdown/{{ win2016_os_distribution }}-{{ benchmark }}-Audit/archive/refs/heads/{{ goss_conf_git_branch }}.zip"
 
 ## Goss running
-goss_vars_path: "{{ goss_audit_path }}{{ win2016_os_distribution }}-{{ benchmark }}-Audit{{ ansible_hostname }}.yml"
+goss_vars_path: "{{ goss_audit_path }}{{ win2016_os_distribution }}-{{ benchmark }}-Audit\\{{ ansible_hostname }}.yml"
 goss_output_file: "{{ goss_audit_path }}{{ ansible_hostname }}_{{ audit_time }}_remediate_{{ ansible_date_time.epoch }}"
