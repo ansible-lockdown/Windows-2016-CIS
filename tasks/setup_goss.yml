@@ -24,4 +24,9 @@
     src: "{{ goss_audit_path }}goss_conf.zip"
     dest: "{{ goss_audit_path }}"
 
-    
+- name: set goss alpha environment
+  win_environment:
+      state: present
+      name: GOSS_USE_ALPHA
+      value: 1
+      level: user

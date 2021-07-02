@@ -81,10 +81,16 @@
   tags:
       - section19
 
-#- name: Run Audit
-#  import_tasks: run_goss_audit.yml
-#  when: run_goss
-#  vars:
-#    audit_time: post
-#  tags:
-#  - run_goss
+- name: Run Audit
+  import_tasks: run_goss_audit.yml
+  when: run_goss
+  vars:
+    audit_time: post
+  tags:
+  - run_goss
+
+- name: Show Audit Summary
+  debug:
+    msg: "{{ audit_results.split('\n') }}"
+  tags:
+  - run_goss
