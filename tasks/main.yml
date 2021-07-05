@@ -25,25 +25,25 @@
   tags:
       - always
 
-# - name: Include the preliminary tasks
-#   include_tasks: prelim.yml
-#   tags:
-#       - prelim_tasks
+- name: Include the preliminary tasks
+  include_tasks: prelim.yml
+  tags:
+      - run_audit
 
 - name: Setup for Audit
-  import_tasks: setup_goss.yml
-  when: setup_goss
+  import_tasks: setup_audit.yml
+  when: setup_audit
   tags:
-      - setup_goss
-#  - run_goss
+      - setup_audit
+#  - run_audit
 
 - name: Run Audit
-  import_tasks: run_goss_audit.yml
-  when: run_goss
+  import_tasks: run_audit.yml
+  when: run_audit
   vars:
       audit_time: pre
   tags:
-      - run_goss
+      - run_audit
 
 - name: Execute the section 1 tasks
   import_tasks: section01.yml
@@ -82,15 +82,15 @@
       - section19
 
 - name: Run Audit
-  import_tasks: run_goss_audit.yml
-  when: run_goss
+  import_tasks: run_audit.yml
+  when: run_audit
   vars:
       audit_time: post
   tags:
-      - run_goss
+      - run_audit
 
 - name: Show Audit Summary
   debug:
       msg: "{{ audit_results.split('\n') }}"
   tags:
-      - run_goss
+      - run_audit
