@@ -30,9 +30,9 @@ exchange_server_group: false
 ###################
 # Reference files #
 ###################
-gpresult_file: {{ audit_capture_path }}
-auditresult_file: {{ audit_capture_path }}auditpol_
-secedit_file: {{ audit_capture_path }}secedit_
+gpresult_file: {{ audit_capture_path }}gpresults_{{ audit_time }}.txt
+auditresult_file: {{ audit_capture_path }}auditpol_{{ audit_time }}.txt
+secedit_file: {{ audit_capture_path }}secedit_{{ audit_time }}.txt
 
 #########
 ## CIS ##
@@ -868,10 +868,11 @@ win2016cis_screensaver_timeout: '900'
 ## Global command Variables ##
 ##############################
 # powershell commands
-reboot_check: 'powershell -c (./scripts/pending_reboot.ps1 localhost).IsPendingReboot'
+audit_scripts_dir: {{ audit_scripts_dir }}
+reboot_check: 'powershell -c ({{ audit_scripts_dir }}/scripts/pending_reboot.ps1 localhost).IsPendingReboot'
 ps_regcheck: 'powershell -noprofile -noninteractive -command'
-gpo_regex_script: 'powershell ./scripts/gpo_regex.ps1'
-standalone_script: 'powershell ./scripts/standalone.ps1'
+gpo_regex_script: 'powershell {{ audit_scripts_dir }}/scripts/gpo_regex.ps1'
+standalone_script: 'powershell {{ audit_scripts_dir }}/scripts/standalone.ps1'
 audit_ps_cmd: Select-String -Path
 # Registry_paths
 # CurrentControlSet/Lsa
