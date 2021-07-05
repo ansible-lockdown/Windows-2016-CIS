@@ -47,12 +47,25 @@ long_running: false
 
 win_skip_for_test: false
 
-## Run goss audit - runs using go program so captures non ansible state
-### Other goss variable can be found at the end of these variables
-setup_goss: true
-run_goss: true
-goss_audit_path: c:\\goss1\\
-download_goss_exe: false
+
+#### Basic external audit enablement settings ####
+#### Precise details - per setting can be found at the bottom of this file ####
+
+# Set up the system to be able to run the audit tool
+setup_audit: true
+### The individual exe is required on the remote host this will download from github
+# paths can be changed at the bottom of the fole
+download_audit_exe: false
+
+# enable audits to run - this  runs the audit and get the latest content
+run_audit: true
+
+# output location for the audit
+audit_capture_path: c:\\remediation_audit_logs\\
+
+### End audit enablements ####
+#### Detailed settings found at the end of this document ####
+
 
 # These variables correspond with the STIG IDs defined in the STIG and allows you to enable/disable specific rules.
 # PLEASE NOTE: These work in coordination with the cat1, cat2, cat3 group variables. You must enable an entire group
@@ -567,10 +580,10 @@ goss_conf_url: "https://github.com/ansible-lockdown/{{ win2016_os_distribution }
 
 
 ## Goss running
-goss_vars_path: "{{ goss_audit_path }}{{ win2016_os_distribution }}-{{ benchmark }}-Audit\\{{ ansible_hostname }}.yml"
-goss_output_file: "{{ goss_audit_path }}{{ ansible_hostname }}_{{ audit_time }}_remediate_{{ ansible_date_time.epoch }}.json"
+goss_vars_path: "{{ audit_capture_path }}{{ win2016_os_distribution }}-{{ benchmark }}-Audit\\{{ ansible_hostname }}.yml"
+goss_output_file: "{{ audit_capture_path }}{{ ansible_hostname }}_{{ audit_time }}_remediate_{{ ansible_date_time.epoch }}.json"
 
 audit_results: |
       The pre remediation results are: {{ pre_audit_summary }}.
       The post remediation results are: {{ post_audit_summary }}.
-      Full breakdown can be found in {{ goss_audit_path }}
+      Full breakdown can be found in {{ audit_capture_path }}
