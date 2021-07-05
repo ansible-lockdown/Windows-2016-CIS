@@ -1,10 +1,25 @@
 ---
 
-- name: "run {{ audit_time }} remediation secedit export"
-  win_command: "powershell.exe -noninteractive -noprofile -command secedit.exe /export /cfg {{ audit_capture_path }}\\secedit_{{ audit_time }}.txt"
+- name: Run prereqs for standalone server
+  block:
+      - name: "run {{ audit_time }} remediation secedit export"
+        win_command: "powershell.exe -noninteractive -noprofile -command secedit.exe /export /cfg {{ audit_capture_path }}\\secedit_{{ audit_time }}.txt"
 
-- name: "run {{ audit_time }} remediation auditpol report"
-  win_shell: "auditpol.exe /get /category:* > {{ audit_capture_path }}auditpol_{{ audit_time }}.txt"
+      - name: "run {{ audit_time }} remediation auditpol report"
+        win_shell: "auditpol.exe /get /category:* > {{ audit_capture_path }}auditpol_{{ audit_time }}.txt"
+  when:
+      - win2016cis_is_standalone
+
+- name: Run prereqs for Domain members or controllers
+  block:
+      - name: "run {{ audit_time }} remediation secedit export"
+        win_command: "powershell.exe -noninteractive -noprofile -command gpresult /v /r {{ audit_capture_path }}\\gpresult_{{ audit_time }}.txt"
+
+      - name: "run {{ audit_time }} remediation auditpol report"
+        win_shell: "auditpol.exe /get /category:* > {{ audit_capture_path }}auditpol_{{ audit_time }}.txt"
+  when:
+      - not win2016cis_is_standalone
+
 
 - name: copy the template used by ansible for consistent checks
   win_template:
