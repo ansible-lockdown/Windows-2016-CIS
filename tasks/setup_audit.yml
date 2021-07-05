@@ -12,7 +12,14 @@
       checksum: "{{ goss_dl_sha }}"
       checksum_algorithm: sha256
   when:
-      - download_goss_exe
+      - download_audit_exe
+
+- name: copy goss binary
+  win_copy:
+    src: "{{ goss_copy_src }}"
+    dest: "{{ audit_capture_path }}{{ goss_exe }}"
+  when:
+      - copy_audit_exe
 
 - name: download goss config
   win_get_url:
