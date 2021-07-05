@@ -2,13 +2,13 @@
 
 - name: Create directory for goss
   win_file:
-      path: "{{ goss_audit_path }}"
+      path: "{{ audit_capture_path }}"
       state: directory
 
 - name: download goss binary
   win_get_url:
       url: "{{ goss_download_url }}"
-      dest: "{{ goss_audit_path }}{{ goss_exe }}"
+      dest: "{{ audit_capture_path }}{{ goss_exe }}"
       checksum: "{{ goss_dl_sha }}"
       checksum_algorithm: sha256
   when:
@@ -17,12 +17,12 @@
 - name: download goss config
   win_get_url:
       url: "{{ goss_conf_url }}"
-      dest: "{{ goss_audit_path }}goss_conf.zip"
+      dest: "{{ audit_capture_path }}goss_conf.zip"
 
 - name: Unzip goss config
   win_unzip:
-      src: "{{ goss_audit_path }}goss_conf.zip"
-      dest: "{{ goss_audit_path }}"
+      src: "{{ audit_capture_path }}goss_conf.zip"
+      dest: "{{ audit_capture_path }}"
 
 - name: set goss alpha environment
   win_environment:
@@ -30,3 +30,4 @@
       name: GOSS_USE_ALPHA
       value: 1
       level: user
+  register: goss_env

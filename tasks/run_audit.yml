@@ -1,10 +1,10 @@
 ---
 
 - name: "run {{ audit_time }} remediation secedit export"
-  win_command: "powershell.exe -noninteractive -noprofile -command secedit.exe /export /cfg {{ goss_audit_path }}\\secedit_{{ audit_time }}.txt"
+  win_command: "powershell.exe -noninteractive -noprofile -command secedit.exe /export /cfg {{ audit_capture_path }}\\secedit_{{ audit_time }}.txt"
 
 - name: "run {{ audit_time }} remediation auditpol report"
-  win_shell: "auditpol.exe /get /category:* > {{ goss_audit_path }}auditpol_{{ audit_time }}.txt"
+  win_shell: "auditpol.exe /get /category:* > {{ audit_capture_path }}auditpol_{{ audit_time }}.txt"
 
 - name: copy the template used by ansible for consistent checks
   win_template:
@@ -12,13 +12,13 @@
       dest: "{{ goss_vars_path }}"
 
 - name: Run the goss audit
-  # win_shell: "{{ goss_audit_path }}{{ goss_exe }} -g {{ goss_audit_path }}{{ win2016_os_distribution }}-{{ benchmark }}-Audit\\goss.yml --vars {{ goss_vars_path }} v -f json -o pretty | Out-File {{ goss_output_file }}"
-  win_shell: "{{ goss_audit_path }}{{ goss_exe }} -g c:\\vagrant\\Win2016-CIS-Audit\\goss.yml --vars {{ goss_vars_path }} v -f json -o pretty | Out-File {{ goss_output_file }}"
+  # win_shell: "{{ audit_capture_path }}{{ goss_exe }} -g {{ audit_capture_path }}{{ win2016_os_distribution }}-{{ benchmark }}-Audit\\goss.yml --vars {{ goss_vars_path }} v -f json -o pretty | Out-File {{ goss_output_file }}"
+  win_shell: "{{ audit_capture_path }}{{ goss_exe }} -g c:\\vagrant\\Win2016-CIS-Audit\\goss.yml --vars {{ goss_vars_path }} v -f json -o pretty | Out-File {{ goss_output_file }}"
   failed_when: false
 
 - name: Capture the pre remediation audit data summary
   block:
-      - name: "capture pre remediation audit data"
+      - name: Capture pre remediation audit data
         win_command: "powershell.exe -noninteractive -noprofile -command (Get-Content {{ goss_output_file }} | ConvertFrom-Json).summary"
         register: pre_audit
         changed_when: false
@@ -33,7 +33,7 @@
 
 - name: Capture the post remediation audit data summary
   block:
-      - name: "capture post remediation audit data"
+      - name: Capture post remediation audit data
         win_command: "powershell.exe -noninteractive -noprofile -command (Get-Content {{ goss_output_file }} | ConvertFrom-Json).summary"
         register: post_audit
         changed_when: false
@@ -45,3 +45,13 @@
             summary: 'summary."summary-line"'
   when:
       - audit_time == 'post'
+
+- name: remove environment variable if set during remediation setup
+  win_environment:
+      state: absent
+      name: GOSS_USE_ALPHA
+      value: 1
+      level: user
+  when: 
+      - audit_time == 'post' 
+      - goss_env.changed
