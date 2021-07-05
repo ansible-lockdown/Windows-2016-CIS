@@ -27,8 +27,7 @@
       dest: "{{ goss_vars_path }}"
 
 - name: Run the goss audit
-  # win_shell: "{{ audit_capture_path }}{{ goss_exe }} -g {{ audit_capture_path }}{{ win2016_os_distribution }}-{{ benchmark }}-Audit\\goss.yml --vars {{ goss_vars_path }} v -f json -o pretty | Out-File {{ audit_results_file }}"
-  win_shell: "{{ audit_capture_path }}{{ goss_exe }} -g c:\\vagrant\\Win2016-CIS-Audit\\goss.yml --vars {{ goss_vars_path }} v -f json -o pretty | Out-File {{ audit_results_file }}"
+  win_shell: "{{ audit_capture_path }}{{ goss_exe }} -g {{ audit_capture_path }}{{ win2016_os_distribution }}-{{ benchmark }}-Audit\\goss.yml --vars {{ goss_vars_path }} v -f json -o pretty | Out-File {{ audit_results_file }}"
   failed_when: false
 
 - name: Capture the pre remediation audit data summary
