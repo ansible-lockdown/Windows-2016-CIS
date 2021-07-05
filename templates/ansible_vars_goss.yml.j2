@@ -6,14 +6,23 @@ win2016cis_benchmark:
 - "os: Win2016"
 - "epoch: {{ ansible_date_time.epoch }}"
 - "hostname: {{ ansible_hostname }}"
+- "server_type: {% if win2016cis_is_domain_controller is defined %}Domain Controller{% elif win2016cis_is_standalone is defined %}Standalone Server{% else %}Domain Member Server{% endif %}"
 
 win2016_os_distribution: {{ win2016_os_distribution }}
 
 ######################
 ## Server Variables ##
 ######################
-is_domain_controller: "{{ win2016cis_is_domain_controller| default(false) }}"
-is_standalone: "{{ win2016cis_is_standalone| default(false) }}"
+{% if win2016cis_is_domain_controller is defined %}
+is_domain_controller: true
+{% else %}
+is_domain_controller: false
+{% endif %}
+{% if win2016cis_is_standalone is defined %}
+is_standalone: true
+{% else %}
+is_standalone: false
+{% endif %}
 reboot_required: false
 win2016cis_use_iis: false
 exchange_server_group: false
