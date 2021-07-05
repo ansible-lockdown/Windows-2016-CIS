@@ -583,7 +583,7 @@ goss_conf_url: "https://github.com/ansible-lockdown/{{ win2016_os_distribution }
 ## Goss running
 audit_scripts_dir: "c:/{{ audit_dir }}/{{ win2016_os_distribution }}-{{ benchmark }}-Audit"
 goss_vars_path: "{{ audit_capture_path }}{{ win2016_os_distribution }}-{{ benchmark }}-Audit\\{{ ansible_hostname }}.yml"
-goss_output_file: "{{ audit_capture_path }}{{ ansible_hostname }}_{{ audit_time }}_remediate_{{ ansible_date_time.epoch }}.json"
+audit_results_file: "{{ audit_capture_path }}{{ ansible_hostname }}_{{ audit_time }}_remediate_{{ ansible_date_time.epoch }}.json"
 
 audit_results: |
       The pre remediation results are: {{ pre_audit_summary }}.

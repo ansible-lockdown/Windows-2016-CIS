@@ -20,21 +20,21 @@
   when:
       - not win2016cis_is_standalone
 
-
+# Copied pre and post to capture output files.
 - name: copy the template used by ansible for consistent checks
   win_template:
       src: ansible_vars_goss.yml.j2
       dest: "{{ goss_vars_path }}"
 
 - name: Run the goss audit
-  # win_shell: "{{ audit_capture_path }}{{ goss_exe }} -g {{ audit_capture_path }}{{ win2016_os_distribution }}-{{ benchmark }}-Audit\\goss.yml --vars {{ goss_vars_path }} v -f json -o pretty | Out-File {{ goss_output_file }}"
-  win_shell: "{{ audit_capture_path }}{{ goss_exe }} -g c:\\vagrant\\Win2016-CIS-Audit\\goss.yml --vars {{ goss_vars_path }} v -f json -o pretty | Out-File {{ goss_output_file }}"
+  # win_shell: "{{ audit_capture_path }}{{ goss_exe }} -g {{ audit_capture_path }}{{ win2016_os_distribution }}-{{ benchmark }}-Audit\\goss.yml --vars {{ goss_vars_path }} v -f json -o pretty | Out-File {{ audit_results_file }}"
+  win_shell: "{{ audit_capture_path }}{{ goss_exe }} -g c:\\vagrant\\Win2016-CIS-Audit\\goss.yml --vars {{ goss_vars_path }} v -f json -o pretty | Out-File {{ audit_results_file }}"
   failed_when: false
 
 - name: Capture the pre remediation audit data summary
   block:
       - name: Capture pre remediation audit data
-        win_command: "powershell.exe -noninteractive -noprofile -command (Get-Content {{ goss_output_file }} | ConvertFrom-Json).summary"
+        win_command: "powershell.exe -noninteractive -noprofile -command (Get-Content {{ audit_results_file }} | ConvertFrom-Json).summary"
         register: pre_audit
         changed_when: false
 
@@ -49,7 +49,7 @@
 - name: Capture the post remediation audit data summary
   block:
       - name: Capture post remediation audit data
-        win_command: "powershell.exe -noninteractive -noprofile -command (Get-Content {{ goss_output_file }} | ConvertFrom-Json).summary"
+        win_command: "powershell.exe -noninteractive -noprofile -command (Get-Content {{ audit_results_file }} | ConvertFrom-Json).summary"
         register: post_audit
         changed_when: false
 
