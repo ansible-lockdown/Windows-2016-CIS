@@ -61,7 +61,8 @@ download_audit_exe: false
 run_audit: true
 
 # output location for the audit
-audit_capture_path: c:\\remediation_audit_logs\\
+audit_dir: remediation_audit_logs
+audit_capture_path: c:\\{{ audit_dir }}\\
 
 ### End audit enablements ####
 #### Detailed settings found at the end of this document ####
@@ -580,6 +581,7 @@ goss_conf_url: "https://github.com/ansible-lockdown/{{ win2016_os_distribution }
 
 
 ## Goss running
+audit_scripts_dir: "c:/{{ audit_dir }}/{{ win2016_os_distribution }}-{{ benchmark }}-Audit"
 goss_vars_path: "{{ audit_capture_path }}{{ win2016_os_distribution }}-{{ benchmark }}-Audit\\{{ ansible_hostname }}.yml"
 goss_output_file: "{{ audit_capture_path }}{{ ansible_hostname }}_{{ audit_time }}_remediate_{{ ansible_date_time.epoch }}.json"
 
