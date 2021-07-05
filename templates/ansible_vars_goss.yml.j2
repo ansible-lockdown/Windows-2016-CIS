@@ -1,19 +1,19 @@
-## Variables file
+## Variables file Thgis is populated from remediation discovery
 ## metadata for benchmark
 win2016cis_benchmark:
 - "type: {{ benchmark }}"
 - "version: '{{ benchmark_version }}'"
 - "os: Win2016"
-- "epoch: {{ ansible_date_time.epoch }}" # To be populated via wrapper script using inline vars
-- "hostname: {{ ansible_hostname }}" # To be populated via wrapper script using inline vars
+- "epoch: {{ ansible_date_time.epoch }}"
+- "hostname: {{ ansible_hostname }}"
 
 win2016_os_distribution: {{ win2016_os_distribution }}
 
 ######################
 ## Server Variables ##
 ######################
-is_domain_controller: false
-is_standalone: true
+is_domain_controller: "{{ win2016cis_is_domain_controller| default(false) }}"
+is_standalone: "{{ win2016cis_is_standalone| default(false) }}"
 reboot_required: false
 win2016cis_use_iis: false
 exchange_server_group: false
@@ -21,9 +21,9 @@ exchange_server_group: false
 ###################
 # Reference files #
 ###################
-gpresult_file: {{ goss_audit_path }}
-auditresult_file: {{ goss_audit_path }}auditpol_
-secedit_file: {{ goss_audit_path }}secedit_
+gpresult_file: {{ audit_capture_path }}
+auditresult_file: {{ audit_capture_path }}auditpol_
+secedit_file: {{ audit_capture_path }}secedit_
 
 #########
 ## CIS ##
