@@ -1,4 +1,4 @@
-## Variables file Thgis is populated from remediation discovery
+## Variables file This is populated from remediation discovery
 ## metadata for benchmark
 win2016cis_benchmark:
 - "type: {{ benchmark }}"
@@ -43,7 +43,7 @@ secedit_file: {{ audit_capture_path }}secedit_{{ audit_time }}.txt
 ##############
 win2016cis_level_1: true
 win2016cis_level_2: true
-win2016cis_NG: {% if nextgen-memberserver or nextgen-domainserver %}true{% else %}false{% endif %} # Note this needs UEFI and virtualication enabled systems - rollback is very manual
+win2016cis_NG: {% if nextgen_memberserver is sameas true %}true{% elif nextgen_domainserver is sameas true %}true {% else %}false{% endif %} # Note this needs UEFI and virtualization enabled systems - rollback is very manual
 
 ################
 # Server Roles #
