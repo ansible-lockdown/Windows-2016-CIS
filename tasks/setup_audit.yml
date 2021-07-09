@@ -25,11 +25,15 @@
   win_get_url:
       url: "{{ goss_conf_url }}"
       dest: "{{ audit_capture_path }}goss_conf.zip"
+  when:
+      - download_goss_config
 
 - name: Unzip goss config
   win_unzip:
       src: "{{ audit_capture_path }}goss_conf.zip"
       dest: "{{ audit_capture_path }}"
+  when:
+      - download_goss_config
 
 - name: set goss alpha environment
   win_environment:

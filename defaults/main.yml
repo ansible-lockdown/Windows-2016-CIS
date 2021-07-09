@@ -59,6 +59,9 @@ setup_audit: true
 download_audit_exe: true
 copy_audit_exe: false
 
+# download audit content
+download_goss_config: true
+
 # enable audits to run - this  runs the audit and get the latest content
 run_audit: true
 
