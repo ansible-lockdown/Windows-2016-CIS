@@ -783,8 +783,8 @@
       - rule_18_8_5_1
       - ansible_windows_domain_role == "Member server"
   tags:
-      - nextgen-domaincontroller
-      - nextgen-memberserver
+      - nextgen_domaincontroller
+      - nextgen_memberserver
       - rule_18.8.5.1
       - patch
 
@@ -798,8 +798,8 @@
       - rule_18_8_5_2
       - ansible_windows_domain_role == "Member server"
   tags:
-      - nextgen-domaincontroller
-      - nextgen-memberserver
+      - nextgen_domaincontroller
+      - nextgen_memberserver
       - rule_18.8.5.2
       - patch
 
@@ -813,8 +813,8 @@
       - rule_18_8_5_3
       - ansible_windows_domain_role == "Member server"
   tags:
-      - nextgen-domaincontroller
-      - nextgen-memberserver
+      - nextgen_domaincontroller
+      - nextgen_memberserver
       - rule_18.8.5.3
       - patch
 
@@ -828,8 +828,8 @@
       - rule_18_8_5_4
       - ansible_windows_domain_role == "Member server"
   tags:
-      - nextgen-domaincontroller
-      - nextgen-memberserver
+      - nextgen_domaincontroller
+      - nextgen_memberserver
       - rule_18.8.5.4
       - patch
 
@@ -843,7 +843,7 @@
       - rule_18_8_5_5
       - ansible_windows_domain_role == "Member server"
   tags:
-      - nextgen-memberserver
+      - nextgen_memberserver
       - rule_18.8.5.5
       - patch
 
@@ -857,7 +857,7 @@
       - rule_18_8_5_6
       - ansible_windows_domain_role == "Primary domain controller"
   tags:
-      - nextgen-domaincontroller
+      - nextgen_domaincontroller
       - rule_18.8.5.6
       - patch
 
@@ -870,8 +870,8 @@
   when:
       - rule_18_8_5_7
   tags:
-      - nextgen-domaincontroller
-      - nextgen-memberserver
+      - nextgen_domaincontroller
+      - nextgen_memberserver
       - rule_18.8.5.7
       - patch
 
