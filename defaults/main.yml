@@ -52,7 +52,7 @@ win_skip_for_test: false
 #### Precise details - per setting can be found at the bottom of this file ####
 
 # Set up the system to be able to run the audit tool
-setup_audit: true
+setup_audit: false
 ### The individual exe is required on the remote host
 ## This can be copied or downloaded
 # paths can be changed at the bottom of the role
@@ -63,7 +63,7 @@ copy_audit_exe: false
 download_goss_config: true
 
 # enable audits to run - this  runs the audit and get the latest content
-run_audit: true
+run_audit: false
 
 # output location for the audit
 audit_dir: remediation_audit_logs
