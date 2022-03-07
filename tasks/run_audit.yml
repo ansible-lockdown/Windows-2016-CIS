@@ -1,33 +1,18 @@
 ---
+- name: Include the preliminary tasks
+  include_tasks: audit_prelim.yml
 
-- name: Run prereqs for standalone server
-  block:
-      - name: "run {{ audit_time }} remediation secedit export"
-        win_command: "powershell.exe -noninteractive -noprofile -command secedit.exe /export /cfg {{ audit_capture_path }}\\secedit_{{ audit_time }}.txt"
-
-      - name: "run {{ audit_time }} remediation auditpol report"
-        win_shell: "auditpol.exe /get /category:* > {{ audit_capture_path }}auditpol_{{ audit_time }}.txt"
-  when:
-      - win2016cis_is_standalone
-
-- name: Run prereqs for Domain members or controllers
-  block:
-      - name: "run {{ audit_time }} remediation secedit export"
-        win_command: "powershell.exe -noninteractive -noprofile -command gpresult /v /r {{ audit_capture_path }}\\gpresult_{{ audit_time }}.txt"
-
-      - name: "run {{ audit_time }} remediation auditpol report"
-        win_shell: "auditpol.exe /get /category:* > {{ audit_capture_path }}auditpol_{{ audit_time }}.txt"
-  when:
-      - not win2016cis_is_standalone
 
 # Copied pre and post to capture output files.
 - name: copy the template used by ansible for consistent checks
   win_template:
       src: ansible_vars_goss.yml.j2
       dest: "{{ goss_vars_path }}"
+  when:
+      - audit_time == 'pre'
 
 - name: Run the goss audit
-  win_shell: "{{ audit_capture_path }}{{ goss_exe }} -g {{ audit_capture_path }}{{ win2016_os_distribution }}-{{ benchmark }}-Audit\\goss.yml --vars {{ goss_vars_path }} v -f {{ audit_format }} -o pretty | Out-File {{ audit_results_file }}"
+  win_shell: "{{ run_audit_script }} -auditbin {{ audit_capture_path }}{{ goss_exe }} -auditdir {{audit_capture_path }} -varsfile {{ ansible_hostname }}.yml -outfile {{ audit_results_file }}"
   failed_when: false
 
 - name: Capture the pre remediation audit data summary
@@ -59,13 +44,3 @@
             summary: 'summary."summary-line"'
   when:
       - audit_time == 'post'
-
-- name: remove environment variable if set during remediation setup
-  win_environment:
-      state: absent
-      name: GOSS_USE_ALPHA
-      value: 1
-      level: user
-  when: 
-      - audit_time == 'post' 
-      - goss_env.changed
