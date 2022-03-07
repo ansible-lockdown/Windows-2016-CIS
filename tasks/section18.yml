@@ -429,11 +429,11 @@
       data: 0
       type: dword
   when:
-      - rule_18_5_4_2
+      - rule_18_5_4_1
   tags:
       - level1-domaincontroller
       - level1-memberserver
-      - rule_18.5.4.2
+      - rule_18.5.4.1
       - patch
 
 - name: "SCORED | 18.5.5.1 | PATCH | (L2) Ensure 'Enable Font Providers' is set to 'Disabled'"
