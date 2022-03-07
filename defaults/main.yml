@@ -1,5 +1,5 @@
 ---
-win2016_os_distribution: Windows-2016
+os_distribution: Windows-2016
 benchmark: CIS
 benchmark_version: 1.2
 
@@ -66,6 +66,7 @@ download_goss_config: true
 run_audit: false
 
 # output location for the audit
+# Caution for the windows path \ / as some commands transponse them. this allows all to work.
 audit_dir: remediation_audit_logs
 audit_capture_path: c:\\{{ audit_dir }}\\
 
@@ -586,12 +587,13 @@ goss_copy_src: Full to copy the exe
 
 # Goss Audit config when using git to download
 goss_conf_git_branch: main
-goss_conf_url: "https://github.com/ansible-lockdown/{{ win2016_os_distribution }}-{{ benchmark }}-Audit/archive/refs/heads/{{ goss_conf_git_branch }}.zip"
+goss_conf_url: "https://github.com/ansible-lockdown/{{ os_distribution }}-{{ benchmark }}-Audit/archive/refs/heads/{{ goss_conf_git_branch }}.zip"
 
 
 ## Goss running
-audit_scripts_dir: "c:/{{ audit_dir }}/{{ win2016_os_distribution }}-{{ benchmark }}-Audit"
-goss_vars_path: "{{ audit_capture_path }}{{ win2016_os_distribution }}-{{ benchmark }}-Audit\\{{ ansible_hostname }}.yml"
+audit_scripts_dir: "c:/{{ audit_dir }}/{{ os_distribution }}-{{ benchmark }}-Audit"
+run_audit_script: "{{ audit_scripts_dir }}/run_audit.ps1"
+goss_vars_path: "{{ audit_scripts_dir }}/{{ ansible_hostname }}.yml"
 audit_results_file: "{{ audit_capture_path }}{{ ansible_hostname }}_{{ audit_time }}_remediate_{{ ansible_date_time.epoch }}.{{ audit_format }}"
 
 audit_results: |
