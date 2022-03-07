@@ -1,14 +1,14 @@
 ## Variables file This is populated from remediation discovery
 ## metadata for benchmark
-win2016cis_benchmark:
-- "type: {{ benchmark }}"
-- "version: '{{ benchmark_version }}'"
-- "os: Win2016"
-- "epoch: {{ ansible_date_time.epoch }}"
-- "hostname: {{ ansible_hostname }}"
-- "server_type: {% if win2016cis_is_domain_controller is defined %}Domain Controller{% elif win2016cis_is_standalone is defined %}Standalone Server{% else %}Domain Member Server{% endif %}"
+benchmark_type: "CIS"
+benchmark_version: '1.2'
+benchmark_os: "Windows2016"
+#- "epoch: {{ ansible_date_time.epoch }}" # To be populated via wrapper script using inline vars
+#- "hostname: {{ ansible_hostname }}" # To be populated via wrapper script using inline vars
+# - "server_type: Standalone Server" # To be populated via wrapper script using inline vars
 
-win2016_os_distribution: {{ win2016_os_distribution }}
+os_distribution: {{ os_distribution }}
+
 
 ######################
 ## Server Variables ##
