@@ -34,11 +34,3 @@
       dest: "{{ audit_capture_path }}"
   when:
       - download_goss_config
-
-- name: set goss alpha environment
-  win_environment:
-      state: present
-      name: GOSS_USE_ALPHA
-      value: 1
-      level: user
-  register: goss_env
