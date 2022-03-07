@@ -25,21 +25,16 @@
   tags:
       - always
 
-- name: Include the preliminary tasks
-  include_tasks: prelim.yml
-  tags:
-      - run_audit
-
 - name: Setup for Audit
   import_tasks: setup_audit.yml
   when: setup_audit
   tags:
       - setup_audit
-#  - run_audit
 
 - name: Run Audit
   import_tasks: run_audit.yml
-  when: run_audit
+  when: 
+      - run_audit
   vars:
       audit_time: pre
   tags:
@@ -83,7 +78,8 @@
 
 - name: Run Audit
   import_tasks: run_audit.yml
-  when: run_audit
+  when:
+      - run_audit
   vars:
       audit_time: post
   tags:
@@ -92,5 +88,7 @@
 - name: Show Audit Summary
   debug:
       msg: "{{ audit_results.split('\n') }}"
+  when: 
+      - run_audit
   tags:
       - run_audit
