@@ -14,7 +14,7 @@
           - ansible_os_family == 'Windows'
           - ansible_distribution | regex_search('(Microsoft Windows Server 2016)')
       success_msg: "{{ ansible_distribution }} {{ ansible_distribution_major_version }} is the detected operating system."
-      fail_msg: "This role can only be run against Windows Server 2019 Editions. {{ ansible_distribution }} {{ ansible_distribution_major_version }} is not supported."
+      fail_msg: "This role can only be run against Windows Server 2016 Editions. {{ ansible_distribution }} {{ ansible_distribution_major_version }} is not supported."
   tags:
       - always
 
@@ -25,10 +25,20 @@
   tags:
       - always
 
-# - name: Include the preliminary tasks
-#   include_tasks: prelim.yml
-#   tags:
-#       - prelim_tasks
+- name: Setup for Audit
+  import_tasks: setup_audit.yml
+  when: setup_audit
+  tags:
+      - setup_audit
+
+- name: Run Audit
+  import_tasks: run_audit.yml
+  when: 
+      - run_audit
+  vars:
+      audit_time: pre
+  tags:
+      - run_audit
 
 - name: Execute the section 1 tasks
   import_tasks: section01.yml
@@ -65,3 +75,20 @@
   when: section19_patch | bool
   tags:
       - section19
+
+- name: Run Audit
+  import_tasks: run_audit.yml
+  when:
+      - run_audit
+  vars:
+      audit_time: post
+  tags:
+      - run_audit
+
+- name: Show Audit Summary
+  debug:
+      msg: "{{ audit_results.split('\n') }}"
+  when: 
+      - run_audit
+  tags:
+      - run_audit

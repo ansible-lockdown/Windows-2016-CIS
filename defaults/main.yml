@@ -1,4 +1,8 @@
 ---
+os_distribution: Windows-2016
+benchmark: CIS
+benchmark_version: 1.2
+
 section01_patch: true
 section02_patch: true
 section09_patch: true
@@ -6,7 +10,7 @@ section17_patch: true
 section18_patch: true
 section19_patch: true
 
-min_ansible_version: "2.6"
+min_ansible_version: "2.9"
 
 # We've defined complexity-high to mean that we cannot automatically remediate
 # the rule in question.  In the future this might mean that the remediation
@@ -42,6 +46,33 @@ is_implemented: false
 long_running: false
 
 win_skip_for_test: false
+
+
+#### Basic external audit enablement settings ####
+#### Precise details - per setting can be found at the bottom of this file ####
+
+# Set up the system to be able to run the audit tool
+setup_audit: false
+### The individual exe is required on the remote host
+## This can be copied or downloaded
+# paths can be changed at the bottom of the role
+download_audit_exe: true
+copy_audit_exe: false
+
+# download audit content
+download_goss_config: true
+
+# enable audits to run - this  runs the audit and get the latest content
+run_audit: false
+
+# output location for the audit
+# Caution for the windows path \ / as some commands transponse them. this allows all to work.
+audit_dir: remediation_audit_logs
+audit_capture_path: c:\\{{ audit_dir }}\\
+
+### End audit enablements ####
+#### Detailed settings found at the end of this document ####
+
 
 # These variables correspond with the STIG IDs defined in the STIG and allows you to enable/disable specific rules.
 # PLEASE NOTE: These work in coordination with the cat1, cat2, cat3 group variables. You must enable an entire group
@@ -538,3 +569,34 @@ public_firewall_log_size: 16,384
 # value 4 - Auto download and schedule install (recommended), value 5 - Allow local admin to choose setting
 # value 7 - Auto download, notify to install, notify to restart
 win16cis_wupdate_options: 4
+
+
+### Goss audit variables
+
+## Goss Binary settings
+goss_version: v0.3.16
+goss_url: https://github.com/aelsabbahy/goss/releases/download/
+goss_dl_exe: goss-alpha-windows-amd64.exe
+goss_dl_sha: dd5fd18a2c42ae05215b1fca3cf7d0d4e4d318011c67be13cb37545e368d4323
+goss_exe: goss.exe  # Note any path to be a forward slash
+audit_format: json
+
+# Goss opy download options
+goss_download_url: "{{ goss_url }}{{ goss_version }}/{{ goss_dl_exe }}"
+goss_copy_src: Full to copy the exe
+
+# Goss Audit config when using git to download
+goss_conf_git_branch: main
+goss_conf_url: "https://github.com/ansible-lockdown/{{ os_distribution }}-{{ benchmark }}-Audit/archive/refs/heads/{{ goss_conf_git_branch }}.zip"
+
+
+## Goss running
+audit_scripts_dir: "c:/{{ audit_dir }}/{{ os_distribution }}-{{ benchmark }}-Audit"
+run_audit_script: "{{ audit_scripts_dir }}/run_audit.ps1"
+goss_vars_path: "{{ audit_scripts_dir }}/{{ ansible_hostname }}.yml"
+audit_results_file: "{{ audit_capture_path }}{{ ansible_hostname }}_{{ audit_time }}_remediate_{{ ansible_date_time.epoch }}.{{ audit_format }}"
+
+audit_results: |
+      The pre remediation results are: {{ pre_audit_summary }}.
+      The post remediation results are: {{ post_audit_summary }}.
+      Full breakdown can be found in {{ audit_capture_path }}
