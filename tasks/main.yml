@@ -25,6 +25,106 @@
   tags:
       - always
 
+- name: Language Check (incl. rescue)
+  block:
+  - name: Check if language is english
+    win_shell: AuditPol /get /subcategory:"Credential Validation" /r
+    register: isEnglish
+    no_log: true
+
+  - name: Set language EN
+    set_fact:
+      language: "en_US"
+    when: '"Machine Name,Policy Target" in isEnglish.stdout'
+  rescue:
+  - name: Set language DE
+    set_fact:
+      language: "de_CH"
+
+- name: Set users by language
+  set_fact:
+    AuthenticatedUsers: Authenticated Users
+    LocalService: Local Service
+    NetworkService: Network Service
+    Service: Service
+    InclusionSetting: "Inclusion Setting"
+    sub_CredentialValidation: "Credential Validation"
+    sub_KerberosAuthenticationService: "Kerberos Authentication Service"
+    sub_ApplicationGroupManagement: "Application Group Management"
+    sub_AuditComputerAccountManagement: "Computer Account Management"
+    sub_DistributionGroupManagement: "Distribution Group Management"
+    sub_OtherAccountManagementEvents: "Other Account Management Events"
+    sub_SecurityGroupManagement: "Security Group Management"
+    sub_UserAccountManagement: "User Account Management"
+    sub_PlugandPlayEvents: "Plug and Play Events"
+    sub_ProcessCreation: "Process Creation"
+    sub_DirectoryServiceAccess: "Directory Service Access"
+    sub_DirectoryServiceChanges: "Directory Service Changes"
+    sub_AccountLockout: "Account Lockout"
+    sub_GroupMembership: "Group Membership"
+    sub_Logoff: "Logoff"
+    sub_Logon: "Logon"
+    sub_OtherLogonLogoffEvents: "Other Logon/Logoff Events"
+    sub_SpecialLogon: "Special Logon"
+    sub_DetailedFileShare: "Detailed File Share"
+    sub_FileShare: File Share
+    sub_OtherObjectAccessEvents: "Other Object Access Events"
+    sub_RemovableStorage: "Removable Storage"
+    sub_AuditPolicyChange: "Audit Policy Change"
+    sub_AuthenticationPolicyChange: "Authentication Policy Change"
+    sub_AuthorizationPolicyChange: "Authorization Policy Change"
+    sub_MPSSVCRuleLevelPolicyChange: MPSSVC Rule-Level Policy Change
+    sub_OtherPolicyChangeEvents: "Other Policy Change Events"
+    sub_SensitivePrivilegeUse: "Sensitive Privilege Use"
+    sub_IPsecDriver: "IPsec Driver"
+    sub_OtherSystemEvents: "Other System Events"
+    sub_SecurityStateChange: "Security State Change"
+    sub_SecuritySystemExtension: "Security System Extension"
+    sub_SystemIntegrity: "System Integrity"
+  when: language == "en_US"
+
+- name: Set users by language
+  set_fact:
+    AuthenticatedUsers: Authentifizierte Benutzer
+    LocalService: Lokaler Dienst
+    NetworkService: Netzwerkdienst
+    Service: Dienst
+    InclusionSetting: "Aufnahmeeinstellung"
+    sub_CredentialValidation: "Überprüfung der Anmeldeinformationen"
+    sub_KerberosAuthenticationService: "Kerberos-Authentifizierungsdienst"
+    sub_ApplicationGroupManagement: "Anwendungsgruppenverwaltung"
+    sub_AuditComputerAccountManagement: "Computerkontoverwaltung"
+    sub_DistributionGroupManagement: "Verteilergruppenverwaltung"
+    sub_OtherAccountManagementEvents: "Andere Kontoverwaltungsereignisse"
+    sub_SecurityGroupManagement: "Sicherheitsgruppenverwaltung"
+    sub_UserAccountManagement: "Benutzerkontenverwaltung"
+    sub_PlugandPlayEvents: "Wechselmedien"
+    sub_ProcessCreation: "Prozesserstellung"
+    sub_DirectoryServiceAccess: "Verzeichnisdienstzugriff"
+    sub_DirectoryServiceChanges: "Verzeichnisdienständerungen"
+    sub_AccountLockout: "Kontosperrung"
+    sub_GroupMembership: "Gruppenmitgliedschaft"
+    sub_Logoff: "Abmelden"
+    sub_Logon: "Anmelden"
+    sub_OtherLogonLogoffEvents: "Andere Anmelde-/Abmeldeereignisse"
+    sub_SpecialLogon: "Spezielle Anmeldung"
+    sub_DetailedFileShare: "Detaillierte Dateifreigabe"
+    sub_FileShare: Dateifreigabe
+    sub_OtherObjectAccessEvents: "Andere Objektzugriffsereignisse"
+    sub_RemovableStorage: "Wechselmedien"
+    sub_AuditPolicyChange: "Richtlinienänderungen überwachen"
+    sub_AuthenticationPolicyChange: "Authentifizierungsrichtlinienänderung"
+    sub_AuthorizationPolicyChange: "Autorisierungsrichtlinienänderung"
+    sub_MPSSVCRuleLevelPolicyChange: MPSSVC-Richtlinienänderung auf Regelebene
+    sub_OtherPolicyChangeEvents: "Andere Richtlinienänderungsereignisse"
+    sub_SensitivePrivilegeUse: "Sensible Verwendung von Rechten"
+    sub_IPsecDriver: "IPSEC-Treiber"
+    sub_OtherSystemEvents: "Andere Systemereignisse"
+    sub_SecurityStateChange: "Sicherheitsstatusänderung"
+    sub_SecuritySystemExtension: "Sicherheitssystemerweiterung"
+    sub_SystemIntegrity: "Systemintegrität"
+  when: language == "de_CH"
+
 - name: Setup for Audit
   import_tasks: setup_audit.yml
   when: setup_audit
