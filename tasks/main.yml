@@ -18,6 +18,7 @@
   tags:
       - always
 
+
 - name: Check ansible version
   assert:
       that: ansible_version.full is version_compare(min_ansible_version, '>=')
@@ -43,6 +44,9 @@
 
 - name: Set users by language
   set_fact:
+    Administrators: Administrators
+    RemoteDesktopUsers: Remote Desktop Users
+    Guests: Guests
     AuthenticatedUsers: Authenticated Users
     LocalService: Local Service
     NetworkService: Network Service
@@ -85,6 +89,9 @@
 
 - name: Set users by language
   set_fact:
+    Administrators: Administratoren
+    RemoteDesktopUsers: Remotedesktopbenutzer
+    Guests: Gäste
     AuthenticatedUsers: Authentifizierte Benutzer
     LocalService: Lokaler Dienst
     NetworkService: Netzwerkdienst
@@ -124,6 +131,10 @@
     sub_SecuritySystemExtension: "Sicherheitssystemerweiterung"
     sub_SystemIntegrity: "Systemintegrität"
   when: language == "de_CH"
+
+- name: Report Ansible Facts
+  ansible.builtin.debug:
+    msg: "{{AuthenticatedUsers}}"
 
 - name: Setup for Audit
   import_tasks: setup_audit.yml
