@@ -15,8 +15,8 @@
   win_user_right:
       name: SeNetworkLogonRight
       users:
-          - Administrators
-          - Authenticated Users
+          - "{{Administrators}}"
+          - "{{AuthenticatedUsers}}"
           - ENTERPRISE DOMAIN CONTROLLERS
       action: set
   when:
@@ -31,8 +31,8 @@
   win_user_right:
       name: SeNetworkLogonRight
       users:
-          - Administrators
-          - Authenticated Users
+          - "{{Administrators}}"
+          - "{{AuthenticatedUsers}}"
       action: set
   when:
       - rule_2_2_3
@@ -57,7 +57,7 @@
 - name: "SCORED | 2.2.5 | PATCH | (L1) Ensure 'Add workstations to domain' is set to 'Administrators' (DC only)"
   win_user_right:
       name: SeMachineAccountPrivilege
-      users: Administrators
+      users: "{{Administrators}}"
       action: set
   when:
       - rule_2_2_5
@@ -71,9 +71,9 @@
   win_user_right:
       name: SeIncreaseQuotaPrivilege
       users:
-          - Administrators
-          - Local Service
-          - Network Service
+          - "{{Administrators}}"
+          - "{{LocalService}}"
+          - "{{NetworkService}}"
       action: set
   when: rule_2_2_6
   tags:
@@ -86,7 +86,7 @@
   win_user_right:
       name: SeInteractiveLogonRight
       users:
-          - Administrators
+          - "{{Administrators}}"
       action: set
   when: rule_2_2_7
   tags:
@@ -99,7 +99,7 @@
   win_user_right:
       name: SeRemoteInteractiveLogonRight
       users:
-          - Administrators
+          - "{{Administrators}}"
       action: set
   when:
       - rule_2_2_8
@@ -113,7 +113,7 @@
   win_user_right:
       name: SeRemoteInteractiveLogonRight
       users:
-          - Administrators
+          - "{{Administrators}}"
           - Remote Desktop Users
       action: set
   when:
@@ -128,7 +128,7 @@
   win_user_right:
       name: SeBackupPrivilege
       users:
-          - Administrators
+          - "{{Administrators}}"
       action: set
   when: rule_2_2_10
   tags:
@@ -141,8 +141,8 @@
   win_user_right:
       name: SeSystemTimePrivilege
       users:
-          - Administrators
-          - Local Service
+          - "{{Administrators}}"
+          - "{{LocalService}}"
       action: set
   when: rule_2_2_11
   tags:
@@ -155,8 +155,8 @@
   win_user_right:
       name: SeTimeZonePrivilege
       users:
-          - Administrators
-          - Local Service
+          - "{{Administrators}}"
+          - "{{LocalService}}"
       action: set
   when: rule_2_2_12
   tags:
@@ -169,7 +169,7 @@
   win_user_right:
       name: SeCreatePagefilePrivilege
       users:
-          - Administrators
+          - "{{Administrators}}"
       action: set
   when: rule_2_2_13
   tags:
@@ -194,10 +194,10 @@
   win_user_right:
       name: SeCreateGlobalPrivilege
       users:
-          - Administrators
-          - Local Service
-          - Network Service
-          - Service
+          - "{{Administrators}}"
+          - "{{LocalService}}"
+          - "{{NetworkService}}"
+          - "{{Service}}"
       action: set
   when: rule_2_2_15
   tags:
@@ -222,7 +222,7 @@
   win_user_right:
       name: SeCreateSymbolicLinkPrivilege
       users:
-          - Administrators
+          - "{{Administrators}}"
       action: set
   when:
       - rule_2_2_17
@@ -238,7 +238,7 @@
         win_user_right:
             name: SeCreateSymbolicLinkPrivilege
             users:
-                - Administrators
+                - "{{Administrators}}"
             action: set
         when: not is_hyperv_installed
 
@@ -246,7 +246,7 @@
         win_user_right:
             name: SeCreateSymbolicLinkPrivilege
             users:
-                - Administrators
+                - "{{Administrators}}"
                 - NT VIRTUAL MACHINE\Virtual Machines
             action: set
         when: is_hyperv_installed
@@ -262,7 +262,7 @@
   win_user_right:
       name: SeDebugPrivilege
       users:
-          - Administrators
+          - "{{Administrators}}"
       action: set
   when: rule_2_2_19
   tags:
@@ -292,7 +292,7 @@
       users:
           - Guests
           # - Local Account
-          # - Administrators
+          # - "{{Administrators}}"
       action: set
   when:
       - rule_2_2_21
@@ -374,7 +374,7 @@
 - name: "SCORED | 2.2.27 | PATCH | (L1) Ensure 'Enable computer and user accounts to be trusted for delegation' is set to 'Administrators' (DC only)"
   win_user_right:
       name: SeEnableDelegationPrivilege
-      users: Administrators
+      users: "{{Administrators}}"
       action: set
   when:
       - rule_2_2_27
@@ -401,7 +401,7 @@
   win_user_right:
       name: SeRemoteShutdownPrivilege
       users:
-          - Administrators
+          - "{{Administrators}}"
       action: set
   when: rule_2_2_29
   tags:
@@ -414,8 +414,8 @@
   win_user_right:
       name: SeAuditPrivilege
       users:
-          - Local Service
-          - Network Service
+          - "{{LocalService}}"
+          - "{{NetworkService}}"
       action: set
   when: rule_2_2_30
   tags:
@@ -428,10 +428,10 @@
   win_user_right:
       name: SeImpersonatePrivilege
       users:
-          - Administrators
-          - Local Service
-          - Network Service
-          - Service
+          - "{{Administrators}}"
+          - "{{LocalService}}"
+          - "{{NetworkService}}"
+          - "{{Service}}"
       action: set
   when:
       - rule_2_2_31
@@ -445,11 +445,11 @@
   win_user_right:
       name: SeImpersonatePrivilege
       users:
-          - Administrators
+          - "{{Administrators}}"
           - IIS_IUSRS
-          - Local Service
-          - Network Service
-          - Service
+          - "{{LocalService}}"
+          - "{{NetworkService}}"
+          - "{{Service}}"
       action: set
   when:
       - rule_2_2_32
@@ -463,7 +463,7 @@
   win_user_right:
       name: SeIncreaseBasePriorityPrivilege
       users:
-          - Administrators
+          - "{{Administrators}}"
       action: set
   when: rule_2_2_33
   tags:
@@ -476,7 +476,7 @@
   win_user_right:
       name: SeLoadDriverPrivilege
       users:
-          - Administrators
+          - "{{Administrators}}"
       action: set
   when: rule_2_2_34
   tags:
@@ -500,7 +500,7 @@
 - name: "SCORED | 2.2.36 | PATCH | (L2) Ensure 'Log on as a batch job' is set to 'Administrators' (DC Only)"
   win_user_right:
       name: SeBatchLogonRight
-      users: Administrators
+      users: "{{Administrators}}"
       action: set
   when:
       - rule_2_2_36
@@ -514,7 +514,7 @@
   win_user_right:
       name: SeSecurityPrivilege
       users:
-          - Administrators
+          - "{{Administrators}}"
       action: set
   when:
       - rule_2_2_37 or
@@ -542,7 +542,7 @@
   win_user_right:
       name: SeSystemEnvironmentPrivilege
       users:
-          - Administrators
+          - "{{Administrators}}"
       action: set
   when: rule_2_2_40
   tags:
@@ -555,7 +555,7 @@
   win_user_right:
       name: SeManageVolumePrivilege
       users:
-          - Administrators
+          - "{{Administrators}}"
       action: set
   when: rule_2_2_41
   tags:
@@ -568,7 +568,7 @@
   win_user_right:
       name: SeProfileSingleProcessPrivilege
       users:
-          - Administrators
+          - "{{Administrators}}"
       action: set
   when: rule_2_2_42
   tags:
@@ -581,7 +581,7 @@
   win_user_right:
       name: SeSystemProfilePrivilege
       users:
-          - Administrators
+          - "{{Administrators}}"
           - NT SERVICE\WdiServiceHost
       action: set
   when: rule_2_2_43
@@ -595,8 +595,8 @@
   win_user_right:
       name: SeAssignPrimaryTokenPrivilege
       users:
-          - LOCAL SERVICE
-          - NETWORK SERVICE
+          - "{{LocalService}}"
+          - "{{NetworkService}}"
       action: set
   when: rule_2_2_44
   tags:
@@ -609,7 +609,7 @@
   win_user_right:
       name: SeRestorePrivilege
       users:
-          - Administrators
+          - "{{Administrators}}"
       action: set
   when: rule_2_2_45
   tags:
@@ -622,7 +622,7 @@
   win_user_right:
       name: SeShutdownPrivilege
       users:
-          - Administrators
+          - "{{Administrators}}"
       action: set
   when: rule_2_2_46
   tags:
@@ -648,7 +648,7 @@
   win_user_right:
       name: SeTakeOwnershipPrivilege
       users:
-          - Administrators
+          - "{{Administrators}}"
       action: set
   when: rule_2_2_48
   tags:
