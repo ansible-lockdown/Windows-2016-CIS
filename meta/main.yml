@@ -5,19 +5,28 @@ galaxy_info:
     company: "MindPoint Group"
     license: MIT
     role_name: windows_2016_cis
+    namespace: mindpointgroup
     min_ansible_version: 2.6
 
     platforms:
         - name: Windows
           versions:
-              - 2016
+              - 2019
 
     galaxy_tags:
         - system
         - security
         - cis
         - hardening
+        - benchmark
         - microsoft
         - windows
+        - complianceascode
+        - compliance
+
+    collections:
+        - ansible.windows
+        - community.windows
+        - community.general
 
     dependencies: []
