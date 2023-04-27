@@ -1,0 +1,5 @@
+---
+
+# vars file for .
+
+lockdown_banner: "{{lookup('file', './templates/banner.txt')}}"

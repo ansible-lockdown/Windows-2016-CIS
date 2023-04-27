@@ -2,46 +2,48 @@
 - name: "SCORED | 1.1.1 | AUDIT | (L1) Ensure 'Enforce password history' is set to '24 or more password(s)'"
   block:
       - name: "SCORED | 1.1.1 | AUDIT | (L1) Ensure 'Enforce password history' is set to '24 or more password(s)'"
-        assert:
+        ansible.builtin.assert:
             that: passwordhistorysize | int is version('24', '>=')
             fail_msg: "Password history must be configured to 24 passwords remembered and variable passwordhistorysize is set to {{ passwordhistorysize }}"
         register: result
-        changed_when: no
-        ignore_errors: yes
+        changed_when: false
+        ignore_errors: true
 
       - name: "SCORED | 1.1.1 | PATCH | (L1) Ensure 'Enforce password history' is set to '24 or more password(s)'"
-        win_security_policy:
+        community.windows.win_security_policy:
             section: System Access
             key: PasswordHistorySize
             value: "{{ passwordhistorysize }}"
-  when: rule_1_1_1
+  when: win16cis_rule_1_1_1
   tags:
       - level1-domaincontroller
       - level1-memberserver
       - rule_1.1.1
       - patch
+      - password
 
 - name: "SCORED | 1.1.2 | PATCH | (L1) Ensure 'Maximum password age' is set to '60 or fewer days, but not 0'"
   block:
       - name: "SCORED | 1.1.2 | AUDIT | L1 Ensure Maximum password age is set to 60 or fewer days but not 0"
-        assert:
+        ansible.builtin.assert:
             that: maximumpasswordage | int is version('60', '<=')
             fail_msg: "Maximum password age must be configured to 60 days or less and variable maximumpasswordage is set to {{ maximumpasswordage }}"
         register: result
-        changed_when: no
-        ignore_errors: yes
+        changed_when: false
+        ignore_errors: true
 
       - name: "SCORED | 1.1.2 | PATCH | (L1) Ensure 'Maximum password age' is set to '60 or fewer days, but not 0'"
         win_security_policy:
             section: System Access
             key: MaximumPasswordAge
             value: "{{ maximumpasswordage }}"
-  when: rule_1_1_2
+  when: win16cis_rule_1_1_2
   tags:
       - level1-domaincontroller
       - level1-memberserver
       - rule_1.1.2
       - patch
+      - password
 
 - name: "SCORED | 1.1.3 | AUDIT | (L1) Ensure 'Minimum password age' is set to '1 or more day(s)'"
   block:
@@ -50,20 +52,21 @@
             that: minimumpasswordage is version('1', '>=')
             fail_msg: "Minimum password age must be configured to at least one day and variable minimumpasswordage is set to {{ minimumpasswordage }}"
         register: result
-        changed_when: no
-        ignore_errors: yes
+        changed_when: false
+        ignore_errors: true
 
       - name: "SCORED | 1.1.3 | PATCH | (L1) Ensure 'Minimum password age' is set to '1 or more day(s)'"
         win_security_policy:
             section: System Access
             key: MinimumPasswordAge
             value: "{{ minimumpasswordage }}"
-  when: rule_1_1_3
+  when: win16cis_rule_1_1_3
   tags:
       - level1-domaincontroller
       - level1-memberserver
       - rule_1.1.3
       - patch
+      - password
 
 - name: "SCORED | 1.1.4 | AUDIT | (L1) Ensure 'Minimum password length' is set to '14 or more character(s)'"
   block:
@@ -72,15 +75,15 @@
             that: minimumpasswordlength is version('14', '>=')
             fail_msg: "Minimum password length must be configured to 14 characters and variable minimumpasswordlength is set to {{ minimumpasswordlength }} characters"
         register: result
-        changed_when: no
-        ignore_errors: yes
+        changed_when: false
+        ignore_errors: true
 
       - name: "SCORED | 1.1.4 | PATCH | (L1) Ensure 'Minimum password length' is set to '14 or more character(s)'"
         win_security_policy:
             section: System Access
             key: MinimumPasswordLength
             value: "{{ minimumpasswordlength }}"
-  when: rule_1_1_4
+  when: win16cis_rule_1_1_4
   tags:
       - level1-domaincontroller
       - level1-memberserver
@@ -92,7 +95,7 @@
       section: System Access
       key: PasswordComplexity
       value: 1
-  when: rule_1_1_5
+  when: win16cis_rule_1_1_5
   tags:
       - level1-domaincontroller
       - level1-memberserver
@@ -104,7 +107,7 @@
       section: System Access
       key: ClearTextPassword
       value: "0"
-  when: rule_1_1_6
+  when: win16cis_rule_1_1_6
   tags:
       - level1-domaincontroller
       - level1-memberserver
@@ -117,7 +120,7 @@
       section: System Access
       key: LockoutBadCount
       value: "{{ lockoutbadcount }}"
-  when: rule_1_2_2
+  when: win16cis_rule_1_2_2
   tags:
       - level1-domaincontroller
       - level1-memberserver
@@ -127,12 +130,12 @@
 - name: "SCORED | 1.2.1 | AUDIT | (L1) Ensure 'Account lockout duration' is set to '15 or more minute(s)'"
   block:
       - name: "SCORED | 1.2.1 | AUDIT | (L1) Ensure 'Account lockout duration' is set to '15 or more minute(s)'"
-        assert:
+        ansible.builtin.assert:
             that: lockoutduration | int is version('15', '<=')
             fail_msg: "Must have the period of time before the bad logon counter is reset configured to 15 minutes or greater and variable lockoutduration is set to {{ lockoutduration }}"
         register: result
-        changed_when: no
-        ignore_errors: yes
+        changed_when: false
+        ignore_errors: true
 
       - name: "SCORED | 1.2.1 | PATCH | (L1) Ensure 'Account lockout duration' is set to '15 or more minute(s)'"
         win_security_policy:
@@ -140,7 +143,7 @@
             key: LockoutDuration
             value: "{{ lockoutduration }}"
   when:
-      - rule_1_2_1
+      - win16cis_rule_1_2_1
       # Speelman | added because of this error "Failed to import secedit.ini file from C:\\Users\\vagrant\\AppData\\Local\\Temp\\tmp81F3.tmp
       - is_implemented
   tags:
@@ -152,19 +155,19 @@
 - name: "SCORED | 1.2.3 | AUDIT | (L1) Ensure 'Reset account lockout counter after' is set to '15 or more minute(s)'"
   block:
       - name: "SCORED | 1.2.3 | AUDIT | (L1) Ensure 'Reset account lockout counter after' is set to '15 or more minute(s)'"
-        assert:
+        ansible.builtin.assert:
             that: resetlockoutcount | int is version('15', '>=')
             fail_msg: "Must have the period of time before the bad logon counter is reset configured to 15 minutes or greater and variable resetlockoutcount is set to {{ resetlockoutcount }}"
         register: result
-        changed_when: no
-        ignore_errors: yes
+        changed_when: false
+        ignore_errors: true
 
       - name: "SCORED | 1.2.3 | PATCH | (L1) Ensure 'Reset account lockout counter after' is set to '15 or more minute(s)'"
-        win_security_policy:
+        community.windows.win_security_policy:
             section: System Access
             key: ResetLockoutCount
             value: "{{ resetlockoutcount }}"
-  when: rule_1_2_3
+  when: win16cis_rule_1_2_3
   tags:
       - level1-domaincontroller
       - level1-memberserver
