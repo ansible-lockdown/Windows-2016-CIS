@@ -5,6 +5,14 @@ terraform {
       source  = "hashicorp/azurerm"
       version = "~> 2.65"
     }
+    random = {
+      source  = "hashicorp/random"
+      version = "~>3.5"
+    }
+    tls = {
+      source = "hashicorp/tls"
+      version = "~>4.0"
+    }
   }
   required_version = ">= 1.1.0"
 }
@@ -13,6 +21,7 @@ provider "azurerm" {
   features {}
 }
 
+#Read Username and password from file
 data "external" "win_account" {
   program = ["cat", "./sensitive_info.json"]
 }
@@ -154,10 +163,6 @@ resource "azurerm_virtual_machine_extension" "enablewinrm" {
 SETTINGS
 }
 
-output "public_ip_address" {
-  value = azurerm_public_ip.main.*.ip_address
-}
-
 // generate inventory file
 resource "local_file" "inventory" {
   filename             = "./hosts.yml"
@@ -172,18 +177,14 @@ resource "local_file" "inventory" {
       vars:
         ansible_user: "${data.external.win_account.result.username}"
         ansible_password: "${data.external.win_account.result.password}"
-        setup_audit: true
-        run_audit: true
+        setup_audit: false
+        run_audit: false
         system_is_ec2: true
         audit_git_version: devel
-        win19cis_skip_for_ansible: true
+        win_skip_for_test: true
         ansible_connection: winrm
         ansible_winrm_server_cert_validation: ignore
         ansible_winrm_operation_timeout_sec: 120
         ansible_winrm_read_timeout_sec: 180
-        # to keep ansible connections
-        win19cis_rule_9_2_1: false
-        win19cis_rule_18_3_1: false
-        win19cis_rule_2_3_1_1: false
     EOF
 }
