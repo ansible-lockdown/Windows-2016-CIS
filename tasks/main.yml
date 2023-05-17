@@ -6,7 +6,7 @@
   tags:
       - always
 
-- name: Gather distribution Info
+- name: Gather Distribution Info
   ansible.builtin.setup:
       gather_subset: distribution,!all,!min
   when:
