@@ -7,7 +7,7 @@
 
 ## Release 1.2.0
 - May 2023 Updates
-  - Updated pipelines for testing in Azure.
+  - Updated pipelines for testing in Azure
 
 - Issues Closed
   [#5](https://github.com/ansible-lockdown/Windows-2016-CIS/issues/5) - 9.1.4/9.2.4/9.3.4 - Wrong data value
