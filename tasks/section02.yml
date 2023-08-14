@@ -110,7 +110,7 @@
       - patch
 
 - name: "SCORED | 2.2.9 | PATCH | (L1) Ensure 'Allow log on through Remote Desktop Services' is set to 'Administrators, Remote Desktop Users' (MS only)"
-  win_user_right:
+  ansible.windows.win_user_right:
       name: SeRemoteInteractiveLogonRight
       users:
           - Administrators
@@ -125,7 +125,7 @@
       - patch
 
 - name: "SCORED | 2.2.10 | PATCH | (L1) Ensure 'Back up files and directories' is set to 'Administrators'"
-  win_user_right:
+  ansible.windows.win_user_right:
       name: SeBackupPrivilege
       users:
           - Administrators
