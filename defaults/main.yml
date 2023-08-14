@@ -1,39 +1,60 @@
 ---
-section01_patch: true
-section02_patch: true
-section09_patch: true
-section17_patch: true
-section18_patch: true
-section19_patch: true
+os_distribution: Windows-2016
+benchmark: CIS
+benchmark_version: 1.2
 
-min_ansible_version: "2.6"
+# Section 1 Account Policies
+# 1.1.x Password Policy, 1.2.x Account Lockout Policy
+win16cis_section01: true
+
+# Section 2 Local Policies
+# 2.2.x User Rights Assignment, 2.3.x Security Options
+win16cis_section02: true
+
+# Section 9 Windows Defender Firewall with Advanced Security (formerly Windows Firewall with Advanced Security)
+# 9.1.x Domain Profile, 9.2.x Private Profile, 9.3.x Public Profile
+win16cis_section09: true
+
+# Section 17 Advanced Audit Policy Configuration
+# 17.1.x Account Logon, 17.2.x Account Management, 17.3.x Detailed Tracking, 17.4.x DS Access, 17.5.x Logon/Logoff
+# 17.6.x Object Access, 17.7.x Policy Change, 17.8.x Privilege Use, 17.9.x System
+win16cis_section17: true
+
+# Section 18 Administrative Templates (Computer)
+# 18.1.x Control Panel, 18.2.x LAPS, 18.3.x MS Security Guide, 18.4.x MSS (Legacy), 18.5.x Network, 18.6.x Printers
+# 18.7.x Start Menu and Taskbar, 18.8.x System, 18.9.x Windows Components
+win16cis_section18: true
+
+# Section 19 Administrative Templates (User)
+# 19.1.x Control Panel, 19.5.x Start Menu and Taskbar, 19.6.x System, 19.7.x Windows Components
+win16cis_section19: true
+
+min_ansible_version: "2.9"
 
 # We've defined complexity-high to mean that we cannot automatically remediate
 # the rule in question.  In the future this might mean that the remediation
 # may fail in some cases.
-complexity_high: no
+complexity_high: false
 
 # Show "changed" for complex items not remediated per complexity-high setting
 # to make them stand out.  "changed" items on a second run of the role would
 # indicate items requiring manual review.
-audit_complex: yes
+audit_complex: true
 
 # We've defined disruption-high to indicate items that are likely to cause
 # disruption in a normal workflow.  These items can be remediated automatically
 # but are disabled by default to avoid disruption.
-disruption_high: no
+disruption_high: false
 
 # Show "changed" for disruptive items not remediated per disruption-high
 # setting to make them stand out.
-audit_disruptive: yes
-
-skip_for_travis: false
+audit_disruptive: true
 
 workaround_for_disa_benchmark: true
 workaround_for_ssg_benchmark: true
 
 # tweak role to run in a non-privileged container
-system_is_container: no
+system_is_container: false
 
 # set to false to skip tasks that either have not been developed or cannot be automated
 is_implemented: false
@@ -41,403 +62,440 @@ is_implemented: false
 # set to false to skip long running tasks
 long_running: false
 
+# win_skip_for_test is used in the playbook to skip over certain controls that
+# may cause breaking changes when running it for testing purposes.
+# Controls that will be skipped:
+# 2.3.1.5
+# 9.3.5
+# 18.9.97.1.1
+# 18.9.97.1.2
+# 18.9.97.2.1
+# 18.9.97.2.2
+# 18.9.97.2.3
+# 18.9.98.1
 win_skip_for_test: false
 
-# These variables correspond with the STIG IDs defined in the STIG and allows you to enable/disable specific rules.
-# PLEASE NOTE: These work in coordination with the cat1, cat2, cat3 group variables. You must enable an entire group
-# in order for the variables below to take effect.
+#### Basic external audit enablement settings ####
+#### Precise details - per setting can be found at the bottom of this file ####
 
-# section01
-rule_1_1_1: true
-rule_1_1_2: true
-rule_1_1_3: true
-rule_1_1_4: true
-rule_1_1_5: true
-rule_1_1_6: true
-rule_1_2_1: true
-rule_1_2_2: true
-rule_1_2_3: true
+# Set up the system to be able to run the audit tool
+setup_audit: false
+### The individual exe is required on the remote host
+## This can be copied or downloaded
+# paths can be changed at the bottom of the role
+download_audit_exe: true
+copy_audit_exe: false
 
-# section02
-rule_2_2_1: true
-rule_2_2_2: true
-rule_2_2_3: true
-rule_2_2_4: true
-rule_2_2_5: true
-rule_2_2_6: true
-rule_2_2_7: true
-rule_2_2_8: true
-rule_2_2_9: true
-rule_2_2_10: true
-rule_2_2_11: true
-rule_2_2_12: true
-rule_2_2_13: true
-rule_2_2_14: true
-rule_2_2_15: true
-rule_2_2_16: true
-rule_2_2_17: true
-rule_2_2_18: true
-rule_2_2_19: true
-rule_2_2_20: true
-rule_2_2_21: true
-rule_2_2_22: true
-rule_2_2_23: true
-rule_2_2_24: true
-rule_2_2_25: true
-rule_2_2_26: true
-rule_2_2_27: true
-rule_2_2_28: true
-rule_2_2_29: true
-rule_2_2_30: true
-rule_2_2_31: true
-rule_2_2_32: true
-rule_2_2_33: true
-rule_2_2_34: true
-rule_2_2_35: true
-rule_2_2_36: true
-rule_2_2_37: true
-rule_2_2_38: true
-rule_2_2_39: true
-rule_2_2_40: true
-rule_2_2_41: true
-rule_2_2_42: true
-rule_2_2_43: true
-rule_2_2_44: true
-rule_2_2_45: true
-rule_2_2_46: true
-rule_2_2_47: true
-rule_2_2_48: true
-rule_2_3_1_1: true
-rule_2_3_1_2: true
-rule_2_3_1_3: true
-rule_2_3_1_4: true
-rule_2_3_1_5: true
-rule_2_3_1_6: true
-rule_2_3_2_1: true
-rule_2_3_2_2: true
-rule_2_3_4_1: true
-rule_2_3_4_2: true
-rule_2_3_5_1: true
-rule_2_3_5_2: true
-rule_2_3_5_3: true
-rule_2_3_6_1: true
-rule_2_3_6_2: true
-rule_2_3_6_3: true
-rule_2_3_6_4: true
-rule_2_3_6_5: true
-rule_2_3_6_6: true
-rule_2_3_7_1: true
-rule_2_3_7_2: true
-rule_2_3_7_3: true
-rule_2_3_7_4: true
-rule_2_3_7_5: true
-rule_2_3_7_6: true
-rule_2_3_7_7: true
-rule_2_3_7_8: true
-rule_2_3_7_9: true
-rule_2_3_8_1: true
-rule_2_3_8_2: true
-rule_2_3_8_3: true
-rule_2_3_9_1: true
-rule_2_3_9_2: true
-rule_2_3_9_3: true
-rule_2_3_9_4: true
-rule_2_3_9_5: true
-rule_2_3_10_1: true
-rule_2_3_10_2: true
-rule_2_3_10_3: true
-rule_2_3_10_4: true
-rule_2_3_10_5: true
-rule_2_3_10_6: true
-rule_2_3_10_7: true
-rule_2_3_10_8: true
-rule_2_3_10_9: true
-rule_2_3_10_10: true
-rule_2_3_10_11: true
-rule_2_3_10_12: true
-rule_2_3_10_13: true
-rule_2_3_11_1: true
-rule_2_3_11_2: true
-rule_2_3_11_3: true
-rule_2_3_11_4: true
-rule_2_3_11_5: true
-rule_2_3_11_6: true
-rule_2_3_11_7: true
-rule_2_3_11_8: true
-rule_2_3_11_9: true
-rule_2_3_11_10: true
-rule_2_3_13_1: true
-rule_2_3_15_1: true
-rule_2_3_15_2: true
-rule_2_3_17_1: true
-rule_2_3_17_2: true
-rule_2_3_17_3: true
-rule_2_3_17_4: true
-rule_2_3_17_5: true
-rule_2_3_17_6: true
-rule_2_3_17_7: true
-rule_2_3_17_8: true
+# download audit content
+download_goss_config: true
 
-# section9
-rule_9_1_1: true
-rule_9_1_2: true
-rule_9_1_3: true
-rule_9_1_4: true
-rule_9_1_5: true
-rule_9_1_6: true
-rule_9_1_7: true
-rule_9_1_8: true
-rule_9_2_1: true
-rule_9_2_2: true
-rule_9_2_3: true
-rule_9_2_4: true
-rule_9_2_5: true
-rule_9_2_6: true
-rule_9_2_7: true
-rule_9_2_8: true
-rule_9_3_1: true
-rule_9_3_2: true
-rule_9_3_3: true
-rule_9_3_4: true
-rule_9_3_5: true
-rule_9_3_6: true
-rule_9_3_7: true
-rule_9_3_8: true
-rule_9_3_9: true
-rule_9_3_10: true
+# enable audits to run - this  runs the audit and get the latest content
+run_audit: false
 
-# section17
-rule_17_1_1: true
-rule_17_1_2: true
-rule_17_1_3: true
-rule_17_2_1: true
-rule_17_2_2: true
-rule_17_2_3: true
-rule_17_2_4: true
-rule_17_2_5: true
-rule_17_2_6: true
-rule_17_3_1: true
-rule_17_3_2: true
-rule_17_4_1: true
-rule_17_4_2: true
-rule_17_5_1: true
-rule_17_5_2: true
-rule_17_5_3: true
-rule_17_5_4: true
-rule_17_5_5: true
-rule_17_5_6: true
-rule_17_6_1: true
-rule_17_6_2: true
-rule_17_6_3: true
-rule_17_6_4: true
-rule_17_7_1: true
-rule_17_7_2: true
-rule_17_7_3: true
-rule_17_7_4: true
-rule_17_7_5: true
-rule_17_8_1: true
-rule_17_9_1: true
-rule_17_9_2: true
-rule_17_9_3: true
-rule_17_9_4: true
-rule_17_9_5: true
+# output location for the audit
+# Caution for the windows path \ / as some commands transponse them. this allows all to work.
+audit_dir: remediation_audit_logs
+audit_capture_path: c:\\{{ audit_dir }}\\
 
-# section18
-rule_18_1_1_1: true
-rule_18_1_1_2: true
-rule_18_1_2_2: true
-rule_18_1_3: true
-rule_18_2_1: true
-rule_18_2_2: true
-rule_18_2_3: true
-rule_18_2_4: true
-rule_18_2_5: true
-rule_18_2_6: true
-rule_18_3_1: true
-rule_18_3_2: true
-rule_18_3_3: true
-rule_18_3_4: true
-rule_18_3_5: true
-rule_18_3_6: true
-rule_18_3_7: true
-rule_18_4_1: true
-rule_18_4_2: true
-rule_18_4_3: true
-rule_18_4_4: true
-rule_18_4_5: true
-rule_18_4_6: true
-rule_18_4_7: true
-rule_18_4_8: true
-rule_18_4_9: true
-rule_18_4_10: true
-rule_18_4_11: true
-rule_18_4_12: true
-rule_18_5_4_1: true
-rule_18_5_4_2: true
-rule_18_5_5_1: true
-rule_18_5_8_1: true
-rule_18_5_9_1: true
-rule_18_5_9_2: true
-rule_18_5_10_2: true
-rule_18_5_11_2: true
-rule_18_5_11_3: true
-rule_18_5_11_4: true
-rule_18_5_14_1: true
-rule_18_5_19_2_1: true
-rule_18_5_20_1: true
-rule_18_5_20_2: true
-rule_18_5_21_1: true
-rule_18_5_21_2: true
-rule_18_7_1_1: true
-rule_18_8_3_1: true
-rule_18_8_4_1: true
-rule_18_8_4_2: true
-rule_18_8_5_1: true
-rule_18_8_5_2: true
-rule_18_8_5_3: true
-rule_18_8_5_4: true
-rule_18_8_5_5: true
-rule_18_8_5_6: true
-rule_18_8_5_7: true
-rule_18_8_14_1: true
-rule_18_8_21_2: true
-rule_18_8_21_3: true
-rule_18_8_21_4: true
-rule_18_8_21_5: true
-rule_18_8_22_1_1: true
-rule_18_8_22_1_2: true
-rule_18_8_22_1_3: true
-rule_18_8_22_1_4: true
-rule_18_8_22_1_5: true
-rule_18_8_22_1_6: true
-rule_18_8_22_1_7: true
-rule_18_8_22_1_8: true
-rule_18_8_22_1_9: true
-rule_18_8_22_1_10: true
-rule_18_8_22_1_11: true
-rule_18_8_22_1_12: true
-rule_18_8_22_1_13: true
-rule_18_8_25_1: true
-rule_18_8_27_1: true
-rule_18_8_28_1: true
-rule_18_8_28_2: true
-rule_18_8_28_3: true
-rule_18_8_28_4: true
-rule_18_8_28_5: true
-rule_18_8_28_6: true
-rule_18_8_28_7: true
-rule_18_8_34_6_1: true
-rule_18_8_34_6_2: true
-rule_18_8_34_6_3: true
-rule_18_8_34_6_4: true
-rule_18_8_36_1: true
-rule_18_8_36_2: true
-rule_18_8_37_1: true
-rule_18_8_37_2: true
-rule_18_8_47_5_1: true
-rule_18_8_47_11_1: true
-rule_18_8_49_1: true
-rule_18_8_52_1_1: true
-rule_18_8_52_1_2: true
-rule_18_9_4_1: true
-rule_18_9_6_1: true
-rule_18_9_8_1: true
-rule_18_9_8_2: true
-rule_18_9_8_3: true
-rule_18_9_10_1_1: true
-rule_18_9_12_1: true
-rule_18_9_13_1: true
-rule_18_9_14_1: true
-rule_18_9_15_1: true
-rule_18_9_15_2: true
-rule_18_9_16_1: true
-rule_18_9_16_2: true
-rule_18_9_16_3: true
-rule_18_9_16_4: true
-rule_18_9_26_1_1: true
-rule_18_9_26_1_2: true
-rule_18_9_26_2_1: true
-rule_18_9_26_2_2: true
-rule_18_9_26_3_1: true
-rule_18_9_26_3_2: true
-rule_18_9_26_4_1: true
-rule_18_9_26_4_2: true
-rule_18_9_30_2: true
-rule_18_9_30_3: true
-rule_18_9_30_4: true
-rule_18_9_39_1: true
-rule_18_9_43_1: true
-rule_18_9_44_1: true
-rule_18_9_52_1: true
-rule_18_9_59_2_2: true
-rule_18_9_59_3_2_1: true
-rule_18_9_59_3_3_1: true
-rule_18_9_59_3_3_2: true
-rule_18_9_59_3_3_3: true
-rule_18_9_59_3_3_4: true
-rule_18_9_59_3_9_1: true
-rule_18_9_59_3_9_2: true
-rule_18_9_59_3_9_3: true
-rule_18_9_59_3_9_4: true
-rule_18_9_59_3_9_5: true
-rule_18_9_59_3_10_1: true
-rule_18_9_59_3_10_2: true
-rule_18_9_59_3_11_1: true
-rule_18_9_59_3_11_2: true
-rule_18_9_60_1: true
-rule_18_9_61_2: true
-rule_18_9_61_3: true
-rule_18_9_66_1: true
-rule_18_9_77_3_1: true
-rule_18_9_77_3_2: true
-rule_18_9_77_7_1: true
-rule_18_9_77_9_1: true
-rule_18_9_77_10_1: true
-rule_18_9_77_10_2: true
-rule_18_9_77_13_3_1: true
-rule_18_9_77_14: true
-rule_18_9_77_15: true
-rule_18_9_80_1_1: true
-rule_18_9_84_1: true
-rule_18_9_84_2: true
-rule_18_9_85_1: true
-rule_18_9_85_2: true
-rule_18_9_85_3: true
-rule_18_9_86_1: true
-rule_18_9_95_1: true
-rule_18_9_95_2: true
-rule_18_9_97_1_1: true
-rule_18_9_97_1_2: true
-rule_18_9_97_1_3: true
-rule_18_9_97_2_1: true
-rule_18_9_97_2_2: true
-rule_18_9_97_2_3: true
-rule_18_9_97_2_4: true
-rule_18_9_98_1: true
-rule_18_9_99_2_1: true
-rule_18_9_102_1_1: true
-rule_18_9_102_1_2: true
-rule_18_9_102_1_3: true
-rule_18_9_102_2: true
-rule_18_9_102_3: true
-rule_18_9_102_4: true
+### End audit enablements ####
+#### Detailed settings found at the end of this document ####
 
-# section19
-rule_19_1_3_1: true
-rule_19_1_3_2: true
-rule_19_1_3_3: true
-rule_19_1_3_4: true
-rule_19_5_1_1: true
-rule_19_6_6_1_1: true
-rule_19_7_4_1: true
-rule_19_7_4_2: true
-rule_19_7_7_1: true
-rule_19_7_7_2: true
-rule_19_7_7_3: true
-rule_19_7_7_4: true
-rule_19_7_26_1: true
-rule_19_7_41_1: true
-rule_19_7_45_2_1: true
+# These variables correspond with the CIS rule IDs or paragraph numbers defined in
+# the CIS benchmark documents.
+# PLEASE NOTE: These work in coordination with the section # group variables and tags.
+# You must enable an entire section in order for the variables below to take effect.
+
+# Section 1 Rules
+win16cis_rule_1_1_1: true
+win16cis_rule_1_1_2: true
+win16cis_rule_1_1_3: true
+win16cis_rule_1_1_4: true
+win16cis_rule_1_1_5: true
+win16cis_rule_1_1_6: true
+win16cis_rule_1_2_1: true
+win16cis_rule_1_2_2: true
+win16cis_rule_1_2_3: true
+
+# Section 2 Rules
+win16cis_rule_2_2_1: true
+win16cis_rule_2_2_2: true
+win16cis_rule_2_2_3: true
+win16cis_rule_2_2_4: true
+win16cis_rule_2_2_5: true
+win16cis_rule_2_2_6: true
+win16cis_rule_2_2_7: true
+win16cis_rule_2_2_8: true
+win16cis_rule_2_2_9: true
+win16cis_rule_2_2_10: true
+win16cis_rule_2_2_11: true
+win16cis_rule_2_2_12: true
+win16cis_rule_2_2_13: true
+win16cis_rule_2_2_14: true
+win16cis_rule_2_2_15: true
+win16cis_rule_2_2_16: true
+win16cis_rule_2_2_17: true
+win16cis_rule_2_2_18: true
+win16cis_rule_2_2_19: true
+win16cis_rule_2_2_20: true
+win16cis_rule_2_2_21: true
+win16cis_rule_2_2_22: true
+win16cis_rule_2_2_23: true
+win16cis_rule_2_2_24: true
+win16cis_rule_2_2_25: true
+win16cis_rule_2_2_26: true
+win16cis_rule_2_2_27: true
+win16cis_rule_2_2_28: true
+win16cis_rule_2_2_29: true
+win16cis_rule_2_2_30: true
+win16cis_rule_2_2_31: true
+win16cis_rule_2_2_32: true
+win16cis_rule_2_2_33: true
+win16cis_rule_2_2_34: true
+win16cis_rule_2_2_35: true
+win16cis_rule_2_2_36: true
+win16cis_rule_2_2_37: true
+win16cis_rule_2_2_38: true
+win16cis_rule_2_2_39: true
+win16cis_rule_2_2_40: true
+win16cis_rule_2_2_41: true
+win16cis_rule_2_2_42: true
+win16cis_rule_2_2_43: true
+win16cis_rule_2_2_44: true
+win16cis_rule_2_2_45: true
+win16cis_rule_2_2_46: true
+win16cis_rule_2_2_47: true
+win16cis_rule_2_2_48: true
+win16cis_rule_2_3_1_1: true
+win16cis_rule_2_3_1_2: true
+win16cis_rule_2_3_1_3: true
+win16cis_rule_2_3_1_4: true
+win16cis_rule_2_3_1_5: true
+win16cis_rule_2_3_1_6: true
+win16cis_rule_2_3_2_1: true
+win16cis_rule_2_3_2_2: true
+win16cis_rule_2_3_4_1: true
+win16cis_rule_2_3_4_2: true
+win16cis_rule_2_3_5_1: true
+win16cis_rule_2_3_5_2: true
+win16cis_rule_2_3_5_3: true
+win16cis_rule_2_3_6_1: true
+win16cis_rule_2_3_6_2: true
+win16cis_rule_2_3_6_3: true
+win16cis_rule_2_3_6_4: true
+win16cis_rule_2_3_6_5: true
+win16cis_rule_2_3_6_6: true
+win16cis_rule_2_3_7_1: true
+win16cis_rule_2_3_7_2: true
+win16cis_rule_2_3_7_3: true
+win16cis_rule_2_3_7_4: true
+win16cis_rule_2_3_7_5: true
+win16cis_rule_2_3_7_6: true
+win16cis_rule_2_3_7_7: true
+win16cis_rule_2_3_7_8: true
+win16cis_rule_2_3_7_9: true
+win16cis_rule_2_3_8_1: true
+win16cis_rule_2_3_8_2: true
+win16cis_rule_2_3_8_3: true
+win16cis_rule_2_3_9_1: true
+win16cis_rule_2_3_9_2: true
+win16cis_rule_2_3_9_3: true
+win16cis_rule_2_3_9_4: true
+win16cis_rule_2_3_9_5: true
+win16cis_rule_2_3_10_1: true
+win16cis_rule_2_3_10_2: true
+win16cis_rule_2_3_10_3: true
+win16cis_rule_2_3_10_4: true
+win16cis_rule_2_3_10_5: true
+win16cis_rule_2_3_10_6: true
+win16cis_rule_2_3_10_7: true
+win16cis_rule_2_3_10_8: true
+win16cis_rule_2_3_10_9: true
+win16cis_rule_2_3_10_10: true
+win16cis_rule_2_3_10_11: true
+win16cis_rule_2_3_10_12: true
+win16cis_rule_2_3_10_13: true
+win16cis_rule_2_3_11_1: true
+win16cis_rule_2_3_11_2: true
+win16cis_rule_2_3_11_3: true
+win16cis_rule_2_3_11_4: true
+win16cis_rule_2_3_11_5: true
+win16cis_rule_2_3_11_6: true
+win16cis_rule_2_3_11_7: true
+win16cis_rule_2_3_11_8: true
+win16cis_rule_2_3_11_9: true
+win16cis_rule_2_3_11_10: true
+win16cis_rule_2_3_13_1: true
+win16cis_rule_2_3_15_1: true
+win16cis_rule_2_3_15_2: true
+win16cis_rule_2_3_17_1: true
+win16cis_rule_2_3_17_2: true
+win16cis_rule_2_3_17_3: true
+win16cis_rule_2_3_17_4: true
+win16cis_rule_2_3_17_5: true
+win16cis_rule_2_3_17_6: true
+win16cis_rule_2_3_17_7: true
+win16cis_rule_2_3_17_8: true
+
+# Section 9 Rules
+win16cis_rule_9_1_1: true
+win16cis_rule_9_1_2: true
+win16cis_rule_9_1_3: true
+win16cis_rule_9_1_4: true
+win16cis_rule_9_1_5: true
+win16cis_rule_9_1_6: true
+win16cis_rule_9_1_7: true
+win16cis_rule_9_1_8: true
+win16cis_rule_9_2_1: true
+win16cis_rule_9_2_2: true
+win16cis_rule_9_2_3: true
+win16cis_rule_9_2_4: true
+win16cis_rule_9_2_5: true
+win16cis_rule_9_2_6: true
+win16cis_rule_9_2_7: true
+win16cis_rule_9_2_8: true
+win16cis_rule_9_3_1: true
+win16cis_rule_9_3_2: true
+win16cis_rule_9_3_3: true
+win16cis_rule_9_3_4: true
+win16cis_rule_9_3_5: true
+win16cis_rule_9_3_6: true
+win16cis_rule_9_3_7: true
+win16cis_rule_9_3_8: true
+win16cis_rule_9_3_9: true
+win16cis_rule_9_3_10: true
+
+# Section 17 Rules
+win16cis_rule_17_1_1: true
+win16cis_rule_17_1_2: true
+win16cis_rule_17_1_3: true
+win16cis_rule_17_2_1: true
+win16cis_rule_17_2_2: true
+win16cis_rule_17_2_3: true
+win16cis_rule_17_2_4: true
+win16cis_rule_17_2_5: true
+win16cis_rule_17_2_6: true
+win16cis_rule_17_3_1: true
+win16cis_rule_17_3_2: true
+win16cis_rule_17_4_1: true
+win16cis_rule_17_4_2: true
+win16cis_rule_17_5_1: true
+win16cis_rule_17_5_2: true
+win16cis_rule_17_5_3: true
+win16cis_rule_17_5_4: true
+win16cis_rule_17_5_5: true
+win16cis_rule_17_5_6: true
+win16cis_rule_17_6_1: true
+win16cis_rule_17_6_2: true
+win16cis_rule_17_6_3: true
+win16cis_rule_17_6_4: true
+win16cis_rule_17_7_1: true
+win16cis_rule_17_7_2: true
+win16cis_rule_17_7_3: true
+win16cis_rule_17_7_4: true
+win16cis_rule_17_7_5: true
+win16cis_rule_17_8_1: true
+win16cis_rule_17_9_1: true
+win16cis_rule_17_9_2: true
+win16cis_rule_17_9_3: true
+win16cis_rule_17_9_4: true
+win16cis_rule_17_9_5: true
+
+# Section 18 Rules
+win16cis_rule_18_1_1_1: true
+win16cis_rule_18_1_1_2: true
+win16cis_rule_18_1_2_2: true
+win16cis_rule_18_1_3: true
+win16cis_rule_18_2_1: true
+win16cis_rule_18_2_2: true
+win16cis_rule_18_2_3: true
+win16cis_rule_18_2_4: true
+win16cis_rule_18_2_5: true
+win16cis_rule_18_2_6: true
+win16cis_rule_18_3_1: true
+win16cis_rule_18_3_2: true
+win16cis_rule_18_3_3: true
+win16cis_rule_18_3_4: true
+win16cis_rule_18_3_5: true
+win16cis_rule_18_3_6: true
+win16cis_rule_18_3_7: true
+win16cis_rule_18_4_1: true
+win16cis_rule_18_4_2: true
+win16cis_rule_18_4_3: true
+win16cis_rule_18_4_4: true
+win16cis_rule_18_4_5: true
+win16cis_rule_18_4_6: true
+win16cis_rule_18_4_7: true
+win16cis_rule_18_4_8: true
+win16cis_rule_18_4_9: true
+win16cis_rule_18_4_10: true
+win16cis_rule_18_4_11: true
+win16cis_rule_18_4_12: true
+win16cis_rule_18_5_4_1: true
+win16cis_rule_18_5_4_2: true
+win16cis_rule_18_5_5_1: true
+win16cis_rule_18_5_8_1: true
+win16cis_rule_18_5_9_1: true
+win16cis_rule_18_5_9_2: true
+win16cis_rule_18_5_10_2: true
+win16cis_rule_18_5_11_2: true
+win16cis_rule_18_5_11_3: true
+win16cis_rule_18_5_11_4: true
+win16cis_rule_18_5_14_1: true
+win16cis_rule_18_5_19_2_1: true
+win16cis_rule_18_5_20_1: true
+win16cis_rule_18_5_20_2: true
+win16cis_rule_18_5_21_1: true
+win16cis_rule_18_5_21_2: true
+win16cis_rule_18_7_1_1: true
+win16cis_rule_18_8_3_1: true
+win16cis_rule_18_8_4_1: true
+win16cis_rule_18_8_4_2: true
+win16cis_rule_18_8_5_1: true
+win16cis_rule_18_8_5_2: true
+win16cis_rule_18_8_5_3: true
+win16cis_rule_18_8_5_4: true
+win16cis_rule_18_8_5_5: true
+win16cis_rule_18_8_5_6: true
+win16cis_rule_18_8_5_7: true
+win16cis_rule_18_8_14_1: true
+win16cis_rule_18_8_21_2: true
+win16cis_rule_18_8_21_3: true
+win16cis_rule_18_8_21_4: true
+win16cis_rule_18_8_21_5: true
+win16cis_rule_18_8_22_1_1: true
+win16cis_rule_18_8_22_1_2: true
+win16cis_rule_18_8_22_1_3: true
+win16cis_rule_18_8_22_1_4: true
+win16cis_rule_18_8_22_1_5: true
+win16cis_rule_18_8_22_1_6: true
+win16cis_rule_18_8_22_1_7: true
+win16cis_rule_18_8_22_1_8: true
+win16cis_rule_18_8_22_1_9: true
+win16cis_rule_18_8_22_1_10: true
+win16cis_rule_18_8_22_1_11: true
+win16cis_rule_18_8_22_1_12: true
+win16cis_rule_18_8_22_1_13: true
+win16cis_rule_18_8_25_1: true
+win16cis_rule_18_8_27_1: true
+win16cis_rule_18_8_28_1: true
+win16cis_rule_18_8_28_2: true
+win16cis_rule_18_8_28_3: true
+win16cis_rule_18_8_28_4: true
+win16cis_rule_18_8_28_5: true
+win16cis_rule_18_8_28_6: true
+win16cis_rule_18_8_28_7: true
+win16cis_rule_18_8_34_6_1: true
+win16cis_rule_18_8_34_6_2: true
+win16cis_rule_18_8_34_6_3: true
+win16cis_rule_18_8_34_6_4: true
+win16cis_rule_18_8_36_1: true
+win16cis_rule_18_8_36_2: true
+win16cis_rule_18_8_37_1: true
+win16cis_rule_18_8_37_2: true
+win16cis_rule_18_8_47_5_1: true
+win16cis_rule_18_8_47_11_1: true
+win16cis_rule_18_8_49_1: true
+win16cis_rule_18_8_52_1_1: true
+win16cis_rule_18_8_52_1_2: true
+win16cis_rule_18_9_4_1: true
+win16cis_rule_18_9_6_1: true
+win16cis_rule_18_9_8_1: true
+win16cis_rule_18_9_8_2: true
+win16cis_rule_18_9_8_3: true
+win16cis_rule_18_9_10_1_1: true
+win16cis_rule_18_9_12_1: true
+win16cis_rule_18_9_13_1: true
+win16cis_rule_18_9_14_1: true
+win16cis_rule_18_9_15_1: true
+win16cis_rule_18_9_15_2: true
+win16cis_rule_18_9_16_1: true
+win16cis_rule_18_9_16_2: true
+win16cis_rule_18_9_16_3: true
+win16cis_rule_18_9_16_4: true
+win16cis_rule_18_9_26_1_1: true
+win16cis_rule_18_9_26_1_2: true
+win16cis_rule_18_9_26_2_1: true
+win16cis_rule_18_9_26_2_2: true
+win16cis_rule_18_9_26_3_1: true
+win16cis_rule_18_9_26_3_2: true
+win16cis_rule_18_9_26_4_1: true
+win16cis_rule_18_9_26_4_2: true
+win16cis_rule_18_9_30_2: true
+win16cis_rule_18_9_30_3: true
+win16cis_rule_18_9_30_4: true
+win16cis_rule_18_9_39_1: true
+win16cis_rule_18_9_43_1: true
+win16cis_rule_18_9_44_1: true
+win16cis_rule_18_9_52_1: true
+win16cis_rule_18_9_59_2_2: true
+win16cis_rule_18_9_59_3_2_1: true
+win16cis_rule_18_9_59_3_3_1: true
+win16cis_rule_18_9_59_3_3_2: true
+win16cis_rule_18_9_59_3_3_3: true
+win16cis_rule_18_9_59_3_3_4: true
+win16cis_rule_18_9_59_3_9_1: true
+win16cis_rule_18_9_59_3_9_2: true
+win16cis_rule_18_9_59_3_9_3: true
+win16cis_rule_18_9_59_3_9_4: true
+win16cis_rule_18_9_59_3_9_5: true
+win16cis_rule_18_9_59_3_10_1: true
+win16cis_rule_18_9_59_3_10_2: true
+win16cis_rule_18_9_59_3_11_1: true
+win16cis_rule_18_9_59_3_11_2: true
+win16cis_rule_18_9_60_1: true
+win16cis_rule_18_9_61_2: true
+win16cis_rule_18_9_61_3: true
+win16cis_rule_18_9_66_1: true
+win16cis_rule_18_9_77_3_1: true
+win16cis_rule_18_9_77_3_2: true
+win16cis_rule_18_9_77_7_1: true
+win16cis_rule_18_9_77_9_1: true
+win16cis_rule_18_9_77_10_1: true
+win16cis_rule_18_9_77_10_2: true
+win16cis_rule_18_9_77_13_3_1: true
+win16cis_rule_18_9_77_14: true
+win16cis_rule_18_9_77_15: true
+win16cis_rule_18_9_80_1_1: true
+win16cis_rule_18_9_84_1: true
+win16cis_rule_18_9_84_2: true
+win16cis_rule_18_9_85_1: true
+win16cis_rule_18_9_85_2: true
+win16cis_rule_18_9_85_3: true
+win16cis_rule_18_9_86_1: true
+win16cis_rule_18_9_95_1: true
+win16cis_rule_18_9_95_2: true
+win16cis_rule_18_9_97_1_1: true
+win16cis_rule_18_9_97_1_2: true
+win16cis_rule_18_9_97_1_3: true
+win16cis_rule_18_9_97_2_1: true
+win16cis_rule_18_9_97_2_2: true
+win16cis_rule_18_9_97_2_3: true
+win16cis_rule_18_9_97_2_4: true
+win16cis_rule_18_9_98_1: true
+win16cis_rule_18_9_99_2_1: true
+win16cis_rule_18_9_102_1_1: true
+win16cis_rule_18_9_102_1_2: true
+win16cis_rule_18_9_102_1_3: true
+win16cis_rule_18_9_102_2: true
+win16cis_rule_18_9_102_3: true
+win16cis_rule_18_9_102_4: true
+
+# Section 19 Rules
+win16cis_rule_19_1_3_1: true
+win16cis_rule_19_1_3_2: true
+win16cis_rule_19_1_3_3: true
+win16cis_rule_19_1_3_4: true
+win16cis_rule_19_5_1_1: true
+win16cis_rule_19_6_6_1_1: true
+win16cis_rule_19_7_4_1: true
+win16cis_rule_19_7_4_2: true
+win16cis_rule_19_7_7_1: true
+win16cis_rule_19_7_7_2: true
+win16cis_rule_19_7_7_3: true
+win16cis_rule_19_7_7_4: true
+win16cis_rule_19_7_26_1: true
+win16cis_rule_19_7_41_1: true
+win16cis_rule_19_7_45_2_1: true
 
 # Global Variables
 
@@ -498,7 +556,6 @@ app_maxsize: 32768
 sec_maxsize: 196608
 sys_maxsize: 32768
 
-
 legalnoticecaption: "DoD Notice and Consent Banner"
 
 # 9.1.5
@@ -531,10 +588,38 @@ public_firewall_log_path: '%SystemRoot%\System32\logfiles\firewall\publicfw.log'
 # To conform to CIS stadnards the value should be 16,384 or greater. Value is in KB
 public_firewall_log_size: 16,384
 
-
 # 18.9.102.2
 # win16cis_wupdate_options are described below
 # value 2 - Notify for download and install, value 3 - Auto download and notify for install
 # value 4 - Auto download and schedule install (recommended), value 5 - Allow local admin to choose setting
 # value 7 - Auto download, notify to install, notify to restart
 win16cis_wupdate_options: 4
+
+### Goss audit variables
+
+## Goss Binary settings
+goss_version: v0.3.16
+goss_url: https://github.com/aelsabbahy/goss/releases/download/
+goss_dl_exe: goss-alpha-windows-amd64.exe
+goss_dl_sha: dd5fd18a2c42ae05215b1fca3cf7d0d4e4d318011c67be13cb37545e368d4323
+goss_exe: goss.exe  # Note any path to be a forward slash
+audit_format: json
+
+# Goss opy download options
+goss_download_url: "{{ goss_url }}{{ goss_version }}/{{ goss_dl_exe }}"
+goss_copy_src: Full to copy the exe
+
+# Goss Audit config when using git to download
+goss_conf_git_branch: main
+goss_conf_url: "https://github.com/ansible-lockdown/{{ os_distribution }}-{{ benchmark }}-Audit/archive/refs/heads/{{ goss_conf_git_branch }}.zip"
+
+## Goss running
+audit_scripts_dir: "c:/{{ audit_dir }}/{{ os_distribution }}-{{ benchmark }}-Audit"
+run_audit_script: "{{ audit_scripts_dir }}/run_audit.ps1"
+goss_vars_path: "{{ audit_scripts_dir }}/{{ ansible_hostname }}.yml"
+audit_results_file: "{{ audit_capture_path }}{{ ansible_hostname }}_{{ audit_time }}_remediate_{{ ansible_date_time.epoch }}.{{ audit_format }}"
+
+audit_results: |
+      The pre remediation results are: {{ pre_audit_summary }}.
+      The post remediation results are: {{ post_audit_summary }}.
+      Full breakdown can be found in {{ audit_capture_path }}
