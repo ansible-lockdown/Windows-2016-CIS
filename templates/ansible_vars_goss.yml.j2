@@ -138,7 +138,7 @@ win2016cis_2_2_47: {{ win16cis_rule_2_2_47 }}  # DC ONLY
 win2016cis_2_2_48: {{ win16cis_rule_2_2_48 }}
 # 2.3.1 Accounts
 win2016cis_2_3_1_1: {{ win16cis_rule_2_3_1_1 }}  # MS Only
-win2016cis_2_3_1_2: {{ win16cis_rule_2_3_1_2 }} 
+win2016cis_2_3_1_2: {{ win16cis_rule_2_3_1_2 }}
 win2016cis_2_3_1_3: {{ win16cis_rule_2_3_1_3 }}  # MS Only
 win2016cis_2_3_1_4: {{ win16cis_rule_2_3_1_4 }}
 win2016cis_2_3_1_5: {{ win16cis_rule_2_3_1_5 }}
@@ -346,7 +346,7 @@ win2016cis_18_2_3: {{ win16cis_rule_18_2_3 }}
 win2016cis_18_2_4: {{ win16cis_rule_18_2_4 }}
 win2016cis_18_2_5: {{ win16cis_rule_18_2_5 }}
 win2016cis_18_2_6: {{ win16cis_rule_18_2_6 }}
-# 18.3 MS Security 
+# 18.3 MS Security
 win2016cis_18_3_1: {{ win16cis_rule_18_3_1 }}
 win2016cis_18_3_2: {{ win16cis_rule_18_3_2 }}
 win2016cis_18_3_3: {{ win16cis_rule_18_3_3 }}
@@ -903,7 +903,7 @@ HKCU_CP_DESKTOP: get-itempropertyvalue -path 'HKCU:/SOFTWARE/Policies/Microsoft/
 HKLM_POL_FW_DOM: get-itempropertyvalue -path 'HKLM:/SOFTWARE/Policies/Microsoft/WindowsFirewall/DomainProfile'
 HKLM_POL_FW_PRV: get-itempropertyvalue -path 'HKLM:/SOFTWARE/Policies/Microsoft/WindowsFirewall/PrivateProfile'
 HKLM_POL_FW_PUB: get-itempropertyvalue -path 'HKLM:/SOFTWARE/Policies/Microsoft/WindowsFirewall/PublicProfile'
-# Known Security identified names 
+# Known Security identified names
 ## https://docs.microsoft.com/en-us/troubleshoot/windows-server/identity/security-identifiers-in-windows
 everyone_sid: '*S-1-1-0'
 auth_users_sid: '*S-1-5-11'

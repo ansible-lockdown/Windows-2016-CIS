@@ -33,7 +33,7 @@
         ignore_errors: true
 
       - name: "SCORED | 1.1.2 | PATCH | (L1) Ensure 'Maximum password age' is set to '60 or fewer days, but not 0'"
-        win_security_policy:
+        community.windows.win_security_policy:
             section: System Access
             key: MaximumPasswordAge
             value: "{{ maximumpasswordage }}"
@@ -48,7 +48,7 @@
 - name: "SCORED | 1.1.3 | AUDIT | (L1) Ensure 'Minimum password age' is set to '1 or more day(s)'"
   block:
       - name: "SCORED | 1.1.3 | AUDIT | (L1) Ensure 'Minimum password age' is set to '1 or more day(s)'"
-        assert:
+        ansible.builtin.assert:
             that: minimumpasswordage is version('1', '>=')
             fail_msg: "Minimum password age must be configured to at least one day and variable minimumpasswordage is set to {{ minimumpasswordage }}"
         register: result
@@ -56,7 +56,7 @@
         ignore_errors: true
 
       - name: "SCORED | 1.1.3 | PATCH | (L1) Ensure 'Minimum password age' is set to '1 or more day(s)'"
-        win_security_policy:
+        community.windows.win_security_policy:
             section: System Access
             key: MinimumPasswordAge
             value: "{{ minimumpasswordage }}"
@@ -71,7 +71,7 @@
 - name: "SCORED | 1.1.4 | AUDIT | (L1) Ensure 'Minimum password length' is set to '14 or more character(s)'"
   block:
       - name: "SCORED | 1.1.4 | AUDIT | (L1) Ensure 'Minimum password length' is set to '14 or more character(s)'"
-        assert:
+        ansible.builtin.assert:
             that: minimumpasswordlength is version('14', '>=')
             fail_msg: "Minimum password length must be configured to 14 characters and variable minimumpasswordlength is set to {{ minimumpasswordlength }} characters"
         register: result
@@ -79,7 +79,7 @@
         ignore_errors: true
 
       - name: "SCORED | 1.1.4 | PATCH | (L1) Ensure 'Minimum password length' is set to '14 or more character(s)'"
-        win_security_policy:
+        community.windows.win_security_policy:
             section: System Access
             key: MinimumPasswordLength
             value: "{{ minimumpasswordlength }}"
@@ -91,7 +91,7 @@
       - patch
 
 - name: "SCORED | 1.1.5 | PATCH | (L1) Ensure 'Password must meet complexity requirements' is set to 'Enabled'"
-  win_security_policy:
+  community.windows.win_security_policy:
       section: System Access
       key: PasswordComplexity
       value: 1
@@ -103,7 +103,7 @@
       - patch
 
 - name: "SCORED | 1.1.6 | PATCH | (L1) Ensure 'Store passwords using reversible encryption' is set to 'Disabled'"
-  win_security_policy:
+  community.windows.win_security_policy:
       section: System Access
       key: ClearTextPassword
       value: "0"
@@ -116,7 +116,7 @@
 
 # This rule must be applied first to make rule_1.2.1 and rule_1.2.3 applicable
 - name: "SCORED | 1.2.2 | PATCH | (L1) Ensure 'Account lockout threshold' is set to '10 or fewer invalid logon attempt(s), but not 0'"
-  win_security_policy:
+  community.windows.win_security_policy:
       section: System Access
       key: LockoutBadCount
       value: "{{ lockoutbadcount }}"
@@ -138,7 +138,7 @@
         ignore_errors: true
 
       - name: "SCORED | 1.2.1 | PATCH | (L1) Ensure 'Account lockout duration' is set to '15 or more minute(s)'"
-        win_security_policy:
+        community.windows.win_security_policy:
             section: System Access
             key: LockoutDuration
             value: "{{ lockoutduration }}"

@@ -1,14 +1,22 @@
 # Changelog
 
-## Future Plans For Repo
+## Release 1.3.0
+
+- August 2023
+  - Updated to Central org based workflow.
+  - Updated Linting files and ran against playbook
+  - All modules fit FQCN standard.
+  - Updated Readme.md
+
+## Possible Future Plans For Repo
 - Warning System Added
-- More of the defalt main variables will be user defined. 
+- More of the defalt main variables will be user defined.
 - Update To 2.0.0 once released by CIS, currently in draft status.
 
 ## Release 1.2.0
+
 - May 2023 Updates
   - Updated pipelines for testing in Azure
-
 - Issues Closed
   [#5](https://github.com/ansible-lockdown/Windows-2016-CIS/issues/5) - 9.1.4/9.2.4/9.3.4 - Wrong data value
   [#6](https://github.com/ansible-lockdown/Windows-2016-CIS/issues/6) - 2.3.11.4 - Wrong data value
@@ -23,7 +31,7 @@
   [#16](https://github.com/ansible-lockdown/Windows-2016-CIS/issues/16) - 2.3.1.5/2.3.1.6 - Changed value from hardcoded to variable
 - Updated Galaxy Workflow
 - Updated module names to new standard.
-- Major Update: All task rule names updated to add win16cis to them in default main 
+- Major Update: All task rule names updated to add win16cis to them in default main
   and in appropriate taks files.
 - Updated Ansible_vars_goss file to match new default main.
 - Ansible Lockdown Banner In Playbook (Testing)
