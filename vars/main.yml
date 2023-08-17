@@ -4,3 +4,4 @@
 
 # This sets the variable that is created for the banner.
 lockdown_banner: "{{lookup('file', './templates/banner.txt')}}"
+
