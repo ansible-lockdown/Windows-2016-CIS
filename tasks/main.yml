@@ -39,8 +39,7 @@
 
 - name: Run Audit
   ansible.builtin.import_tasks: run_audit.yml
-  when:
-      - run_audit
+  when: run_audit
   vars:
       audit_time: pre
   tags:

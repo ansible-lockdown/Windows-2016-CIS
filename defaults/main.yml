@@ -73,7 +73,7 @@ long_running: false
 # 18.9.97.2.2
 # 18.9.97.2.3
 # 18.9.98.1
-win_skip_for_test: false
+win_skip_for_test: true
 
 #### Basic external audit enablement settings ####
 #### Precise details - per setting can be found at the bottom of this file ####
@@ -83,13 +83,13 @@ setup_audit: false
 ### The individual exe is required on the remote host
 ## This can be copied or downloaded
 # paths can be changed at the bottom of the role
-download_audit_exe: true
+download_audit_exe: false
 copy_audit_exe: false
 
 # download audit content
-download_goss_config: true
+download_goss_config: false
 
-# enable audits to run - this  runs the audit and get the latest content
+# enable audits to run - this runs the audit and get the latest content
 run_audit: false
 
 # output location for the audit
