@@ -610,7 +610,7 @@ goss_download_url: "{{ goss_url }}{{ goss_version }}/{{ goss_dl_exe }}"
 goss_copy_src: Full Path To Local Copy Of .Exe Inserted In This Variable
 
 # Goss Audit config when using git to download
-goss_conf_git_branch: main
+goss_conf_git_branch: devel
 goss_conf_url: "https://github.com/ansible-lockdown/{{ os_distribution }}-{{ benchmark }}-Audit/archive/refs/heads/{{ goss_conf_git_branch }}.zip"
 
 ## Goss running
