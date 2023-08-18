@@ -11,7 +11,7 @@
       - audit_time == 'pre'
 
 - name: Run the goss audit
-  ansible.windows.win_shell: "{{ run_audit_script }} -auditbin {{ audit_capture_path }}{{ goss_exe }} -auditdir {{audit_capture_path }} -varsfile {{ ansible_hostname }}.yml -outfile {{ audit_results_file }}"
+  ansible.windows.win_shell: "{{ run_audit_script }} -auditbin {{ audit_capture_path }}{{ goss_exe }} -auditdir {{ audit_capture_path }} -varsfile {{ ansible_hostname }}.yml -outfile {{ audit_results_file }}"
   failed_when: false
 
 - name: Capture the pre remediation audit data summary

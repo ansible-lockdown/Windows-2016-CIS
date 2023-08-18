@@ -34,3 +34,8 @@
       dest: "{{ audit_capture_path }}"
   when:
       - download_goss_config
+
+- name: Rename Goss Config Folder
+  ansible.windows.win_shell: Rename-Item {{ goss_conf_unzipped_dir }} {{ audit_scripts_dir }}
+  when:
+      - download_goss_config
