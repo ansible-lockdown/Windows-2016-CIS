@@ -145,7 +145,6 @@
   when:
       - win16cis_rule_1_2_1
       # Speelman | added because of this error "Failed to import secedit.ini file from C:\\Users\\vagrant\\AppData\\Local\\Temp\\tmp81F3.tmp
-      - is_implemented
   tags:
       - level1-domaincontroller
       - level1-memberserver
