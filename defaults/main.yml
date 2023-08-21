@@ -73,7 +73,7 @@ win_skip_for_test: true
 #### Precise details - per setting can be found at the bottom of this file ####
 
 # Set up the system to be able to run the audit tool
-setup_audit: true
+setup_audit: false
 ### The individual exe is required on the remote host
 ## This can be copied or downloaded
 # paths can be changed at the bottom of the role
