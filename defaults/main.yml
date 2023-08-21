@@ -50,14 +50,8 @@ disruption_high: false
 # setting to make them stand out.
 audit_disruptive: true
 
-workaround_for_disa_benchmark: true
-workaround_for_ssg_benchmark: true
-
 # tweak role to run in a non-privileged container
 system_is_container: false
-
-# set to false to skip tasks that either have not been developed or cannot be automated
-is_implemented: false
 
 # set to false to skip long running tasks
 long_running: false
