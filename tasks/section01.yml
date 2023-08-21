@@ -120,9 +120,7 @@
       section: System Access
       key: LockoutBadCount
       value: "{{ lockoutbadcount }}"
-  when:
-      - win16cis_rule_1_2_2
-      - not win16cis_cloud_based_system
+  when: win16cis_rule_1_2_2
   tags:
       - level1-domaincontroller
       - level1-memberserver
@@ -144,16 +142,13 @@
             section: System Access
             key: ResetLockoutCount
             value: "{{ resetlockoutcount }}"
-  when:
-      - win16cis_rule_1_2_3
-      - not win16cis_cloud_based_system
+  when: win16cis_rule_1_2_3
   tags:
       - level1-domaincontroller
       - level1-memberserver
       - rule_1.2.3
       - patch
 
-# Speelman | added because of this error "Failed to import secedit.ini file from C:\\Users\\vagrant\\AppData\\Local\\Temp\\tmp81F3.tmp
 - name: "SCORED | 1.2.1 | AUDIT | (L1) Ensure 'Account lockout duration' is set to '15 or more minute(s)'"
   block:
       - name: "SCORED | 1.2.1 | AUDIT | (L1) Ensure 'Account lockout duration' is set to '15 or more minute(s)'"
@@ -169,9 +164,7 @@
             section: System Access
             key: LockoutDuration
             value: "{{ lockoutduration }}"
-  when:
-      - win16cis_rule_1_2_1
-      - not win16cis_cloud_based_system
+  when: win16cis_rule_1_2_1
   tags:
       - level1-domaincontroller
       - level1-memberserver
