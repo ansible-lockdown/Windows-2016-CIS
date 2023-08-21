@@ -67,7 +67,7 @@ long_running: false
 # 18.9.97.2.2
 # 18.9.97.2.3
 # 18.9.98.1
-win_skip_for_test: true
+win_skip_for_test: false
 
 #### Basic external audit enablement settings ####
 #### Precise details - per setting can be found at the bottom of this file ####
