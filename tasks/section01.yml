@@ -120,35 +120,13 @@
       section: System Access
       key: LockoutBadCount
       value: "{{ lockoutbadcount }}"
-  when: win16cis_rule_1_2_2
+  when:
+      - win16cis_rule_1_2_2
+      - not win16cis_cloud_based_system
   tags:
       - level1-domaincontroller
       - level1-memberserver
       - rule_1.2.2
-      - patch
-
-- name: "SCORED | 1.2.1 | AUDIT | (L1) Ensure 'Account lockout duration' is set to '15 or more minute(s)'"
-  block:
-      - name: "SCORED | 1.2.1 | AUDIT | (L1) Ensure 'Account lockout duration' is set to '15 or more minute(s)'"
-        ansible.builtin.assert:
-            that: lockoutduration | int is version('15', '<=')
-            fail_msg: "Must have the period of time before the bad logon counter is reset configured to 15 minutes or greater and variable lockoutduration is set to {{ lockoutduration }}"
-        register: result
-        changed_when: false
-        ignore_errors: true
-
-      - name: "SCORED | 1.2.1 | PATCH | (L1) Ensure 'Account lockout duration' is set to '15 or more minute(s)'"
-        community.windows.win_security_policy:
-            section: System Access
-            key: LockoutDuration
-            value: "{{ lockoutduration }}"
-  when:
-      - win16cis_rule_1_2_1
-      # Speelman | added because of this error "Failed to import secedit.ini file from C:\\Users\\vagrant\\AppData\\Local\\Temp\\tmp81F3.tmp
-  tags:
-      - level1-domaincontroller
-      - level1-memberserver
-      - rule_1.2.1
       - patch
 
 - name: "SCORED | 1.2.3 | AUDIT | (L1) Ensure 'Reset account lockout counter after' is set to '15 or more minute(s)'"
@@ -166,9 +144,36 @@
             section: System Access
             key: ResetLockoutCount
             value: "{{ resetlockoutcount }}"
-  when: win16cis_rule_1_2_3
+  when:
+      - win16cis_rule_1_2_3
+      - not win16cis_cloud_based_system
   tags:
       - level1-domaincontroller
       - level1-memberserver
       - rule_1.2.3
+      - patch
+
+# Speelman | added because of this error "Failed to import secedit.ini file from C:\\Users\\vagrant\\AppData\\Local\\Temp\\tmp81F3.tmp
+- name: "SCORED | 1.2.1 | AUDIT | (L1) Ensure 'Account lockout duration' is set to '15 or more minute(s)'"
+  block:
+      - name: "SCORED | 1.2.1 | AUDIT | (L1) Ensure 'Account lockout duration' is set to '15 or more minute(s)'"
+        ansible.builtin.assert:
+            that: lockoutduration | int is version('15', '<=')
+            fail_msg: "Must have the period of time before the bad logon counter is reset configured to 15 minutes or greater and variable lockoutduration is set to {{ lockoutduration }}"
+        register: result
+        changed_when: false
+        ignore_errors: true
+
+      - name: "SCORED | 1.2.1 | PATCH | (L1) Ensure 'Account lockout duration' is set to '15 or more minute(s)'"
+        community.windows.win_security_policy:
+            section: System Access
+            key: LockoutDuration
+            value: "{{ lockoutduration }}"
+  when:
+      - win16cis_rule_1_2_1
+      - not win16cis_cloud_based_system
+  tags:
+      - level1-domaincontroller
+      - level1-memberserver
+      - rule_1.2.1
       - patch
