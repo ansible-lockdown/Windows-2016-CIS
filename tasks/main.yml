@@ -31,6 +31,12 @@
   tags:
       - always
 
+- name: Include the preliminary tasks
+  ansible.builtin.include_tasks: prelim.yml
+  tags:
+      - always
+      - prelim_tasks
+
 - name: Setup for Audit
   ansible.builtin.import_tasks: setup_audit.yml
   when: setup_audit

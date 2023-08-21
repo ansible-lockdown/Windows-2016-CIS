@@ -1,12 +1,12 @@
 ---
 
-- name: Set system facts based on gather facts module
+- name: Set System Facts Based On Gather Facts Module
   block:
       - name: Set fact is system is standalone
         ansible.builtin.set_fact:
             win2016cis_is_standalone: true
         when:
-            - ansible_windows_domain_role ==  'Stand-alone server'
+            - ansible_windows_domain_role == 'Stand-alone server'
 
       - name: Set fact if domain controller role
         ansible.builtin.set_fact:
@@ -19,3 +19,19 @@
             win2016cis_is_domain_member: true
         when:
             - ansible_windows_domain_role == 'Member server'
+  tags:
+      - always
+
+- name: Get Windows installation type
+  ansible.windows.win_reg_stat:
+      path: HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion
+      name: InstallationType
+  register: get_windows_installation_type
+  tags:
+      - always
+
+- name: Set Windows installation type
+  ansible.builtin.set_fact:
+      windows_installation_type: "{{ get_windows_installation_type.value | default('') }}"
+  tags:
+      - always

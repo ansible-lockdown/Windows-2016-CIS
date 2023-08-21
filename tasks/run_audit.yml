@@ -1,7 +1,4 @@
 ---
-- name: Include the preliminary tasks
-  ansible.builtin.include_tasks: audit_prelim.yml
-
 # Copied pre and post to capture output files.
 - name: copy the template used by ansible for consistent checks
   ansible.windows.win_template:
