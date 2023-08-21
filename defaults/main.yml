@@ -50,14 +50,8 @@ disruption_high: false
 # setting to make them stand out.
 audit_disruptive: true
 
-workaround_for_disa_benchmark: true
-workaround_for_ssg_benchmark: true
-
 # tweak role to run in a non-privileged container
 system_is_container: false
-
-# set to false to skip tasks that either have not been developed or cannot be automated
-is_implemented: false
 
 # set to false to skip long running tasks
 long_running: false
@@ -89,7 +83,7 @@ copy_audit_exe: false
 # download audit content
 download_goss_config: true
 
-# enable audits to run - this  runs the audit and get the latest content
+# enable audits to run - this runs the audit and get the latest content
 run_audit: false
 
 # output location for the audit
@@ -598,26 +592,27 @@ win16cis_wupdate_options: 4
 ### Goss audit variables
 
 ## Goss Binary settings
-goss_version: v0.3.16
-goss_url: https://github.com/aelsabbahy/goss/releases/download/
+goss_version: v0.3.23
+goss_url: https://github.com/goss-org/goss/releases/download/
 goss_dl_exe: goss-alpha-windows-amd64.exe
-goss_dl_sha: dd5fd18a2c42ae05215b1fca3cf7d0d4e4d318011c67be13cb37545e368d4323
+goss_dl_sha: 011477201088cac0bb8762dc0c861215b2585e0873d16277375947afe29146da
 goss_exe: goss.exe  # Note any path to be a forward slash
 audit_format: json
 
-# Goss opy download options
+# Goss copy download options
 goss_download_url: "{{ goss_url }}{{ goss_version }}/{{ goss_dl_exe }}"
-goss_copy_src: Full to copy the exe
+goss_copy_src: Full Path To Local Copy Of .Exe Inserted In This Variable
 
 # Goss Audit config when using git to download
-goss_conf_git_branch: main
+goss_conf_git_branch: devel
 goss_conf_url: "https://github.com/ansible-lockdown/{{ os_distribution }}-{{ benchmark }}-Audit/archive/refs/heads/{{ goss_conf_git_branch }}.zip"
+goss_conf_unzipped_dir: "c:/{{ audit_dir }}/{{ os_distribution }}-{{ benchmark }}-Audit-{{ goss_conf_git_branch }}"
 
 ## Goss running
 audit_scripts_dir: "c:/{{ audit_dir }}/{{ os_distribution }}-{{ benchmark }}-Audit"
 run_audit_script: "{{ audit_scripts_dir }}/run_audit.ps1"
 goss_vars_path: "{{ audit_scripts_dir }}/{{ ansible_hostname }}.yml"
-audit_results_file: "{{ audit_capture_path }}{{ ansible_hostname }}_{{ audit_time }}_remediate_{{ ansible_date_time.epoch }}.{{ audit_format }}"
+audit_results_file: "{{ audit_capture_path }}/{{ ansible_hostname }}_{{ audit_time }}_remediate_{{ ansible_date_time.epoch }}.{{ audit_format }}"
 
 audit_results: |
       The pre remediation results are: {{ pre_audit_summary }}.

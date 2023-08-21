@@ -6,7 +6,7 @@
   tags:
       - always
 
-- name: Gather distribution info
+- name: Gather Distribution Info
   ansible.builtin.setup:
       gather_subset: distribution,!all,!min
   when:
@@ -39,8 +39,7 @@
 
 - name: Run Audit
   ansible.builtin.import_tasks: run_audit.yml
-  when:
-      - run_audit
+  when: run_audit
   vars:
       audit_time: pre
   tags:
