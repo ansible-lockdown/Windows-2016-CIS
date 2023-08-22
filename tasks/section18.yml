@@ -105,7 +105,6 @@
       data: 4
       type: dword
   when:
-      - is_implemented
       - win16cis_rule_18_2_4
       - ansible_windows_domain_role == "Member Server"
   tags:
@@ -2512,7 +2511,6 @@
       type: dword
   when:
       - win16cis_rule_18_9_98_1
-      - is_implemented
       - not win_skip_for_test
   tags:
       - level2-domaincontroller

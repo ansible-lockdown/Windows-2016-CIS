@@ -1,17 +1,14 @@
 ---
-- name: Include the preliminary tasks
-  ansible.builtin.include_tasks: audit_prelim.yml
-
 # Copied pre and post to capture output files.
 - name: copy the template used by ansible for consistent checks
   ansible.windows.win_template:
-      src: ansible_vars_goss.yml.j2
+      src: templates/ansible_vars_goss.yml.j2
       dest: "{{ goss_vars_path }}"
   when:
       - audit_time == 'pre'
 
 - name: Run the goss audit
-  ansible.windows.win_shell: "{{ run_audit_script }} -auditbin {{ audit_capture_path }}{{ goss_exe }} -auditdir {{audit_capture_path }} -varsfile {{ ansible_hostname }}.yml -outfile {{ audit_results_file }}"
+  ansible.windows.win_shell: "{{ run_audit_script }} -auditbin {{ audit_capture_path }}{{ goss_exe }} -auditdir {{ audit_capture_path }} -varsfile {{ ansible_hostname }}.yml -outfile {{ audit_results_file }}"
   failed_when: false
 
 - name: Capture the pre remediation audit data summary
