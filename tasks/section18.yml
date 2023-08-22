@@ -218,9 +218,9 @@
   ansible.windows.win_regedit:
       path: HKLM:\SYSTEM\CurrentControlSet\Services\NetBT\Parameters
       state: present
-      value: NodeType
+      name: NodeType
       data: 2
-      datatype: dword
+      type: dword
   when:
       - win16cis_rule_18_3_6
   tags:
@@ -233,9 +233,9 @@
   ansible.windows.win_regedit:
       path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\Wdigest
       state: present
-      value: UseLogonCredential
+      name: UseLogonCredential
       data: 0
-      datatype: dword
+      type: dword
   when:
       - win16cis_rule_18_3_7
   tags:
@@ -248,9 +248,9 @@
   ansible.windows.win_regedit:
       path: HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon
       state: present
-      value: AutoAdminLogon
+      name: AutoAdminLogon
       data: 0
-      datatype: string
+      type: string
   when:
       - win16cis_rule_18_4_1
   tags:
@@ -263,9 +263,9 @@
   ansible.windows.win_regedit:
       path: HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip6\Parameters
       state: present
-      value: DisableIPSourceRouting
+      name: DisableIPSourceRouting
       data: 2
-      datatype: dword
+      type: dword
   when:
       - win16cis_rule_18_4_2
   tags:
@@ -278,9 +278,9 @@
   ansible.windows.win_regedit:
       path: HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters
       state: present
-      value: DisableIPSourceRouting
+      name: DisableIPSourceRouting
       data: 2
-      datatype: dword
+      type: dword
   when:
       - win16cis_rule_18_4_3
   tags:
@@ -293,9 +293,9 @@
   ansible.windows.win_regedit:
       path: HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters
       state: present
-      value: EnableICMPRedirect
+      name: EnableICMPRedirect
       data: 0
-      datatype: dword
+      type: dword
   when:
       - win16cis_rule_18_4_4
   tags:
@@ -308,9 +308,9 @@
   ansible.windows.win_regedit:
       path: HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters
       state: present
-      value: KeepAliveTime
+      name: KeepAliveTime
       data: 300000
-      datatype: dword
+      type: dword
   when:
       - win16cis_rule_18_4_5
   tags:
