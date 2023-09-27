@@ -12,7 +12,7 @@
 ![followers](https://img.shields.io/github/followers/ansible-lockdown?style=social)
 [![Twitter URL](https://img.shields.io/twitter/url/https/twitter.com/AnsibleLockdown.svg?style=social&label=Follow%20%40AnsibleLockdown)](https://twitter.com/AnsibleLockdown)
 
-![Ansible Galaxy Quality](https://img.shields.io/ansible/quality/56324?label=Quality&&logo=ansible)
+![Ansible Galaxy Quality](https://img.shields.io/ansible/quality/55061?label=Quality&&logo=ansible)
 ![Discord Badge](https://img.shields.io/discord/925818806838919229?logo=discord)
 
 ![Release Branch](https://img.shields.io/badge/Release%20Branch-Main-brightgreen)
@@ -36,11 +36,11 @@
 
 [Lockdown Enterprise](https://www.lockdownenterprise.com#GH_AL_WINDOWS_2016_cis)
 
-[Ansible support](https://www.mindpointgroup.com/cybersecurity-products/ansible-counselor#GH_AL_WINDOWS_2016_cis)
+[Ansible Support](https://www.mindpointgroup.com/cybersecurity-products/ansible-counselor#GH_AL_WINDOWS_2016_cis)
 
 ### Community
 
-On our [Discord Server](https://discord.io/ansible-lockdown) to ask questions, discuss features, or just chat with other Ansible-Lockdown users
+On our [Discord Server](https://www.lockdownenterprise.com/discord) to ask questions, discuss features, or just chat with other Ansible-Lockdown users
 
 ---
 
@@ -70,8 +70,9 @@ The control found in defaults main also need to reflect this as this control the
 
 ## Coming from a previous release
 
-CIS release always contains changes, it is highly recommended to review the new references and available variables. This have changed significantly since ansible-lockdown initial release.
-This is now compatible with python3 if it is found to be the default interpreter. This does come with pre-requisites which it configures the system accordingly.
+CIS release always contains changes, so it is highly recommended to review the new references and available variables. This have changed significantly since the ansible-lockdown initial release.
+This is now compatible with python3 if it is found to be the default interpreter. This does come with prerequisites that configure the system accordingly.
+
 
 Further details can be seen in the [Changelog](./ChangeLog.md)
 
@@ -124,7 +125,7 @@ There are many tags available for added control precision. Each control has it's
 Below is an example of the tag section from a control within this role. Using this example if you set your run to skip all controls with the tag smb, this task will be skipped. The opposite can also happen where you run only controls tagged with smb.
 
 ```sh
-      tags:
+  tags:
       - level1-domaincontroller
       - level1-memberserver
       - win16cis_rule_18.3.3

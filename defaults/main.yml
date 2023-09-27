@@ -59,14 +59,11 @@ long_running: false
 # win_skip_for_test is used in the playbook to skip over certain controls that
 # may cause breaking changes when running it for testing purposes.
 # Controls that will be skipped:
-# 2.3.1.5
-# 9.3.5
-# 18.9.97.1.1
-# 18.9.97.1.2
-# 18.9.97.2.1
-# 18.9.97.2.2
-# 18.9.97.2.3
-# 18.9.98.1
+# 2.3.1.5 - Renames Administrator Account
+# 18.9.97.1.1 - Disables WinRM Allow Client Basic Auth
+# 18.9.97.2.1 - Disables WinRM Allow Service Basic Auth
+# 18.9.97.2.2 - Disables Remote Server Management through WinRM
+# 18.9.98.1 - Disables Remote Shell Access
 win_skip_for_test: false
 
 #### Basic external audit enablement settings ####

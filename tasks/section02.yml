@@ -1135,7 +1135,7 @@
       type: dword
   when:
       - win16cis_rule_2_3_9_5
-      - not ansible_windows_domain_role == "Primary domain controller"
+      - ansible_windows_domain_role == "Member server"
   tags:
       - level1-memberserver
       - rule_2.3.9.5
@@ -1281,7 +1281,7 @@
       data: "O:BAG:BAD:(A;;RC;;;BA)"
       type: string
   when:
-      - not ansible_windows_domain_role == "Primary domain controller"
+      - ansible_windows_domain_role == "Member server"
       - win16cis_rule_2_3_10_11
   tags:
       - level1-memberserver
@@ -1582,4 +1582,7 @@
       type: dword
   when: win16cis_rule_2_3_17_8
   tags:
-      - level1s
+      - level1-domaincontroller
+      - level1-memberserver
+      - rule_2.3.17.8
+      - patch

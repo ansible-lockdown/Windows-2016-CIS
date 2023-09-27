@@ -1,17 +1,30 @@
 # Changelog
 
+## Possible Future Plans For Repo
+
+- Warning System Added
+- More of the default main variables will be user defined.
+- Update To 2.0.0 once released by CIS, currently in draft status.
+
 ## Release 1.3.0
 
-- August 2023
+- September 2023 Updates
+  - Added Updated Discord Links
+  - Updated Galaxy Score Links
+  - Updated Readme
+  - Control 18.2.6 - Fixed Spelling For Member server
+  - Control 18.3.1 - Adjusted when statement for Member server only.
+  - Pr'S Closed
+    [#37] (https://github.com/ansible-lockdown/Windows-2016-CIS/pull/37) - 9.2.1/9.3.1 Fixed Module Parameters in win_firewall - Thanks @gberginc
+    [#37] (https://github.com/ansible-lockdown/Windows-2016-CIS/pull/37) - Section 18 Fixed Module Parameters in win_regedit - Thanks @gberginc
+  - Reviewed all DC Only and MS Only Controls to verify when statements are valid.
+  - Updated win_skip_for_test controls
+
+- August 2023 Updates
   - Updated to Central org based workflow.
   - Updated Linting files and ran against playbook
   - All modules fit FQCN standard.
   - Updated Readme.md
-
-## Possible Future Plans For Repo
-- Warning System Added
-- More of the defalt main variables will be user defined.
-- Update To 2.0.0 once released by CIS, currently in draft status.
 
 ## Release 1.2.0
 
