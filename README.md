@@ -2,7 +2,7 @@
 
 ## Configure a Windows 2016 machine to be [CIS](https://www.cisecurity.org/cis-benchmarks/) compliant
 
-### Based on [ Microsoft Windows Server 2019 Benchmark v1.2.0 - 04-21-2022 ](https://www.cisecurity.org/cis-benchmarks/)
+### Based on [ Microsoft Windows Server 2016 RTM Benchmark v1.2.0 - 04-21-2022 ](https://www.cisecurity.org/cis-benchmarks/)
 
 ---
 
