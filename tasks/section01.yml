@@ -106,7 +106,7 @@
   community.windows.win_security_policy:
       section: System Access
       key: ClearTextPassword
-      value: "0"
+      value: 0
   when: win16cis_rule_1_1_6
   tags:
       - level1-domaincontroller
