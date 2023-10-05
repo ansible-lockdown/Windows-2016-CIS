@@ -285,6 +285,7 @@
       type: dword
   when:
       - win16cis_rule_9_3_5
+      - not win_skip_for_test
   tags:
       - level1-domaincontroller
       - level1-memberserver
