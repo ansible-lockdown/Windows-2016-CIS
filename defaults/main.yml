@@ -65,7 +65,7 @@ long_running: false
 # 18.9.97.2.1 - Disables WinRM Allow Service Basic Auth
 # 18.9.97.2.2 - Disables Remote Server Management through WinRM
 # 18.9.98.1 - Disables Remote Shell Access
-win_skip_for_test: true
+win_skip_for_test: false
 
 #### Basic external audit enablement settings ####
 #### Precise details - per setting can be found at the bottom of this file ####
