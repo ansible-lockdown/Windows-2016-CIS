@@ -60,7 +60,7 @@ long_running: false
 # may cause breaking changes when running it for testing purposes.
 # Controls that will be skipped:
 # 2.3.1.5 - Renames Administrator Account
-# 9.3.5 - Firewall Breaks Reboot
+# 9.3.5 - Enables Firewall Public Rules *Breaks Reboot*
 # 18.9.97.1.1 - Disables WinRM Allow Client Basic Auth
 # 18.9.97.2.1 - Disables WinRM Allow Service Basic Auth
 # 18.9.97.2.2 - Disables Remote Server Management through WinRM
