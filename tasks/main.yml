@@ -54,21 +54,18 @@
 - name: Execute the section 1 tasks
   ansible.builtin.import_tasks: section01.yml
   when: win16cis_section01
-  notify: reboot_windows
   tags:
       - section01
 
 - name: Execute the section 2 tasks
   ansible.builtin.import_tasks: section02.yml
   when: win16cis_section02
-  notify: reboot_windows
   tags:
       - section02
 
 - name: Execute the section 9 tasks
   ansible.builtin.import_tasks: section09.yml
   when: win16cis_section09
-  notify: reboot_windows
   tags:
       - section09
 
