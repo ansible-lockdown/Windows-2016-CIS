@@ -27,7 +27,7 @@
 - name: Check ansible version
   ansible.builtin.assert:
       that: ansible_version.full is version_compare(min_ansible_version, '>=')
-      msg: You must use Ansible {{ min_ansible_version }} or greater
+      fail_msg: You must use Ansible {{ min_ansible_version }} or greater
   tags:
       - always
 

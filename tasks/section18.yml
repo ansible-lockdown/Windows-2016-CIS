@@ -1,4 +1,5 @@
 ---
+
 # one of the settings in the file render the server unreachable from ansible with this message "the specified credentials were rejected by the server"
 - name: "SCORED | 18.1.1.1 | PATCH | (L1) Ensure 'Prevent enabling lock screen camera' is set to 'Enabled'"
   ansible.windows.win_regedit:
@@ -64,7 +65,7 @@
       type: string
   when:
       - win16cis_rule_18_2_1
-      - ansible_windows_domain_role == "Member Server"
+      - ansible_windows_domain_role == "Member server"
   tags:
       - level1-memberserver
       - rule_18.2.1
@@ -78,7 +79,7 @@
       type: dword
   when:
       - win16cis_rule_18_2_2
-      - ansible_windows_domain_role == "Member Server"
+      - ansible_windows_domain_role == "Member server"
   tags:
       - level1-memberserver
       - rule_18.2.2
@@ -92,7 +93,7 @@
       type: dword
   when:
       - win16cis_rule_18_2_3
-      - ansible_windows_domain_role == "Member Server"
+      - ansible_windows_domain_role == "Member server"
   tags:
       - level1-memberserver
       - rule_18.2.3
@@ -106,7 +107,7 @@
       type: dword
   when:
       - win16cis_rule_18_2_4
-      - ansible_windows_domain_role == "Member Server"
+      - ansible_windows_domain_role == "Member server"
   tags:
       - level1-memberserver
       - rule_18.2.4
@@ -120,7 +121,6 @@
       type: dword
   when:
       - win16cis_rule_18_2_5
-      - ansible_windows_domain_role == "Member Server"
   tags:
       - level1-memberserver
       - rule_18.2.5
@@ -134,7 +134,7 @@
       type: dword
   when:
       - win16cis_rule_18_2_6
-      - ansible_windows_domain_role == "Memmber Server"
+      - ansible_windows_domain_role == "Memmber server"
   tags:
       - level1-memberserver
       - rule_18.2.6
@@ -148,7 +148,7 @@
       type: dword
   when:
       - win16cis_rule_18_3_1
-      - not ansible_windows_domain_role == "Primary domain controller"
+      - ansible_windows_domain_role == "Member server"
   tags:
       - level1-memberserver
       - rule_18.3.1
@@ -216,10 +216,10 @@
 - name: "SCORED | 18.3.6 | PATCH | (L1) Ensure 'NetBT NodeType configuration' is set to 'Enabled: P-node (recommended)'"
   ansible.windows.win_regedit:
       path: HKLM:\SYSTEM\CurrentControlSet\Services\NetBT\Parameters
-      state: present
       value: NodeType
       data: 2
       datatype: dword
+      state: present
   when:
       - win16cis_rule_18_3_6
   tags:
@@ -231,10 +231,10 @@
 - name: "SCORED | 18.3.7 | PATCH | (L1) Ensure 'WDigest Authentication' is set to 'Disabled'"
   ansible.windows.win_regedit:
       path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\Wdigest
-      state: present
       value: UseLogonCredential
       data: 0
       datatype: dword
+      state: present
   when:
       - win16cis_rule_18_3_7
   tags:
@@ -246,10 +246,10 @@
 - name: "SCORED | 18.4.1 | PATCH | (L1) Ensure 'MSS: (AutoAdminLogon) Enable Automatic Logon (not recommended)' is set to 'Disabled'"
   ansible.windows.win_regedit:
       path: HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon
-      state: present
       value: AutoAdminLogon
       data: 0
       datatype: string
+      state: present
   when:
       - win16cis_rule_18_4_1
   tags:
@@ -261,10 +261,10 @@
 - name: "SCORED | 18.4.2 | PATCH | (L1) Ensure 'MSS: (DisableIPSourceRouting IPv6) IP source routing protection level (protects against packet spoofing)' is set to 'Enabled: Highest protection, source routing is completely disabled'"
   ansible.windows.win_regedit:
       path: HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip6\Parameters
-      state: present
       value: DisableIPSourceRouting
       data: 2
       datatype: dword
+      state: present
   when:
       - win16cis_rule_18_4_2
   tags:
@@ -276,10 +276,10 @@
 - name: "SCORED | 18.4.3 | PATCH | (L1) Ensure 'MSS: (DisableIPSourceRouting) IP source routing protection level (protects against packet spoofing)' is set to 'Enabled: Highest protection, source routing is completely disabled'"
   ansible.windows.win_regedit:
       path: HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters
-      state: present
       value: DisableIPSourceRouting
       data: 2
       datatype: dword
+      state: present
   when:
       - win16cis_rule_18_4_3
   tags:
@@ -291,10 +291,10 @@
 - name: "SCORED | 18.4.4 | PATCH | (L1) Ensure 'MSS: (EnableICMPRedirect) Allow ICMP redirects to override OSPF generated routes' is set to 'Disabled'"
   ansible.windows.win_regedit:
       path: HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters
-      state: present
       value: EnableICMPRedirect
       data: 0
       datatype: dword
+      state: present
   when:
       - win16cis_rule_18_4_4
   tags:
@@ -306,10 +306,10 @@
 - name: "SCORED | 18.4.5 | PATCH | (L2) Ensure 'MSS: (KeepAliveTime) How often keep-alive packets are sent in milliseconds' is set to 'Enabled: 300,000 or 5 minutes (recommended)'"
   ansible.windows.win_regedit:
       path: HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters
-      state: present
       value: KeepAliveTime
       data: 300000
       datatype: dword
+      state: present
   when:
       - win16cis_rule_18_4_5
   tags:
@@ -321,10 +321,10 @@
 - name: "SCORED | 18.4.6 | PATCH | (L1) Ensure 'MSS: (NoNameReleaseOnDemand) Allow the computer to ignore NetBIOS name release requests except from WINS servers' is set to 'Enabled'"
   ansible.windows.win_regedit:
       path: HKLM:\System\Currentcontrolset\Services\Netbt\Parameters
-      state: present
       name: NoNameReleaseOnDemand
       data: 1
       type: dword
+      state: present
   when:
       - win16cis_rule_18_4_6
   tags:
@@ -336,10 +336,10 @@
 - name: "SCORED | 18.4.7 | PATCH | (L2) Ensure 'MSS: (PerformRouterDiscovery) Allow IRDP to detect and configure Default Gateway addresses (could lead to DoS)' is set to 'Disabled'"
   ansible.windows.win_regedit:
       path: HKLM:\System\Currentcontrolset\Services\Tcpip\Parameters
-      state: present
       name: PerformRouterDiscovery
       data: 0
       type: dword
+      state: present
   when:
       - win16cis_rule_18_4_7
   tags:
