@@ -1,16 +1,13 @@
 ---
+
 galaxy_info:
-    author: "Ryan Speelman"
+    author: "Ansible-Lockdown"
     description: "Ansible role to apply Windows Server 2016 CIS Benchmark"
     company: "MindPoint Group"
     license: MIT
     role_name: windows_2016_cis
     namespace: mindpointgroup
-    min_ansible_version: 2.6
-
-# The galaxy api currently supports only Win 2008R2, 2008x64, 2008x86,
-# 2012, 2012R2, 2016, and 2019 versions. And using anything else will lower
-# galaxy score.
+    min_ansible_version: 2.10.0
     platforms:
         - name: Windows
           versions:
