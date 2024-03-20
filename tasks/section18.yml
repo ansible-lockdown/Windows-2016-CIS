@@ -175,7 +175,7 @@
       data: 0
       type: dword
       state: present
-  notify: reboot_windows
+  notify: change_requires_reboot
   when:
       - win16cis_rule_18_3_3
   tags:
