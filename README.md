@@ -2,7 +2,7 @@
 
 ## Configure a Windows 2016 machine to be [CIS](https://www.cisecurity.org/cis-benchmarks/) compliant
 
-### Based on [ Microsoft Windows Server 2019 Benchmark v1.2.0 - 04-21-2022 ](https://www.cisecurity.org/cis-benchmarks/)
+### Based on [ Microsoft Windows Server 2016 RTM Benchmark v1.2.0 - 04-21-2022 ](https://www.cisecurity.org/cis-benchmarks/)
 
 ---
 
@@ -12,7 +12,6 @@
 ![followers](https://img.shields.io/github/followers/ansible-lockdown?style=social)
 [![Twitter URL](https://img.shields.io/twitter/url/https/twitter.com/AnsibleLockdown.svg?style=social&label=Follow%20%40AnsibleLockdown)](https://twitter.com/AnsibleLockdown)
 
-![Ansible Galaxy Quality](https://img.shields.io/ansible/quality/56324?label=Quality&&logo=ansible)
 ![Discord Badge](https://img.shields.io/discord/925818806838919229?logo=discord)
 
 ![Release Branch](https://img.shields.io/badge/Release%20Branch-Main-brightgreen)
@@ -36,11 +35,11 @@
 
 [Lockdown Enterprise](https://www.lockdownenterprise.com#GH_AL_WINDOWS_2016_cis)
 
-[Ansible support](https://www.mindpointgroup.com/cybersecurity-products/ansible-counselor#GH_AL_WINDOWS_2016_cis)
+[Ansible Support](https://www.mindpointgroup.com/cybersecurity-products/ansible-counselor#GH_AL_WINDOWS_2016_cis)
 
 ### Community
 
-On our [Discord Server](https://discord.io/ansible-lockdown) to ask questions, discuss features, or just chat with other Ansible-Lockdown users
+On our [Discord Server](https://www.lockdownenterprise.com/discord) to ask questions, discuss features, or just chat with other Ansible-Lockdown users
 
 ---
 
@@ -50,15 +49,15 @@ This role **will make changes to the system** which may have unintended conseque
 
 Check Mode is not supported! The role will complete in check mode without errors, but it is not supported and should be used with caution.
 
-This role was developed against a clean install of the Windows 2016 Operating System. If you are implementing to an existing system please review this role for any site specific changes that are needed.
+This role was developed against a clean install of the Windows 2016 Operating System. If you are implementing this role on an existing system, please review this role for any site specific changes that are needed.
 
-To use release version please point to main branch and relevant release for the cis benchmark you wish to work with.
+To use release version please point to main branch and relevant release for the CIS benchmark you wish to work with.
 
 ---
 
 ## Matching a security Level for CIS
 
-It is possible to to only run level 1 or level 2 controls for CIS.
+It is possible to only run level 1 or level 2 controls for CIS.
 This is managed using tags:
 
 - level1-domaincontroller
@@ -66,12 +65,12 @@ This is managed using tags:
 - level2-domaincontroller
 - level2-memberserver
 
-The control found in defaults main also need to reflect this as this control the testing thet takes place if you are using the audit component.
+The controls found in defaults/main also need to reflect those control numbers due to aligning every control to the audit component.
 
 ## Coming from a previous release
 
-CIS release always contains changes, it is highly recommended to review the new references and available variables. This have changed significantly since ansible-lockdown initial release.
-This is now compatible with python3 if it is found to be the default interpreter. This does come with pre-requisites which it configures the system accordingly.
+CIS releases routinely contain changes, so it is highly recommended to review the new references and available variables. This has changed significantly since the initial release of ansible-lockdown.
+This is now compatible with python3 if it is found to be the default interpreter. This does come with prerequisites that configure the system accordingly.
 
 Further details can be seen in the [Changelog](./ChangeLog.md)
 
@@ -98,7 +97,7 @@ Currently this release does not have a auditing tool that is up to date.
   - [Tower User Guide](https://docs.ansible.com/ansible-tower/latest/html/userguide/index.html)
   - [Ansible Community Info](https://docs.ansible.com/ansible/latest/community/index.html)
 - Functioning Ansible and/or Tower Installed, configured, and running. This includes all of the base Ansible/Tower configurations, needed packages installed, and infrastructure setup.
-- Please read through the tasks in this role to gain an understanding of what each control is doing. Some of the tasks are disruptive and can have unintended consiquences in a live production system. Also familiarize yourself with the variables in the defaults/main.yml file.
+- Please read through the tasks in this role to gain an understanding of what each control is doing. Some of the tasks are disruptive and can have unintended consequences in a live production system. Also, familiarize yourself with the variables in the defaults/main.yml file.
 
 **Technical Dependencies:**
 
@@ -119,12 +118,12 @@ This role is designed that the end user should not have to edit the tasks themse
 
 ## Tags
 
-There are many tags available for added control precision. Each control has it's own set of tags noting what level, if it's scored/notscored, what OS element it relates to, if it's a patch or audit, and the rule number.
+There are many tags available for added control precision. Each control has its own set of tags noting what level, what OS element it relates to if it's a patch or audit, and the rule number.
 
 Below is an example of the tag section from a control within this role. Using this example if you set your run to skip all controls with the tag smb, this task will be skipped. The opposite can also happen where you run only controls tagged with smb.
 
 ```sh
-      tags:
+  tags:
       - level1-domaincontroller
       - level1-memberserver
       - win16cis_rule_18.3.3
@@ -136,9 +135,16 @@ Below is an example of the tag section from a control within this role. Using th
 
 We encourage you (the community) to contribute to this role. Please read the rules below.
 
-- Your work is done in your own individual branch. Make sure to Signed-off and GPG sign all commits you intend to merge.
+- Your work is done in your own individual branch. Make sure to Signed-off-by and GPG sign all commits you intend to merge.
 - All community Pull Requests are pulled into the devel branch
-- Pull Requests into devel will confirm your commits have a GPG signature, Signed-off, and a functional test before being approved
+- Pull Requests into devel will confirm your commits have a GPG signature, Signed-off-by, and a functional test before being approved
 - Once your changes are merged and a more detailed review is complete, an authorized member will merge your changes into the main branch for a new release
 
 ## Pipeline Testing
+
+uses:
+
+- ansible-core 2.12
+- ansible collections - pulls in the latest version based on the requirements file
+- runs the audit using the devel branch
+- This is an automated test that occurs on pull requests into devel

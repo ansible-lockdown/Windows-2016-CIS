@@ -27,7 +27,7 @@
 - name: Check ansible version
   ansible.builtin.assert:
       that: ansible_version.full is version_compare(min_ansible_version, '>=')
-      msg: You must use Ansible {{ min_ansible_version }} or greater
+      fail_msg: You must use Ansible {{ min_ansible_version }} or greater
   tags:
       - always
 
@@ -103,3 +103,10 @@
       - run_audit
   tags:
       - run_audit
+
+- name: If Warnings found Output count and control IDs affected
+  ansible.builtin.debug:
+      msg:
+          - "You have {{ warn_count }} Warning(s) that require investigation(s). Their IDs are listed below:"
+          - "{{ warn_control_list }}"
+  when: warn_count != 0
