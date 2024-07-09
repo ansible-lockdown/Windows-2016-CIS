@@ -87,6 +87,11 @@
   tags:
       - section19
 
+- name: Run Post Tasks
+  ansible.builtin.import_tasks: post.yml
+  tags:
+      - always
+
 - name: Run Audit
   ansible.builtin.import_tasks: run_audit.yml
   when:
