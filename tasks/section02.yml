@@ -278,7 +278,7 @@
       name: SeDenyNetworkLogonRight
       users:
           - Guests
-      action: set
+      action: add
   when:
       - win16cis_rule_2_2_20
       - ansible_windows_domain_role == "Primary domain controller"
@@ -294,7 +294,7 @@
           - Guests
           # - Local Account
           # - Administrators
-      action: set
+      action: add
   when:
       - win16cis_rule_2_2_21
       - not ansible_windows_domain_role == "Primary domain controller"
@@ -308,7 +308,7 @@
       name: SeDenyBatchLogonRight
       users:
           - Guests
-      action: set
+      action: add
   when: win16cis_rule_2_2_22
   tags:
       - level1-domaincontroller
@@ -321,7 +321,7 @@
       name: SeDenyServiceLogonRight
       users:
           - Guests
-      action: set
+      action: add
   when: win16cis_rule_2_2_23
   tags:
       - level1-domaincontroller
@@ -334,7 +334,7 @@
       name: SeDenyInteractiveLogonRight
       users:
           - Guests
-      action: set
+      action: add
   when: win16cis_rule_2_2_24
   tags:
       - level1-domaincontroller
@@ -348,7 +348,7 @@
       users:
           - Guests
           # - Local Account
-      action: set
+      action: add
   when:
       - win16cis_rule_2_2_25
       - ansible_windows_domain_role == "Primary domain controller"
