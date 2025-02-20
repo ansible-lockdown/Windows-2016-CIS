@@ -1,35 +1,66 @@
 ---
+
 galaxy_info:
-    author: "Ryan Speelman"
-    description: "Ansible role to apply Windows Server 2016 CIS Benchmark"
-    company: "MindPoint Group"
-    license: MIT
-    role_name: windows_2016_cis
-    namespace: mindpointgroup
-    min_ansible_version: 2.6
-
-# The galaxy api currently supports only Win 2008R2, 2008x64, 2008x86,
-# 2012, 2012R2, 2016, and 2019 versions. And using anything else will lower
-# galaxy score.
-    platforms:
-        - name: Windows
-          versions:
-              - 2016
-
-    galaxy_tags:
-        - system
-        - security
-        - cis
-        - hardening
-        - benchmark
-        - microsoft
-        - windows
-        - complianceascode
-        - compliance
-
-    collections:
-        - ansible.windows
-        - community.windows
-        - community.general
-
-    dependencies: []
+  author: "MindPoint Group"
+  description: "Ansible Role to Apply The Windows Server 2016 CIS Benchmark"
+  company: "MindPoint Group"
+  license: MIT
+  role_name: windows_2016_cis
+  namespace: mindpointgroup
+  min_ansible_version: "2.16"
+  platforms:
+    - name: Windows
+      versions:
+        - "2016"
+  galaxy_tags:
+    - accesscontrol
+    - activedirectory
+    - auditpolicy
+    - automation
+    - azure
+    - benchmark
+    - cis
+    - cisbenchmark
+    - ciscompliance
+    - cloudhardening
+    - compliance
+    - compliancehardening
+    - complianceascode
+    - configurationmanagement
+    - dc
+    - domaincontroller
+    - domainmember
+    - encryption
+    - eventlogging
+    - gpo
+    - grouppolicy
+    - hardening
+    - infrastructureascode
+    - logging
+    - microsoft
+    - monitoring
+    - memberserver
+    - ms
+    - oshardening
+    - patchmanagement
+    - patching
+    - policymanagement
+    - privilegedaccess
+    - remediation
+    - rolebasedaccess
+    - security
+    - system
+    - systemintegrity
+    - vulnerabilitymanagement
+    - windows
+    - windows2016
+    - win2016
+    - windows2016
+    - windowssecurity
+    - windowsserver
+    - windowsserver2016
+collections:
+  - ansible.windows
+  - community.windows
+  - community.general
+dependencies: []
