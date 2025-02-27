@@ -1621,7 +1621,7 @@
   tags:
     - level1-domaincontroller
     - level1-memberserver
-    - rule_2.3_10_9
+    - rule_2.3.10.9
     - patch
   block:
     - name: "2.3.10.9 | PATCH | Configure Network access Remotely accessible registry paths and sub-paths | Set Fact"
