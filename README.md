@@ -6,7 +6,7 @@
 
 ---
 
-## 📣 Public Repository
+## Public Repository 📣
 
 ![Org Stars](https://img.shields.io/github/stars/ansible-lockdown?label=Org%20Stars&style=social)
 ![Stars](https://img.shields.io/github/stars/ansible-lockdown/Windows-2016-CIS?label=Repo%20Stars&style=social)
@@ -16,16 +16,20 @@
 ![Discord Badge](https://img.shields.io/discord/925818806838919229?logo=discord)
 
 ![License](https://img.shields.io/github/license/ansible-lockdown/Windows-2016-CIS?label=License)
-[![Pre-Commit.ci](https://ansible-lockdown.github.io/github_windows_IaC/badges/Windows-2016-CIS/pre-commit-ci.json)](https://results.pre-commit.ci/latest/github/ansible-lockdown/Windows-2016-CIS/devel)
 
+## Lint & Pre-Commit Tools 🔧
 
-## 📂 Community Release Information
+[![Pre-Commit.ci](https://img.shields.io/endpoint?url=https://ansible-lockdown.github.io/github_windows_IaC/badges/Windows-2016-CIS/pre-commit-ci.json)](https://results.pre-commit.ci/latest/github/ansible-lockdown/Windows-2016-CIS/devel)
+![YamlLint](https://img.shields.io/badge/yamllint-Present-brightgreen?style=flat&logo=yaml&logoColor=white)
+![Ansible-Lint](https://img.shields.io/badge/ansible--lint-Present-brightgreen?style=flat&logo=ansible&logoColor=white)
 
-![Release Branch](https://img.shields.io/endpoint?url=https://ansible-lockdown.github.io/github_windows_IaC/badges/Windows-2016-CIS/release-branch.json)
+## Community Release Information 📂
+
+![Release Branch](https://img.shields.io/badge/Release%20Branch-Main-brightgreen)
 ![Release Tag](https://img.shields.io/github/v/tag/ansible-lockdown/Windows-2016-CIS?label=Release%20Tag&color=success)
 ![Main Release Date](https://img.shields.io/github/release-date/ansible-lockdown/Windows-2016-CIS?label=Release%20Date)
-![Benchmark Version Main](https://ansible-lockdown.github.io/github_windows_IaC/badges/Windows-11-CIS/benchmark-version-main.json)
-![Benchmark Version Devel](https://ansible-lockdown.github.io/github_windows_IaC/badges/Windows-11-CIS/benchmark-version-devel.json)
+![Benchmark Version Main](https://img.shields.io/endpoint?url=https://ansible-lockdown.github.io/github_windows_IaC/badges/Windows-2016-CIS/benchmark-version-main.json)
+![Benchmark Version Devel](https://img.shields.io/endpoint?url=https://ansible-lockdown.github.io/github_windows_IaC/badges/Windows-2016-CIS/benchmark-version-devel.json)
 
 [![Main Pipeline Status](https://github.com/ansible-lockdown/Windows-2016-CIS/actions/workflows/main_pipeline_validation.yml/badge.svg?)](https://github.com/ansible-lockdown/Windows-2016-CIS/actions/workflows/main_pipeline_validation.yml)
 [![GPO Main Pipeline Status](https://github.com/ansible-lockdown/Windows-2016-CIS/actions/workflows/main_pipeline_validation_gpo.yml/badge.svg?)](https://github.com/ansible-lockdown/Windows-2016-CIS/actions/workflows/main_pipeline_validation_gpo.yml)
@@ -40,7 +44,7 @@
 
 ---
 
-## 🔐 Subscriber Release Information
+## Subscriber Release Information 🔐
 
 ![Private Release Branch](https://img.shields.io/endpoint?url=https://ansible-lockdown.github.io/github_windows_IaC/badges/Private-Windows-2016-CIS/release-branch.json)
 ![Private Benchmark Version](https://img.shields.io/endpoint?url=https://ansible-lockdown.github.io/github_windows_IaC/badges/Private-Windows-2016-CIS/benchmark-version.json)
