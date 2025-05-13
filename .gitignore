@@ -46,4 +46,3 @@ benchparse/
 .github/.ansible/.lock
 .ansible/
 .DS_Store
-.DS_Store
